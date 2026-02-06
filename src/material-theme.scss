@@ -1,0 +1,56 @@
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+html {
+  // User provided colors
+  // #1E3D58 - Primary Blue
+  // #CDA349 - Accent Gold
+  // #000000 - Black
+  // #333333 - Dark Gray
+  // #787878 - Medium Gray
+  // #FFFFFF - White
+  // #484848 - Charcoal
+
+  @include mat.theme((color: (primary: mat.$azure-palette, // We will override this with system variables or custom palette if needed, but for now setting seeds
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Encode+Sans+Semi+Condensed,
+      density: 0,
+    ));
+}
+
+:root {
+  --app-primary: #1E3D58;
+  --app-secondary: #CDA349; // Using gold as secondary/accent
+  --app-black: #000000;
+  --app-dark-gray: #333333;
+  --app-medium-gray: #787878;
+  --app-white: #FFFFFF;
+  --app-charcoal: #484848;
+
+  // Overriding Angular Material system variables to match the exact primary/tertiary if the generated palette isn't close enough
+  // Note: Angular M3 generates a tonal palette. For strict adherence, we might need to generate a custom palette object.
+  // For now, let's ensure these variables are available for custom components.
+}
+
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  color-scheme: light;
+
+  // Set a default background, font and text colors for the application using
+  // Angular Material's system-level CSS variables. Learn more about these
+  // variables at https://material.angular.dev/guide/system-variables
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+  height: 100%;
+}
