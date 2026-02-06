@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Auth } from './auth';
+import { Auth } from './pages/auth';
 
 describe('Auth', () => {
   let component: Auth;
@@ -10,7 +10,7 @@ describe('Auth', () => {
     await TestBed.configureTestingModule({
       imports: [Auth]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(Auth);
     component = fixture.componentInstance;
