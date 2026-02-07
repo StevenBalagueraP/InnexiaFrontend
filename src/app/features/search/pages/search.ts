@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-search',
@@ -7,6 +8,12 @@ import { Component } from '@angular/core';
   templateUrl: './search.html',
   styleUrl: './search.css',
 })
-export class Search {
+export class Search implements OnInit {
+  private http = inject(HttpClient);
 
+  ngOnInit(): void {
+    this.http.get('http://localhost:3000/hotels').subscribe(response => {
+      console.log('Hotels Response:', response);
+    });
+  }
 }
