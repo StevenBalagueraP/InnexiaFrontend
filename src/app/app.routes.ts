@@ -3,7 +3,6 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
     {
         path: '',
-        loadComponent: () => import('./shared/components/side-menu/side-menu.component').then(m => m.SideMenuComponent),
         children: [
             {
                 path: '',
