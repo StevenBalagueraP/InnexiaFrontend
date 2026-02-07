@@ -4,7 +4,6 @@ import { provideHttpClient } from '@angular/common/http';
 
 import { routes } from './app.routes';
 
-// Define the base URL for the backend API
 export const API_URL = 'http://localhost:3000';
 
 export const appConfig: ApplicationConfig = {
