@@ -19,7 +19,6 @@
     position: relative;
 }
 
-/* Título */
 .login-header {
     margin-top: 22px;
 }
@@ -31,7 +30,6 @@
     color: var(--app-primary, #1E3D58);
 }
 
-/* Formulario */
 .login-form {
     display: flex;
     flex-direction: column;
@@ -39,54 +37,54 @@
     width: 100%;
 }
 
-/* INPUTS */
 .full-width {
     width: 331px !important;
 }
 
-/* Altura real del field */
 ::ng-deep .mat-mdc-text-field-wrapper {
     height: 44px !important;
     padding: 0 16px !important;
-    /* Increased padding to 16px */
 }
 
-/* Flex interno centrado */
 ::ng-deep .mat-mdc-form-field-flex {
     height: 44px !important;
     align-items: center !important;
 }
 
-/* Eliminar padding extra interno y centrar */
 ::ng-deep .mat-mdc-form-field-infix {
     padding: 0 !important;
     min-height: 44px !important;
     height: 44px !important;
-    display: flex !important;
-    align-items: center !important;
     border-top: 0 !important;
 }
 
-/* Input interno sin padding raro */
 ::ng-deep .mat-mdc-input-element {
     padding: 0 !important;
     margin: 0 !important;
-    transform: translateY(-9px);
-    /* Correction for visual vertical centering */
     position: relative;
     caret-color: var(--app-primary, #1E3D58);
-    /* Optional: styling caret */
+}
+::ng-deep .mat-mdc-text-field-wrapper {
+    height: 44px !important;
+    padding: 0 16px !important;
 }
 
+::ng-deep .mat-mdc-form-field-infix {
+    min-height: 44px !important;
+    padding-top: 12px !important;
+    padding-bottom: 0 !important;
+}
 
-/* Centrar icono suffix */
+::ng-deep .mdc-floating-label {
+    top: 22px !important;  
+}
+
 ::ng-deep .mat-mdc-form-field-icon-suffix {
     height: 44px !important;
     display: flex !important;
     align-items: center !important;
 }
 
-/* Centrar botón del icono */
 ::ng-deep .mat-mdc-icon-button {
     height: 44px !important;
     width: 44px !important;
@@ -94,20 +92,17 @@
     align-items: center;
     justify-content: center;
     padding: 0 !important;
-    /* Ensure button doesn't have extra padding */
+
 }
 
-/* Distancia del título al input email */
 .login-form mat-form-field:first-of-type {
     margin-top: 43px;
 }
 
-/* Distancia entre email y password */
 .login-form mat-form-field:last-of-type {
     margin-top: 30px;
 }
 
-/* BOTÓN */
 .submit-btn {
     width: 149px !important;
     height: 43px !important;
