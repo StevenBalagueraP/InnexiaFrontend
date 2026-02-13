@@ -13,4 +13,9 @@ import { inject } from '@angular/core';
 export class SideMenuComponent {
   private authService = inject(AuthService);
   public isLoggedIn = this.authService.isLoggedIn;
+  public userName = this.authService.currentUserName;
+
+  logout() {
+    this.authService.logout();
+  }
 }
