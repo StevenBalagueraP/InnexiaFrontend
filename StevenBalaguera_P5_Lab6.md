@@ -34,3 +34,38 @@
 
 ## Activity 3:
 
+### Auth Service:
+https://gitlab.com/jala-university1/cohort-3/ES.CSPR-351.GA.T1.26.M1/SC/jerson.balaguera/innexiafrontend/-/blob/develop/src/app/core/services/auth.service.ts?ref_type=heads
+
+### Login Component (Smart)
+https://gitlab.com/jala-university1/cohort-3/ES.CSPR-351.GA.T1.26.M1/SC/jerson.balaguera/innexiafrontend/-/blob/develop/src/app/core/auth/pages/login/login.component.ts?ref_type=heads
+
+### Login Token 
+
+![](https://i.postimg.cc/v8jBvFXf/Screenshot-from-2026-02-14-23-19-26.png)
+
+### Status Recovering
+
+![](https://i.postimg.cc/nhxQvfcB/Screenshot-from-2026-02-14-23-21-30.png)
+
+## Activity 4
+
+### JWT interceptor
+https://gitlab.com/jala-university1/cohort-3/ES.CSPR-351.GA.T1.26.M1/SC/jerson.balaguera/innexiafrontend/-/blob/develop/src/app/core/interceptors/auth.interceptor.ts?ref_type=heads
+
+![BearerTokenHotels](https://i.postimg.cc/zXFfYb8g/Screenshot-from-2026-02-14-22-10-47.png)
+![BearerTokenBookings](https://i.postimg.cc/fLSbG8T6/Screenshot-from-2026-02-14-22-10-21.png)
+
+### Error Management
+
+![ErrorManagement](https://i.postimg.cc/gksGBCHT/Screenshot-from-2026-02-14-23-28-38.png)
+
+![ErrorManagement2](https://i.postimg.cc/8PjZqWhn/Screenshot-from-2026-02-14-23-37-10.png)
+
+### LogOut implementation 
+
+![logOutImpl](https://i.postimg.cc/260xt83q/Screenshot-from-2026-02-14-23-38-30.png)
+
+![LoggedIn](https://i.postimg.cc/VN1BLbCY/Screenshot-from-2026-02-14-23-40-00.png)
+
+![LoggedOut](https://i.postimg.cc/j2GyVWb8/Screenshot-from-2026-02-14-23-40-59.png)
