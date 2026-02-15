@@ -28,6 +28,7 @@ export class LoginFormComponent {
     // Signals for inputs and outputs as requested
     initialData = input<string>(''); // Receiving initial data via signal
     loading = input<boolean>(false); // Receiving loading state
+    errorMessage = input<string>(''); // Receiving error message
     loginSuccess = output<{ email: string, password: string }>(); // Emitting event via signal
 
     private fb = inject(FormBuilder);
@@ -52,6 +53,15 @@ export class LoginFormComponent {
             const initial = this.initialData();
             if (initial) {
                 this.loginForm.patchValue({ email: initial });
+            }
+        });
+
+        // Effect to apply error to password field when errorMessage changes
+        effect(() => {
+            const error = this.errorMessage();
+            if (error) {
+                this.loginForm.get('password')?.setErrors({ invalidCredentials: true });
+                this.loginForm.markAllAsTouched(); // Ensure error message shows up
             }
         });
 
@@ -92,6 +102,9 @@ export class LoginFormComponent {
         }
         if (control?.hasError('minlength')) {
             return 'Mínimo 6 caracteres';
+        }
+        if (control?.hasError('invalidCredentials')) {
+            return this.errorMessage() || 'Credenciales inválidas';
         }
         return '';
     }
