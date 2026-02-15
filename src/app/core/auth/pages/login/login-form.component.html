@@ -1,0 +1,42 @@
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-header">
+            <h2>Login</h2>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" type="email" placeholder="ejemplo@correo.com">
+                @if (loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty ||
+                loginForm.get('email')?.touched)) {
+                <mat-error>{{ emailError }}</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Contraseña</mat-label>
+                <input matInput [type]="hidePassword() ? 'password' : 'text'" formControlName="password">
+                <button mat-icon-button matSuffix (click)="togglePasswordVisibility($event)"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword()">
+                    <mat-icon>{{hidePassword() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                @if (loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty ||
+                loginForm.get('password')?.touched)) {
+                <mat-error>{{ passwordError }}</mat-error>
+                }
+            </mat-form-field>
+
+
+            <button mat-flat-button class="submit-btn" type="submit" [disabled]="loginForm.invalid || loading()">
+                @if (loading()) {
+                <mat-icon>hourglass_empty</mat-icon>
+                } @else {
+                Login
+                }
+            </button>
+
+        </form>
+    </div>
+</div>
