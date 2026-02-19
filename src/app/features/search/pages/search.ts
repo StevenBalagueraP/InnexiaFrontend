@@ -2,6 +2,9 @@ import { Component, inject, signal } from '@angular/core';
 import { HotelService } from '../../../core/services/hotel.service';
 import { Hotel } from '../../../core/interfaces/models/hotel-model';
 import { BookingService } from '../../../core/services/booking.service';
+import { SearchResult } from '../../../core/interfaces/models/SearchResult';
+import { SearchService } from '../../../core/services/search.service';
+
 
 @Component({
   selector: 'app-search',
@@ -13,13 +16,16 @@ import { BookingService } from '../../../core/services/booking.service';
 export class Search {
   private hotelService = inject(HotelService);
   private bookingService = inject(BookingService);
+  private searchService = inject(SearchService);
   hotels = signal<Hotel[]>([]);
+  searchResults = signal<SearchResult[]>([]);
   loading = signal<boolean>(true);
   error = signal<string | null>(null);
 
   constructor() {
     this.loadHotels();
     this.loadBookings();
+    this.loadSearchResults();
   }
 
   loadHotels(): void {
@@ -49,5 +55,18 @@ export class Search {
       }
     });
   }
+  loadSearchResults(): void {
+    this.searchService.loadSearchResults().subscribe({
+      next: (data) => {
+        console.log('Search results loaded:', data);
+        this.searchResults.set(data);
+      },
+      error: (err) => {
+        console.error('Error loading search results:', err);
+        this.error.set('Error loading search results');
+      }
+    })
+  }
+  
 
 } 
