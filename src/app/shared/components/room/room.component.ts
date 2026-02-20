@@ -1,5 +1,6 @@
 import { Component, input } from '@angular/core';
 import { Room } from '../../../core/interfaces/models/room';
+import { RoomSuggestion } from '../../../core/interfaces/models/RoomSuggestion';
 
 @Component({
   selector: 'app-room',
@@ -9,6 +10,6 @@ import { Room } from '../../../core/interfaces/models/room';
 })
 export class RoomComponent {
 
-  room = input.required<Room>();
+  room = input.required<RoomSuggestion>();
 
 }

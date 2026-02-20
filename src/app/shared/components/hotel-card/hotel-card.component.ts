@@ -2,11 +2,12 @@ import { Component, input, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchResult } from '../../../core/interfaces/models/SearchResult';
 import { Hotel } from '../../../core/interfaces/models/hotel-model';
+import { RoomComponent } from '../room/room.component';
 
 @Component({
   selector: 'app-hotel-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RoomComponent],
   templateUrl: './hotel-card.component.html',
   styleUrl: './hotel-card.component.css',
 })

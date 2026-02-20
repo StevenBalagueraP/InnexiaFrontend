@@ -36,8 +36,8 @@ export class App {
     hotel: {
       _id: 'h2',
       name: 'Mountain View Resort',
-      location: 'Medellín, Colombia',
-      description: 'Vista increíble a la montaña.',
+      location: 'Medellín',
+      description: 'Descripción:  Lorem Ipsum -is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industr s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
       amenities: ['Spa', 'WiFi', 'Gym'],
       images: ['https://images.pexels.com/photos/17836121/pexels-photo-17836121.jpeg']
     },
@@ -46,13 +46,43 @@ export class App {
       {
         _id: 'r1',
         type: 'Deluxe',
-        price: 350000,
+        description: 'Descripción:  Lorem Ipsum -is simply dummy',
         capacity: 3
       },
       {
         _id: 'r2',
         type: 'Standard',
-        price: 250000,
+        description: 'Descripción:  Lorem Ipsum -is simply dummy',
+        capacity: 2
+      },
+      {
+        _id: 'r3',
+        type: 'Standard',
+        description: 'Descripción:  Lorem Ipsum -is simply dummy',
+        capacity: 2
+      },
+      {
+        _id: 'r4',
+        type: 'Standard',
+        description: 'Descripción:  Lorem Ipsum -is simply dummy',
+        capacity: 2
+      },
+      {
+        _id: 'r5',
+        type: 'Standard',
+        description: 'Descripción:  Lorem Ipsum -is simply dummy',
+        capacity: 2
+      },
+      {
+        _id: 'r6',
+        type: 'Standard',
+        description: 'Descripción:  Lorem Ipsum -is simply dummy',
+        capacity: 2
+      },
+      {
+        _id: 'r7',
+        type: 'Standard',
+        description: 'Descripción:  Lorem Ipsum -is simply dummy',
         capacity: 2
       }
     ],
