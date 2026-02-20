@@ -1,16 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { Room } from '../../../core/interfaces/models/room';
 
 @Component({
   selector: 'app-room',
   standalone: true,
-  imports: [],
   templateUrl: './room.component.html',
   styleUrl: './room.component.css',
 })
-export class Room {
+export class RoomComponent {
 
-  roomName: string = 'Room Name';
-  capacity: number = 2;
-  description: string =
-    'Lorem Ipsum is simply dummy text of the printing and typesetting industry.';
+  room = input.required<Room>();
+
 }

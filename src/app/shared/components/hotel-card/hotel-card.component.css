@@ -1,0 +1,134 @@
+.hotel-card {
+  width: 1104px;
+  height: 137px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 30px;
+  border: 1px solid #C9C9C9; 
+  border-radius: 12px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); 
+  background: #F4F4F4;
+}
+
+/* ===== IMAGE ===== */
+
+.hotel-image {
+  width: 137px;
+  height: 137px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #1E3D58;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hotel-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-placeholder {
+  color: white;
+  font-size: 40px;
+}
+
+.hotel-main-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hotel-name {
+  width: 472px;
+  height: 25px;
+  margin: 0;
+  font-family: 'Encode Sans Semi Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 100%;
+  color: #1E3D58;
+}
+
+.hotel-location {
+  width: 70px;
+  height: 17px;
+  margin: 0;
+  font-family: 'Encode Sans Semi Condensed', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  color: #787878;
+}
+
+.hotel-description {
+  width: 472px;
+  height: 60px;
+  margin: 0;
+  font-family: 'Encode Sans Semi Condensed', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 100%;
+  color: #000;
+}
+
+.promo-card {
+  width: 244px;
+  height: 119px;
+  background: white;
+  border: 0.5px solid #BDBDBD;  
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 4px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.promo-card h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1E3D58;
+}
+
+.promo-card ul {
+  padding-left: 18px;
+  margin: 0;
+  font-size: 12px;
+  color: #555;
+}
+
+.hotel-action {
+  margin-left: auto;
+}
+
+.book-btn {
+  width: 100px;
+  height: 70px;
+  background: #D4A63B;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.book-icon {
+  font-size: 20px;
+}
+
+.book-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-3px);
+}

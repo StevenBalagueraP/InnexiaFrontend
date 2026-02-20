@@ -1,6 +1,7 @@
 <div class="app-container">
     <app-side-menu></app-side-menu>
-    <app-room></app-room>
+    <app-room [room]="testRoom"></app-room>
+    <app-hotel-card [data]="hotel"></app-hotel-card>
     <div class="content">
         <router-outlet></router-outlet>
     </div>

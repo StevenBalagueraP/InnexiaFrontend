@@ -1,12 +1,18 @@
 <div class="card">
-  <h2 class="room-name">{{ roomName }}</h2>
+  <h2 class="room-name">
+    {{ room().roomName }}
+  </h2>
 
   <div class="capacity">
     <span class="icon">👥</span>
-    <span class="capacity-text">Capacidad: {{ capacity }}</span>
+    <span class="capacity-text">
+      Capacidad: {{ room().capacity }}
+    </span>
   </div>
 
-  <p class="description">
-    Descripción: {{ description }}
-  </p>
+  @if (room().description) {
+    <p class="description">
+      {{ room().description }}
+    </p>
+  }
 </div>
