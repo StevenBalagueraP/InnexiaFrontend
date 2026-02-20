@@ -1,9 +1,11 @@
 <div class="hotel-card">
 
-  <!-- 🔹 Fila superior -->
-  <div class="hotel-top">
+  <div class="hotel-main-wrapper">
 
-    <div class="hotel-image">
+    <div class="hotel-left">
+
+      <div class="hotel-top">
+        <div class="hotel-image">
       @if (hotel().images?.length) {
         <img [src]="hotel().images![0]" [alt]="hotel().name"/>
       } @else {
@@ -31,21 +33,26 @@
         <li>Desayuno incluido</li>
       </ul>
     </div>
+      </div>
 
-    <button class="book-btn">
-      <span class="book-icon">📅</span>
-      <span>Book</span>
-    </button>
+      @if (suggestedRooms().length > 0) {
+        <div class="rooms-container">
+          @for (room of suggestedRooms(); track room._id) {
+            <app-room [room]="room"></app-room>
+          }
+        </div>
+      }
+
+    </div>
+
+    <!-- 🔥 columna botón independiente -->
+    <div class="hotel-right">
+      <button class="book-btn">
+        <span class="book-icon">📅</span>
+        <span>Book</span>
+      </button>
+    </div>
 
   </div>
-
-  <!-- 🔹 Segunda fila -->
-  @if (suggestedRooms().length > 0) {
-    <div class="rooms-container">
-      @for (room of suggestedRooms(); track room._id) {
-        <app-room [room]="room"></app-room>
-      }
-    </div>
-  }
 
 </div>
