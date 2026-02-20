@@ -14,10 +14,8 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class HotelCard {
 
-  // 🔥 Angular 21 signal input (required)
   data = input.required<SearchResult | Hotel>();
 
-  // 🔥 Computed signals
   hotel = computed<Hotel>(() => {
     const value = this.data();
     return this.isSearchResult(value) ? value.hotel : value;
