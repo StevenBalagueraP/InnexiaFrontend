@@ -1,0 +1,11 @@
+<div class="hotel-list">
+    @if (hotels().length > 0) {
+    @for (hotel of hotels(); track $index) {
+    <app-hotel-card [data]="hotel" />
+    }
+    } @else {
+    <div class="empty-state">
+        <p>No se encontraron hoteles disponibles.</p>
+    </div>
+    }
+</div>

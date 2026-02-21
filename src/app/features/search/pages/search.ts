@@ -4,12 +4,11 @@ import { Hotel } from '../../../core/interfaces/models/hotel-model';
 import { BookingService } from '../../../core/services/booking.service';
 import { SearchResult } from '../../../core/interfaces/models/SearchResult';
 import { SearchService } from '../../../core/services/search.service';
-import { HotelCard } from '../../../shared/components/hotel-card/hotel-card.component';
-
+import { HotelListComponent } from '../../../shared/components/hotel-list/hotel-list.component';
 
 @Component({
   selector: 'app-search',
-  imports: [HotelCard],
+  imports: [HotelListComponent],
   standalone: true,
   templateUrl: './search.html',
   styleUrl: './search.css',
@@ -22,75 +21,6 @@ export class Search {
   searchResults = signal<SearchResult[]>([]);
   loading = signal<boolean>(true);
   error = signal<string | null>(null);
-
-  hotel: Hotel = {
-    _id: 'h2',
-    name: 'Mountain View Resort',
-    location: 'Medellín',
-    description: 'Descripción:  Lorem Ipsum -is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industr s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
-    amenities: ['Spa', 'WiFi', 'Gym'],
-    images: ['https://images.pexels.com/photos/17836121/pexels-photo-17836121.jpeg']
-
-  };
-
-  testSearchResult: SearchResult = {
-    hotel: {
-      _id: 'h2',
-      name: 'Mountain View Resort',
-      location: 'Medellín',
-      description: 'Descripción:  Lorem Ipsum -is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industr s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
-      amenities: ['Spa', 'WiFi', 'Gym'],
-      images: ['https://images.pexels.com/photos/17836121/pexels-photo-17836121.jpeg']
-    },
-    optionLabel: 'Best Option',
-    suggestedRooms: [
-      {
-        _id: 'r1',
-        type: 'Deluxe',
-        description: 'Descripción:  Lorem Ipsum -is simply dummy',
-        capacity: 3
-      },
-      {
-        _id: 'r2',
-        type: 'Standard',
-        description: 'Descripción:  Lorem Ipsum -is simply dummy',
-        capacity: 2
-      },
-      {
-        _id: 'r3',
-        type: 'Standard',
-        description: 'Descripción:  Lorem Ipsum -is simply dummy',
-        capacity: 2
-      },
-      {
-        _id: 'r4',
-        type: 'Standard',
-        description: 'Descripción:  Lorem Ipsum -is simply dummy',
-        capacity: 2
-      },
-      {
-        _id: 'r5',
-        type: 'Standard',
-        description: 'Descripción:  Lorem Ipsum -is simply dummy',
-        capacity: 2
-      },
-      {
-        _id: 'r6',
-        type: 'Standard',
-        description: 'Descripción:  Lorem Ipsum -is simply dummy',
-        capacity: 2
-      },
-      {
-        _id: 'r7',
-        type: 'Standard',
-        description: 'Descripción:  Lorem Ipsum -is simply dummy',
-        capacity: 2
-      }
-    ],
-    totalPrice: 600000,
-    available: true
-  };
-
 
   constructor() {
     this.loadHotels();
@@ -137,6 +67,6 @@ export class Search {
       }
     })
   }
-  
+
 
 } 
