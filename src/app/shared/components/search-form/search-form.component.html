@@ -1,0 +1,136 @@
+<div class="search-container">
+
+  <h2>Buscador</h2>
+
+  <div class="clear-filters">
+  <button mat-button color="warn" (click)="clearFilters()">
+    <mat-icon>delete</mat-icon>
+    Borrar filtros
+  </button>
+</div>
+
+  <!-- ================= FECHAS ================= -->
+<div class="date-box">
+
+  <!-- Llegada -->
+  <div class="date-item">
+    <div class="date-info">
+      <span class="icon">🛬</span>
+      <span>Llegada</span>
+    </div>
+    <input 
+      type="date" 
+      [value]="checkIn()" 
+      (change)="checkIn.set($any($event.target).value)"
+    />
+  </div>
+
+  <!-- Salida -->
+  <div class="date-item">
+    <div class="date-info">
+      <span class="icon">🛫</span>
+      <span>Salida  </span>
+    </div>
+    <input 
+      type="date" 
+      [value]="checkOut()" 
+      (change)="checkOut.set($any($event.target).value)"
+    />
+  </div>
+
+</div>
+@if (dateError()) {
+  <div class="date-error">
+    La fecha de salida no puede ser menor que la de llegada
+  </div>
+}
+
+  <div class="field field-personas">
+  <label>Buscar habitación por cantidad de personas</label>
+
+  <div class="counter-box">
+
+    <span class="people-value">
+      {{ people() }}
+    </span>
+
+    <div class="arrows">
+      <button 
+        (click)="increasePeople()" 
+        [disabled]="people() === 30">
+        ▲
+      </button>
+
+      <button 
+        (click)="decreasePeople()" 
+        [disabled]="people() === 0">
+        ▼
+      </button>
+    </div>
+
+  </div>
+</div>
+
+  <!-- Rango de Precio DOBLE -->
+  <div class="field">
+    <label>Rango de Precio</label>
+
+    <div class="range-container">
+
+      <!-- Línea base -->
+      <div class="slider-track"></div>
+
+      <!-- Rango activo -->
+      <div 
+        class="slider-range"
+        [style.left.%]="(minPrice() / 1000) * 100"
+        [style.width.%]="((maxPrice() - minPrice()) / 1000) * 100">
+      </div>
+
+      <!-- Min -->
+      <input 
+        type="range"
+        min="0"
+        max="1000"
+        [value]="minPrice()"
+        (input)="updateMin(+($any($event.target).value))"
+        class="range-thumb"
+      />
+
+      <!-- Max -->
+      <input 
+        type="range"
+        min="0"
+        max="1000"
+        [value]="maxPrice()"
+        (input)="updateMax(+($any($event.target).value))"
+        class="range-thumb"
+      />
+
+    </div>
+
+    <div class="price-values">
+      <span>{{ minPrice() }}$</span>
+      <span>{{ maxPrice() }}$</span>
+    </div>
+
+  </div>
+
+  <!-- Ubicaciones -->
+<div class="field location-field">
+  <label>Ubicaciones Disponibles</label>
+
+  @for (loc of locations; track loc) {
+    <div class="location-item">
+      <input 
+        type="radio"
+        name="location"
+        [value]="loc"
+        (change)="location.set(loc)"
+      />
+      <span>{{ loc }}</span>
+    </div>
+  }
+</div>
+
+</div>

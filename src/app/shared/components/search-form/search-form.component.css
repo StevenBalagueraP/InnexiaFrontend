@@ -1,0 +1,261 @@
+/* ========================= */
+/* CARD PRINCIPAL */
+/* ========================= */
+
+.search-container {
+  width: 382.25px;
+  height: 100%;
+  padding: 20px;
+  background: #f4f6f8;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* 👈 separación EXACTA entre cada bloque */
+  
+  font-family: 'Encode Sans Semi Condensed', sans-serif;
+}
+
+.clear-filters {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+h2 {
+  text-align: center;
+  color: #1f3c56;
+  margin-bottom: 20px;
+  font-size: 32px;
+  font-weight: 500; /* Medium */
+}
+
+/* ========================= */
+/* DATE BOX */
+/* ========================= */
+
+.date-box {
+  width: 360px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 14px;
+  padding: 0 15px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* Primera fecha (Llegada) */
+.date-item:first-child {
+  margin-top: 32px;   /* 👈 32px desde la parte superior */
+  margin-bottom: 22px; /* 👈 22px entre llegada y salida */
+}
+
+/* Segunda fecha (Salida) */
+.date-item:last-child {
+  margin-bottom: 32px; /* 👈 32px hasta la parte inferior */
+}
+
+.date-item {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* 👈 espacio entre texto y fecha */
+}
+.date-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.date-info span:last-child {
+  font-size: 14px;
+  font-weight: 300; /* Light */
+}
+
+.icon {
+  font-size: 18px;
+}
+
+.date-item input[type="date"] {
+  border: none;
+  background: #f4f6f8;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400; /* Regular */
+}
+
+/* ========================= */
+/* ERROR FECHAS */
+/* ========================= */
+
+.date-error {
+  color: #d32f2f;
+  font-size: 14px;
+  margin: 8px auto 20px auto;
+  font-weight: 500;
+  width: 360px;
+}
+
+/* ========================= */
+/* FIELD GENERAL */
+/* ========================= */
+
+.field {
+  margin-bottom: 25px;
+}
+
+/* ========================= */
+/* PERSONAS (alineado horizontal) */
+/* ========================= */
+
+.field-personas {
+  display: flex;
+  align-items: center;   /* 👈 centra verticalmente */
+  gap: 12px;             /* 👈 espacio entre texto y contador */
+}
+
+.field-personas label {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.counter-box {
+  width: 76px;
+  height: 29px;
+
+  display: flex;
+  justify-content: center; /* 👈 mejor centrado */
+  align-items: center;
+  gap: 4px;
+
+  padding: 0 8px;  /* 👈 menos padding */
+}
+
+.people-value {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.arrows {
+  display: flex;
+  flex-direction: column;
+}
+
+.arrows button {
+  background: none;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0;          /* 👈 quitamos espacio */
+  line-height: 10px;   /* 👈 compacta la altura */
+  height: 10px;        /* 👈 fuerza que queden pegadas */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrows button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ========================= */
+/* RANGE DOBLE */
+/* ========================= */
+
+.field > label {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.range-container {
+  position: relative;
+  height: 30px;
+  margin-top: 15px;
+}
+
+.slider-track {
+  position: absolute;
+  top: 14px;
+  width: 100%;
+  height: 4px;
+  background: #dcdcdc;
+  border-radius: 4px;
+}
+
+.slider-range {
+  position: absolute;
+  top: 14px;
+  height: 4px;
+  background: #1f3c56;
+  border-radius: 4px;
+}
+
+.range-thumb {
+  position: absolute;
+  width: 100%;
+  pointer-events: none;
+  appearance: none;
+  background: none;
+}
+
+.range-thumb::-webkit-slider-thumb {
+  pointer-events: auto;
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  background: #d4a017;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+.range-thumb::-moz-range-thumb {
+  pointer-events: auto;
+  height: 16px;
+  width: 16px;
+  background: #d4a017;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+.price-values {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  font-weight: 500;
+}
+
+/* ========================= */
+/* UBICACIONES */
+/* ========================= */
+
+.location-field > label {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.location-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 16px;
+  font-weight: 400;
+
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+/* Radio personalizado más limpio */
+.location-item input[type="radio"] {
+  accent-color: #1f3c56;
+  cursor: pointer;
+}
