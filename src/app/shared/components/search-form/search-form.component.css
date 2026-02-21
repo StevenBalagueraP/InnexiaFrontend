@@ -1,44 +1,93 @@
-/* ========================= */
-/* CARD PRINCIPAL */
-/* ========================= */
+/*
+--app-primary: #1E3D58;
+  --app-secondary: #CDA349; // Using gold as secondary/accent
+  --app-black: #000000;
+  --app-dark-gray: #333333;
+  --app-medium-gray: #787878;
+  --app-white: #FFFFFF;
+  --app-grey-line: #E8E8E8;
+  --app-box-shadow: #EDEDED;
+  --app-text-primary: #000000;
+  --app-text-secondary: #484848;
+  --app-hotel-card-background: #C9C9C9;
+  --app-border-promotions: #BDBDBD;
+
+  --hotel-label-size: 24px;
+  --hotel-label-weight: 600;
+
+  --user-label-size: 16px;
+  --user-label-weight: 500;
+  --app-weigth-400: 400;
+  --app-weigth-300: 300;
+  --app-weigth-700: 700;
+  --app-weigth-promotions: 275;
+  --app-error: #F11010;
+*/
+
 
 .search-container {
   width: 382.25px;
   height: 100%;
   padding: 20px;
-  background: #f4f6f8;
+  background: var(--app-white);
   border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  box-shadow: 2px 4px 4px 0 #00000040;
+  border: 1px solid var(--app-box-shadow);
 
   display: flex;
   flex-direction: column;
-  gap: 16px; /* 👈 separación EXACTA entre cada bloque */
+  gap: 16px;
   
   font-family: 'Encode Sans Semi Condensed', sans-serif;
 }
 
+.date-box ~ .field {
+  margin-left: 36px; 
+}
+
+.date-box ~ .date-error {
+  margin-left: 36px;
+}
 .clear-filters {
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 12px;
+  justify-content: flex-end; 
+  width: 100%;
+}
+.clear-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  font-weight: var(--app-weigth-400);
+  color: var(--app-secondary);
+  cursor: pointer;
+  user-select: none;
+  
+}
+
+.clear-btn mat-icon {
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+}
+
+.clear-btn:hover {
+  opacity: 0.75;
 }
 
 h2 {
   text-align: center;
-  color: #1f3c56;
+  color: var(--app-primary);
   margin-bottom: 20px;
   font-size: 32px;
-  font-weight: 500; /* Medium */
+  font-weight: var(--user-label-weight); 
 }
 
-/* ========================= */
-/* DATE BOX */
-/* ========================= */
 
 .date-box {
   width: 360px;
-  background: #ffffff;
-  border: 1px solid #e0e0e0;
+  background: var(--app-white);
+  border: 1.5px solid var(--app-secondary);
   border-radius: 14px;
   padding: 0 15px;
 
@@ -46,32 +95,30 @@ h2 {
   flex-direction: column;
 }
 
-/* Primera fecha (Llegada) */
 .date-item:first-child {
-  margin-top: 32px;   /* 👈 32px desde la parte superior */
-  margin-bottom: 22px; /* 👈 22px entre llegada y salida */
+  margin-top: 32px;   
+  margin-bottom: 22px; 
 }
 
-/* Segunda fecha (Salida) */
 .date-item:last-child {
-  margin-bottom: 32px; /* 👈 32px hasta la parte inferior */
+  margin-bottom: 32px;
 }
 
 .date-item {
   display: flex;
   align-items: center;
-  gap: 12px; /* 👈 espacio entre texto y fecha */
+  gap: 12px;
 }
 .date-info {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-weight: 500;
+  font-weight: var(--user-label-weight);
 }
 
 .date-info span:last-child {
   font-size: 14px;
-  font-weight: 300; /* Light */
+  font-weight: var(--app-weigth-300);
 }
 
 .icon {
@@ -80,47 +127,38 @@ h2 {
 
 .date-item input[type="date"] {
   border: none;
-  background: #f4f6f8;
+  background: var(--app-white);
   padding: 6px 10px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
-  font-weight: 400; /* Regular */
+  font-weight: var(--app-weigth-400);
 }
 
-/* ========================= */
-/* ERROR FECHAS */
-/* ========================= */
 
 .date-error {
-  color: #d32f2f;
+  color: var(--app-error);
   font-size: 14px;
   margin: 8px auto 20px auto;
-  font-weight: 500;
+  font-weight: var(--user-label-weight);
   width: 360px;
 }
 
-/* ========================= */
-/* FIELD GENERAL */
-/* ========================= */
 
 .field {
   margin-bottom: 25px;
 }
 
-/* ========================= */
-/* PERSONAS (alineado horizontal) */
-/* ========================= */
 
 .field-personas {
   display: flex;
-  align-items: center;   /* 👈 centra verticalmente */
-  gap: 12px;             /* 👈 espacio entre texto y contador */
+  align-items: center;  
+  gap: 12px;             
 }
 
 .field-personas label {
   font-size: 16px;
-  font-weight: 400;
+  font-weight: var(--app-weigth-400);
 }
 
 .counter-box {
@@ -128,16 +166,16 @@ h2 {
   height: 29px;
 
   display: flex;
-  justify-content: center; /* 👈 mejor centrado */
+  justify-content: center; 
   align-items: center;
   gap: 4px;
 
-  padding: 0 8px;  /* 👈 menos padding */
+  padding: 0 8px; 
 }
 
 .people-value {
   font-size: 18px;
-  font-weight: 500;
+  font-weight: var(--user-label-weight);
 }
 
 .arrows {
@@ -150,9 +188,9 @@ h2 {
   border: none;
   font-size: 12px;
   cursor: pointer;
-  padding: 0;          /* 👈 quitamos espacio */
-  line-height: 10px;   /* 👈 compacta la altura */
-  height: 10px;        /* 👈 fuerza que queden pegadas */
+  padding: 0;       
+  line-height: 10px; 
+  height: 10px;      
   display: flex;
   align-items: center;
   justify-content: center;
@@ -163,13 +201,9 @@ h2 {
   cursor: not-allowed;
 }
 
-/* ========================= */
-/* RANGE DOBLE */
-/* ========================= */
-
 .field > label {
   font-size: 16px;
-  font-weight: 400;
+  font-weight: var(--app-weigth-400);
 }
 
 .range-container {
@@ -183,7 +217,7 @@ h2 {
   top: 14px;
   width: 100%;
   height: 4px;
-  background: #dcdcdc;
+  background: var(--app-white);
   border-radius: 4px;
 }
 
@@ -191,7 +225,7 @@ h2 {
   position: absolute;
   top: 14px;
   height: 4px;
-  background: #1f3c56;
+  background: var(--app-primary);
   border-radius: 4px;
 }
 
@@ -208,7 +242,7 @@ h2 {
   appearance: none;
   height: 16px;
   width: 16px;
-  background: #d4a017;
+  background: var(--app-secondary);
   border-radius: 50%;
   cursor: pointer;
   border: none;
@@ -218,7 +252,7 @@ h2 {
   pointer-events: auto;
   height: 16px;
   width: 16px;
-  background: #d4a017;
+  background: var(--app-secondary);
   border-radius: 50%;
   cursor: pointer;
   border: none;
@@ -227,17 +261,14 @@ h2 {
 .price-values {
   display: flex;
   justify-content: space-between;
-  margin-top: 25px;
-  font-weight: 500;
+  margin-top: 5px;
+  font-weight: var(--user-label-weight);
 }
 
-/* ========================= */
-/* UBICACIONES */
-/* ========================= */
 
 .location-field > label {
   font-size: 20px;
-  font-weight: 500;
+  font-weight: var(--user-label-weight);
   margin-bottom: 12px;
   display: block;
 }
@@ -248,14 +279,13 @@ h2 {
   gap: 8px;
 
   font-size: 16px;
-  font-weight: 400;
+  font-weight: var(--app-weigth-400);
 
   margin-bottom: 8px;
   cursor: pointer;
 }
 
-/* Radio personalizado más limpio */
 .location-item input[type="radio"] {
-  accent-color: #1f3c56;
+  accent-color: var(--app-primary);
   cursor: pointer;
 }

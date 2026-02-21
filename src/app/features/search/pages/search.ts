@@ -5,10 +5,11 @@ import { BookingService } from '../../../core/services/booking.service';
 import { SearchResult } from '../../../core/interfaces/models/SearchResult';
 import { SearchService } from '../../../core/services/search.service';
 import { HotelListComponent } from '../../../shared/components/hotel-list/hotel-list.component';
+import { SearchForm } from '../../../shared/components/search-form/search-form.component';
 
 @Component({
   selector: 'app-search',
-  imports: [HotelListComponent],
+  imports: [HotelListComponent, SearchForm],
   standalone: true,
   templateUrl: './search.html',
   styleUrl: './search.css',

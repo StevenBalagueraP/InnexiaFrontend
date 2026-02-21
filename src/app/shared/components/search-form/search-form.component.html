@@ -1,18 +1,17 @@
 <div class="search-container">
 
   <h2>Buscador</h2>
-
+@if (hasChanges()) {
   <div class="clear-filters">
-  <button mat-button color="warn" (click)="clearFilters()">
-    <mat-icon>delete</mat-icon>
-    Borrar filtros
-  </button>
-</div>
+    <span class="clear-btn" (click)="clearFilters()">
+      <mat-icon>delete</mat-icon>
+      Borrar filtros
+    </span>
+  </div>
+}
 
-  <!-- ================= FECHAS ================= -->
 <div class="date-box">
 
-  <!-- Llegada -->
   <div class="date-item">
     <div class="date-info">
       <span class="icon">🛬</span>
@@ -25,7 +24,6 @@
     />
   </div>
 
-  <!-- Salida -->
   <div class="date-item">
     <div class="date-info">
       <span class="icon">🛫</span>
@@ -71,23 +69,19 @@
   </div>
 </div>
 
-  <!-- Rango de Precio DOBLE -->
   <div class="field">
     <label>Rango de Precio</label>
 
     <div class="range-container">
 
-      <!-- Línea base -->
       <div class="slider-track"></div>
 
-      <!-- Rango activo -->
       <div 
         class="slider-range"
         [style.left.%]="(minPrice() / 1000) * 100"
         [style.width.%]="((maxPrice() - minPrice()) / 1000) * 100">
       </div>
 
-      <!-- Min -->
       <input 
         type="range"
         min="0"
@@ -97,7 +91,6 @@
         class="range-thumb"
       />
 
-      <!-- Max -->
       <input 
         type="range"
         min="0"
@@ -116,7 +109,6 @@
 
   </div>
 
-  <!-- Ubicaciones -->
 <div class="field location-field">
   <label>Ubicaciones Disponibles</label>
 

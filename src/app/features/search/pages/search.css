@@ -1,0 +1,21 @@
+.layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 41px;
+    height: 100vh;
+    overflow: hidden;
+}
+
+app-search-form {
+    position: sticky;
+    top: 0;
+    height: 100%;
+    align-self: stretch;
+    flex-shrink: 0;
+}
+
+app-hotel-list {
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+}

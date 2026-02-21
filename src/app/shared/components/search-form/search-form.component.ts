@@ -18,79 +18,93 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class SearchForm {
 
-  // ====== FECHAS ======
-  today = new Date();
-  tomorrow = new Date(this.today.getTime() + 86400000);
+  readonly initialState = {
+    checkIn: '',
+    checkOut: '',
+    people: 0,
+    minPrice: 0,
+    maxPrice: 1000,
+    location: null as string | null
+  };
 
-  checkIn = signal(this.formatDate(this.today));
-  checkOut = signal(this.formatDate(this.tomorrow));
+  checkIn = signal(this.initialState.checkIn);
+  checkOut = signal(this.initialState.checkOut);
 
-  // ====== FILTROS ======
-  people = signal(1);
+  people = signal(this.initialState.people);
 
-  minPrice = signal(100);
-  maxPrice = signal(900);
+  minPrice = signal(this.initialState.minPrice);
+  maxPrice = signal(this.initialState.maxPrice);
 
-  location = signal<string | null>(null);
+  location = signal<string | null>(this.initialState.location);
 
   locations = [
-    'Ubicación 1',
-    'Ubicación 2',
-    'Ubicación 3',
-    'Ubicación 4',
-    'Ubicación 5'
+    'Phoenix',
+    'New York',
+    'Los Angeles',
+    'Aspen',
+    'Alaska',
+    'Miami',
+    'Honolulu',
+    'Chicago'
   ];
 
-  updateMin(value: number) {
-    if (value < this.maxPrice()) {
-      this.minPrice.set(value);
+    updateMin(value: number) {
+        if (value < this.maxPrice()) {
+            this.minPrice.set(value);
+        }
     }
-  }
 
-  updateMax(value: number) {
-    if (value > this.minPrice()) {
-      this.maxPrice.set(value);
+    updateMax(value: number) {
+        if (value > this.minPrice()) {
+            this.maxPrice.set(value);
+        }
     }
-  }
 
-  private formatDate(date: Date): string {
-    return date.toISOString().split('T')[0];
-  }
+    filters = computed(() => ({
+        checkIn: this.checkIn(),
+        checkOut: this.checkOut(),
+        people: this.people(),
+        minPrice: this.minPrice(),
+        maxPrice: this.maxPrice(),
+        location: this.location()
+    }));
 
-  filters = computed(() => ({
-    checkIn: this.checkIn(),
-    checkOut: this.checkOut(),
-    people: this.people(),
-    minPrice: this.minPrice(),
-    maxPrice: this.maxPrice(),
-    location: this.location()
-  }));
+    dateError = computed(() => {
+        const start = new Date(this.checkIn());
+        const end = new Date(this.checkOut());
 
-  dateError = computed(() => {
-    const start = new Date(this.checkIn());
-    const end = new Date(this.checkOut());
-
-    return start > end;
-  });   
+        return start > end;
+    });   
 
     increasePeople() {
-    if (this.people() < 30) {
-        this.people.update(v => v + 1);
+        if (this.people() < 30) {
+            this.people.update(v => v + 1);
+        }
     }
-}
 
     decreasePeople() {
-    if (this.people() > 0) {
-        this.people.update(v => v - 1);
-    }
+        if (this.people() > 0) {
+            this.people.update(v => v - 1);
+        }
     }
 
     clearFilters() {
-  this.checkIn.set('');
-  this.checkOut.set('');
-  this.people.set(0);
-  this.minPrice.set(0);
-  this.maxPrice.set(1000);
-  this.location.set(null);
-}
+        this.checkIn.set(this.initialState.checkIn);
+        this.checkOut.set(this.initialState.checkOut);
+        this.people.set(this.initialState.people);
+        this.minPrice.set(this.initialState.minPrice);
+        this.maxPrice.set(this.initialState.maxPrice);
+        this.location.set(this.initialState.location);
+    }
+
+  hasChanges = computed(() => {
+    return (
+        this.checkIn() !== this.initialState.checkIn ||
+        this.checkOut() !== this.initialState.checkOut ||
+        this.people() !== this.initialState.people ||
+        this.minPrice() !== this.initialState.minPrice ||
+        this.maxPrice() !== this.initialState.maxPrice ||
+        this.location() !== this.initialState.location
+    );
+  });
 }
