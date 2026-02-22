@@ -19,12 +19,12 @@ import { MatIconModule } from '@angular/material/icon';
 export class SearchForm {
 
   readonly initialState = {
-    checkIn: '',
-    checkOut: '',
+    checkIn: this.getToday(),
+    checkOut: this.getTomorrow(),
     people: 0,
     minPrice: 0,
     maxPrice: 1000,
-    location: null as string | null
+    location: ''
   };
 
   checkIn = signal(this.initialState.checkIn);
@@ -95,6 +95,16 @@ export class SearchForm {
         this.minPrice.set(this.initialState.minPrice);
         this.maxPrice.set(this.initialState.maxPrice);
         this.location.set(this.initialState.location);
+    }
+    private getToday(): string {
+      const today = new Date();
+      return today.toISOString().split('T')[0];
+    }
+
+    private getTomorrow(): string {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      return tomorrow.toISOString().split('T')[0];
     }
 
   hasChanges = computed(() => {

@@ -118,6 +118,7 @@
         type="radio"
         name="location"
         [value]="loc"
+        [checked]="location() === loc"
         (change)="location.set(loc)"
       />
       <span>{{ loc }}</span>
