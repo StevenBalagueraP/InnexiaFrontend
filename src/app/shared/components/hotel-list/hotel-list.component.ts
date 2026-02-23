@@ -11,5 +11,6 @@ import { HotelCard } from '../hotel-card/hotel-card.component';
     styleUrl: './hotel-list.component.css',
 })
 export class HotelListComponent {
-    hotels = input.required<(Hotel | SearchResult)[]>();
+    hotels = input<Hotel[]>([]);
+    searchResults = input<SearchResult[]>([]);
 }

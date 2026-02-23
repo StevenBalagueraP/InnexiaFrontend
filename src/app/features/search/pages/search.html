@@ -1,4 +1,9 @@
 <div class="layout">
-  <app-search-form></app-search-form>
+  <app-search-form (filtersChanged)="onFiltersChanged($event)" />
+
+  @if (isSearchActive()) {
+  <app-hotel-list [searchResults]="searchResults()" />
+  } @else {
   <app-hotel-list [hotels]="hotels()" />
+  }
 </div>

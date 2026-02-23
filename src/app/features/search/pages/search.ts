@@ -5,7 +5,7 @@ import { BookingService } from '../../../core/services/booking.service';
 import { SearchResult } from '../../../core/interfaces/models/SearchResult';
 import { SearchService } from '../../../core/services/search.service';
 import { HotelListComponent } from '../../../shared/components/hotel-list/hotel-list.component';
-import { SearchForm } from '../../../shared/components/search-form/search-form.component';
+import { SearchForm, SearchFilters } from '../../../shared/components/search-form/search-form.component';
 
 @Component({
   selector: 'app-search',
@@ -18,15 +18,16 @@ export class Search {
   private hotelService = inject(HotelService);
   private bookingService = inject(BookingService);
   private searchService = inject(SearchService);
+
   hotels = signal<Hotel[]>([]);
   searchResults = signal<SearchResult[]>([]);
+  isSearchActive = signal<boolean>(false);
   loading = signal<boolean>(true);
   error = signal<string | null>(null);
 
   constructor() {
     this.loadHotels();
     this.loadBookings();
-    this.loadSearchResults();
   }
 
   loadHotels(): void {
@@ -34,16 +35,15 @@ export class Search {
       next: (data) => {
         const sortedHotels = data.sort((a, b) =>
           a.name.localeCompare(b.name)
-        )
-        this.hotels.set(sortedHotels)
-        console.log(this.hotels());
+        );
+        this.hotels.set(sortedHotels);
         this.loading.set(false);
       },
       error: (err) => {
         console.error('Error al cargar el hotel', err);
         this.error.set('Error al cargar el hotel');
       }
-    })
+    });
   }
 
   loadBookings(): void {
@@ -56,18 +56,30 @@ export class Search {
       }
     });
   }
-  loadSearchResults(): void {
-    this.searchService.loadSearchResults().subscribe({
-      next: (data) => {
-        console.log('Search results loaded:', data);
-        this.searchResults.set(data);
-      },
-      error: (err) => {
-        console.error('Error loading search results:', err);
-        this.error.set('Error loading search results');
-      }
-    })
+
+  onFiltersChanged(filters: SearchFilters): void {
+    if (filters.hasChanges) {
+      this.isSearchActive.set(true);
+      this.searchService.loadSearchResults({
+        startDate: filters.checkIn,
+        endDate: filters.checkOut,
+        peopleCount: filters.people,
+        city: filters.location ?? undefined,
+        minPrice: filters.minPrice,
+        maxPrice: filters.maxPrice,
+      }).subscribe({
+        next: (data) => {
+          console.log('Search results loaded:', data);
+          this.searchResults.set(data);
+        },
+        error: (err) => {
+          console.error('Error loading search results:', err);
+          this.error.set('Error loading search results');
+        }
+      });
+    } else {
+      this.isSearchActive.set(false);
+      this.searchResults.set([]);
+    }
   }
-
-
-} 
+}

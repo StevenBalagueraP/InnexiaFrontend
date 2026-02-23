@@ -1,5 +1,9 @@
 <div class="hotel-list">
-    @if (hotels().length > 0) {
+    @if (searchResults().length > 0) {
+    @for (result of searchResults(); track $index) {
+    <app-hotel-card [data]="result" />
+    }
+    } @else if (hotels().length > 0) {
     @for (hotel of hotels(); track $index) {
     <app-hotel-card [data]="hotel" />
     }

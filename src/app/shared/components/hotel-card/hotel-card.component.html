@@ -5,41 +5,41 @@
 
       <div class="hotel-top">
         <div class="hotel-image">
-      @if (hotel().images?.length) {
-        <img [src]="hotel().images![0]" [alt]="hotel().name"/>
-      } @else {
-        <div class="image-placeholder">🏔</div>
-      }
-    </div>
+          @if (hotelImage()) {
+          <img [src]="hotelImage()!" [alt]="hotelName()" />
+          } @else {
+          <div class="image-placeholder">🏔</div>
+          }
+        </div>
 
-    <div class="hotel-main-info">
-      <h2 class="hotel-name">{{ hotel().name }}</h2>
-      <p class="hotel-location">📍 {{ hotel().location }}</p>
+        <div class="hotel-main-info">
+          <h2 class="hotel-name">{{ hotelName() }}</h2>
+          <p class="hotel-location">📍 {{ hotelLocation() }}</p>
 
-      @if (hotel().description) {
-        <p class="hotel-description">
-          {{ hotel().description }}
-        </p>
-      }
-    </div>
+          @if (hotelDescription()) {
+          <p class="hotel-description">
+            {{ hotelDescription() }}
+          </p>
+          }
+        </div>
 
-    <div class="promo-card">
-      <h3>Promociones Disponibles</h3>
-      <ul>
-        <li>Carnaval</li>
-        <li>Familias de 8 integrantes</li>
-        <li>Niños menores de 5 años no pagan estadía</li>
-        <li>Desayuno incluido</li>
-      </ul>
-    </div>
+        <div class="promo-card">
+          <h3>Promociones Disponibles</h3>
+          <ul>
+            <li>Carnaval</li>
+            <li>Familias de 8 integrantes</li>
+            <li>Niños menores de 5 años no pagan estadía</li>
+            <li>Desayuno incluido</li>
+          </ul>
+        </div>
       </div>
 
       @if (suggestedRooms().length > 0) {
-        <div class="rooms-container">
-          @for (room of suggestedRooms(); track room._id) {
-            <app-room [room]="room"></app-room>
-          }
-        </div>
+      <div class="rooms-container">
+        @for (room of suggestedRooms(); track room._id) {
+        <app-room [room]="room"></app-room>
+        }
+      </div>
       }
 
     </div>
