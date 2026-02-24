@@ -58,7 +58,6 @@ export class SearchForm {
     'Chicago'
   ];
 
-  // Output to notify parent of filter changes
   filtersChanged = output<SearchFilters>();
 
   updateMin(value: number) {
@@ -133,7 +132,6 @@ export class SearchForm {
   });
 
   constructor() {
-    // Emit whenever any filter changes
     effect(() => {
       const currentFilters: SearchFilters = {
         checkIn: this.checkIn(),
