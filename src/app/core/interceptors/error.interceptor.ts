@@ -11,14 +11,25 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         catchError((error: HttpErrorResponse) => {
             if (error.status === 401) {
                 localStorageService.removeToken();
-                return throwError(() => new Error('Credenciales inválidas'));
+                return throwError(() => new Error('Credenciales inválidas. Por favor inicie sesión nuevamente.'));
             }
 
             if (error.status >= 400 && error.status < 600) {
                 const backendError: BackendError = error.error;
                 console.error('Backend Error:', backendError);
+
+                // Build a readable message from the backend payload
+                const message =
+                    backendError?.message ||
+                    (error.status === 400 ? 'Parámetros de búsqueda inválidos.' :
+                        error.status === 404 ? 'No se encontraron resultados.' :
+                            error.status === 500 ? 'Error interno del servidor. Intente más tarde.' :
+                                `Error ${error.status}: algo salió mal.`);
+
+                return throwError(() => new Error(message));
             }
-            return throwError(() => error);
+
+            return throwError(() => new Error('Error de red. Verifique su conexión.'));
         })
     );
 };

@@ -34,13 +34,19 @@ html {
   --app-box-shadow: #EDEDED;
   --app-text-primary: #000000;
   --app-text-secondary: #484848;
+  --app-hotel-card-background: #C9C9C9;
+  --app-border-promotions: #BDBDBD;
+  --app-error: #F11010;
 
   --hotel-label-size: 24px;
   --hotel-label-weight: 600;
 
   --user-label-size: 16px;
   --user-label-weight: 500;
-
+  --app-weigth-400: 400;
+  --app-weigth-300: 300;
+  --app-weigth-700: 700;
+  --app-weigth-promotions: 275;
 
   // Overriding Angular Material system variables to match the exact primary/tertiary if the generated palette isn't close enough
   // Note: Angular M3 generates a tonal palette. For strict adherence, we might need to generate a custom palette object.

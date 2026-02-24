@@ -10,4 +10,5 @@ import { SideMenuComponent } from './shared/components/side-menu/side-menu.compo
 })
 export class App {
   protected readonly title = signal('innexiafrontend');
-}
+
+  }

@@ -1,0 +1,56 @@
+<div class="hotel-card">
+  <div class="hotel-main-wrapper">
+
+    <div class="hotel-left">
+
+      <div class="hotel-top">
+        <div class="hotel-image">
+          @if (hotelImage()) {
+          <img [src]="hotelImage()!" [alt]="hotelName()" />
+          } @else {
+          <div class="image-placeholder">🏔</div>
+          }
+        </div>
+
+        <div class="hotel-main-info">
+          <h2 class="hotel-name">{{ hotelName() }}</h2>
+          <p class="hotel-location">📍 {{ hotelLocation() }}</p>
+
+          @if (hotelDescription()) {
+          <p class="hotel-description">
+            {{ hotelDescription() }}
+          </p>
+          }
+        </div>
+
+        <div class="promo-card">
+          <h3>Promociones Disponibles</h3>
+          <ul>
+            <li>Carnaval</li>
+            <li>Familias de 8 integrantes</li>
+            <li>Niños menores de 5 años no pagan estadía</li>
+            <li>Desayuno incluido</li>
+          </ul>
+        </div>
+      </div>
+
+      @if (suggestedRooms().length > 0) {
+      <div class="rooms-container">
+        @for (room of suggestedRooms(); track room._id) {
+        <app-room [room]="room"></app-room>
+        }
+      </div>
+      }
+
+    </div>
+
+    <div class="hotel-right">
+      <button class="book-btn" mat-raised-button color="primary">
+        <mat-icon>event</mat-icon>
+        <span>Book</span>
+      </button>
+    </div>
+
+  </div>
+
+</div>

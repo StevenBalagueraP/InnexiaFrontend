@@ -10,4 +10,7 @@
     overflow-y: auto;
     height: 100%;
     position: relative;
+    will-change: scroll-position;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
 }
