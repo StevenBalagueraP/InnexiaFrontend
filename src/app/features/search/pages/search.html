@@ -1,9 +1,18 @@
 <div class="layout">
   <app-search-form (filtersChanged)="onFiltersChanged($event)" />
 
-  @if (isSearchActive()) {
-  <app-hotel-list [searchResults]="searchResults()" />
-  } @else {
-  <app-hotel-list [hotels]="hotels()" />
-  }
+  <div class="content-area">
+    @if (error()) {
+    <div class="search-error-banner" role="alert">
+      <span class="error-icon">⚠️</span>
+      <span>{{ error() }}</span>
+    </div>
+    }
+
+    @if (isSearchActive()) {
+    <app-hotel-list [searchResults]="searchResults()" />
+    } @else {
+    <app-hotel-list [hotels]="hotels()" />
+    }
+  </div>
 </div>

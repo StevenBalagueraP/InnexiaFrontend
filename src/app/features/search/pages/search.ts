@@ -60,6 +60,7 @@ export class Search {
   onFiltersChanged(filters: SearchFilters): void {
     if (filters.hasChanges) {
       this.isSearchActive.set(true);
+      this.error.set(null);
       this.searchService.loadSearchResults({
         startDate: filters.checkIn,
         endDate: filters.checkOut,
@@ -69,17 +70,20 @@ export class Search {
         maxPrice: filters.maxPrice,
       }).subscribe({
         next: (data) => {
-          console.log('Search results loaded:', data);
           this.searchResults.set(data);
+          this.error.set(null);
         },
-        error: (err) => {
-          console.error('Error loading search results:', err);
-          this.error.set('Error loading search results');
+        error: (err: Error) => {
+          console.error('Search error:', err);
+          this.searchResults.set([]);
+          // err.message is already normalized by the ErrorInterceptor
+          this.error.set(err.message || 'No se pudieron cargar los resultados de búsqueda.');
         }
       });
     } else {
       this.isSearchActive.set(false);
       this.searchResults.set([]);
+      this.error.set(null);
     }
   }
 }
