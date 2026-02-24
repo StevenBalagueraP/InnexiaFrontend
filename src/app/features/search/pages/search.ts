@@ -76,7 +76,6 @@ export class Search {
         error: (err: Error) => {
           console.error('Search error:', err);
           this.searchResults.set([]);
-          // err.message is already normalized by the ErrorInterceptor
           this.error.set(err.message || 'No se pudieron cargar los resultados de búsqueda.');
         }
       });
