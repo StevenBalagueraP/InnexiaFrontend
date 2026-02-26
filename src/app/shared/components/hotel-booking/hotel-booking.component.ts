@@ -97,14 +97,6 @@ export class HotelBookingComponent {
         description:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
       },
-      {
-        _id: '69992d3af480e2b0614d3168',
-        type: 'SIMPLE_ONE',
-        price: 97,
-        capacity: 1,
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-      },
     ],
     totalPrice: 97,
     available: true,

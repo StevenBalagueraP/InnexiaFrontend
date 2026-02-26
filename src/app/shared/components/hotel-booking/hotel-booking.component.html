@@ -1,6 +1,6 @@
 <div class="booking-page">
   <!-- Main content -->
-  <main class="main" [class.main--scroll]="hasManyRooms()">
+  <main class="main">
     <!-- Hotel details + Promociones -->
     <section class="section-hotel">
       <div class="hotel-info">
@@ -112,7 +112,7 @@
     </section>
 
     <!-- Habitaciones disponibles -->
-    <section class="section-rooms">
+    <section class="section-rooms" [class.section-rooms--scroll]="hasManyRooms()">
       <h3 class="block-title">Habitaciones disponibles</h3>
       <div class="rooms-grid">
         @for (room of hotel().rooms; track room._id) {
