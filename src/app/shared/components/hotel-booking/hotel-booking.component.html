@@ -1,0 +1,130 @@
+<div class="booking-page">
+  <!-- Main content -->
+  <main class="main" [class.main--scroll]="hasManyRooms()">
+    <!-- Hotel details + Promociones -->
+    <section class="section-hotel">
+      <div class="hotel-info">
+        <div class="hotel-head">
+          <div class="hotel-text">
+            <h1 class="hotel-name">{{ hotel().hotelName }}</h1>
+            <p class="hotel-location">
+              <mat-icon>location_on</mat-icon>
+              <span>{{ hotel().location }}</span>
+            </p>
+          </div>
+          
+        </div>
+        <div class="hotel-desc-block">
+            @if (hotel().image?.[0]; as img) {
+                <div class="hotel-image">
+                  <img [src]="img" [alt]="hotel().hotelName" />
+                </div>
+              }
+          <p class="hotel-description">{{ hotel().description }}</p>
+          <div class="promo-card">
+            <h3>Promociones Disponibles</h3>
+            <ul>
+              @for (promo of hotel().promotions; track promo) {
+                <li>{{ promo }}</li>
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+    </section>
+
+    <!-- Fechas + Cantidad huéspedes -->
+    <section class="section-dates-guests">
+      <div class="dates-block">
+        <h3 class="block-title">Fechas</h3>
+
+        <!-- Inputs ocultos para los datepickers -->
+        <mat-form-field appearance="outline" class="visually-hidden-field">
+          <input
+            matInput
+            [matDatepicker]="arrivalPicker"
+            [min]="minDate"
+            [value]="arrivalDate()"
+            (dateChange)="onArrivalDateChange($event)"
+          />
+          <mat-datepicker #arrivalPicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="visually-hidden-field">
+          <input
+            matInput
+            [matDatepicker]="departurePicker"
+            [min]="minDate"
+            [value]="departureDate()"
+            (dateChange)="onDepartureDateChange($event)"
+          />
+          <mat-datepicker #departurePicker></mat-datepicker>
+        </mat-form-field>
+
+        <div class="dates-rect">
+          <mat-icon (click)="arrivalPicker.open()">calendar_today</mat-icon>
+          <span class="date-text arrival" (click)="arrivalPicker.open()">
+            {{ arrivalLabel() }}
+          </span>
+          <mat-icon class="arrow">arrow_forward</mat-icon>
+          <mat-icon (click)="departurePicker.open()">calendar_today</mat-icon>
+          <span class="date-text departure" (click)="departurePicker.open()">
+            {{ departureLabel() }}
+          </span>
+        </div>
+
+        @if (dateError()) {
+          <p class="date-error">
+            No puede poner fechas menores a la fecha actual ni una llegada mayor a la salida.
+          </p>
+        }
+      </div>
+      <div class="guests-block">
+        <h3 class="block-title">Cantidad de huéspedes</h3>
+        <div class="guests-fields">
+          <div class="guest-field">
+            <span class="guest-label">Adultos</span>
+            <div class="guest-stepper">
+              <button type="button" mat-icon-button (click)="setAdults(-1)" aria-label="Menos adultos">
+                <mat-icon>expand_more</mat-icon>
+              </button>
+              <span class="guest-value">{{ adults() }}</span>
+              <button type="button" mat-icon-button (click)="setAdults(1)" aria-label="Más adultos">
+                <mat-icon>expand_less</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div class="guest-field">
+            <span class="guest-label">Niños</span>
+            <div class="guest-stepper">
+              <button type="button" mat-icon-button (click)="setChildren(-1)" aria-label="Menos niños">
+                <mat-icon>expand_more</mat-icon>
+              </button>
+              <span class="guest-value">{{ children() }}</span>
+              <button type="button" mat-icon-button (click)="setChildren(1)" aria-label="Más niños">
+                <mat-icon>expand_less</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Habitaciones disponibles -->
+    <section class="section-rooms">
+      <h3 class="block-title">Habitaciones disponibles</h3>
+      <div class="rooms-grid">
+        @for (room of hotel().rooms; track room._id) {
+          <app-room [room]="room" [variant]="'hotel-booking'" />
+        }
+      </div>
+    </section>
+
+    <!-- FAB Book -->
+    <button class="fab-book" mat-fab extended type="button" aria-label="Reservar">
+      <mat-icon>event</mat-icon>
+      <span>Book</span>
+    </button>
+  </main>
+</div>

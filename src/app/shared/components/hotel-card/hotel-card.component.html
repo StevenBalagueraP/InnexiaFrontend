@@ -37,7 +37,7 @@
       @if (suggestedRooms().length > 0) {
       <div class="rooms-container">
         @for (room of suggestedRooms(); track room._id) {
-        <app-room [room]="room"></app-room>
+        <app-room [room]="room" [variant]="'search'"></app-room>
         }
       </div>
       }
@@ -45,7 +45,13 @@
     </div>
 
     <div class="hotel-right">
-      <button class="book-btn" mat-raised-button color="primary">
+      <button
+        class="book-btn"
+        mat-raised-button
+        color="primary"
+        [routerLink]="['/hotel-booking']"
+        type="button"
+      >
         <mat-icon>event</mat-icon>
         <span>Book</span>
       </button>

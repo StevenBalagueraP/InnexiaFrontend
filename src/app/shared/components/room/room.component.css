@@ -10,8 +10,25 @@
   box-shadow: 0px 4px 4px 0px #00000040;
 
   background-color: var(--app-white);
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
 }
 
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.card--booking {
+  width: 607px;
+  height: 137px;
+  padding: 16px 20px;
+}
 
 .room-name {
   margin: 0;
@@ -22,6 +39,13 @@
   line-height: 100%;
 
   color: var(--app-primary);
+}
+
+.capacity-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 .capacity {
@@ -40,6 +64,15 @@
   color: var(--app-medium-gray);
 }
 
+.price {
+  font-family: 'Encode Sans Semi Condensed', sans-serif;
+  font-weight: var(--hotel-label-weight);
+  font-size: 14px;
+  line-height: 100%;
+  color: var(--app-black);
+  white-space: nowrap;
+}
+
 .icon {
   font-size: 12px;
   display: flex;
@@ -56,4 +89,21 @@
   line-height: 100%;
 
   color: var(--app-black);
+}
+
+.book-btn {
+  align-self: center;
+  border-color: var(--app-secondary);
+  color: var(--app-secondary);
+  border-radius: 20px;
+  padding: 4px 16px;
+  font-family: 'Encode Sans Semi Condensed', sans-serif;
+  font-weight: var(--user-label-weight);
+  font-size: 14px;
+  text-transform: none;
+}
+
+.book-icon {
+  font-size: 16px;
+  margin-right: 4px;
 }

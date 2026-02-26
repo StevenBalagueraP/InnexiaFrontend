@@ -5,11 +5,12 @@ import { Hotel } from '../../../core/interfaces/models/hotel-model';
 import { RoomComponent } from '../room/room.component';
 import { RoomSuggestion } from '../../../core/interfaces/models/RoomSuggestion';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-hotel-card',
   standalone: true,
-  imports: [CommonModule, RoomComponent, MatIconModule],
+  imports: [CommonModule, RoomComponent, MatIconModule, RouterLink],
   templateUrl: './hotel-card.component.html',
   styleUrl: './hotel-card.component.css',
 })
