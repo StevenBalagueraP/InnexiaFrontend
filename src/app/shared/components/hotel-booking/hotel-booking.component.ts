@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { SearchService } from '../../../core/services/search.service';
 import { SearchResult } from '../../../core/interfaces/models/SearchResult';
 import { SearchFilters } from '../search-form/search-form.component';
@@ -44,7 +44,6 @@ interface HotelBookingData {
 })
 export class HotelBookingComponent implements OnInit {
   private route = inject(ActivatedRoute);
-  private router = inject(Router);
   private searchService = inject(SearchService);
 
   readonly today = new Date();
@@ -79,10 +78,9 @@ export class HotelBookingComponent implements OnInit {
 
   ngOnInit(): void {
     const hotelId = this.route.snapshot.paramMap.get('hotelId') ?? '';
-    const navState = this.router.getCurrentNavigation()?.extras.state as { filters?: SearchFilters } | undefined;
-    // Router state is only available during navigation; fall back to history.state
+    // Angular populates history.state with the router navigation state before the component initializes
     const stateFilters: SearchFilters | null =
-      navState?.filters ?? (history.state as { filters?: SearchFilters })?.filters ?? null;
+      (history.state as { filters?: SearchFilters | null })?.filters ?? null;
 
     // Sync the date pickers to whatever the user had in the search form
     if (stateFilters?.checkIn) {
