@@ -1,37 +1,49 @@
 <div class="booking-page">
+  <!-- Loading state -->
+  @if (loading()) {
+  <div class="loading-state">
+    <mat-icon>hourglass_empty</mat-icon>
+    <p>Cargando información del hotel...</p>
+  </div>
+  } @else if (error()) {
+  <div class="error-state">
+    <mat-icon>error_outline</mat-icon>
+    <p>{{ error() }}</p>
+  </div>
+  } @else if (hotel(); as h) {
   <!-- Main content -->
   <main class="main">
-    <!-- Hotel details + Promociones -->
+    <!-- Hotel details -->
     <section class="section-hotel">
       <div class="hotel-info">
         <div class="hotel-head">
           <div class="hotel-text">
-            <h1 class="hotel-name">{{ hotel().hotelName }}</h1>
+            <h1 class="hotel-name">{{ h.hotelName }}</h1>
             <p class="hotel-location">
               <mat-icon>location_on</mat-icon>
-              <span>{{ hotel().location }}</span>
+              <span>{{ h.location }}</span>
             </p>
           </div>
-          
         </div>
         <div class="hotel-desc-block">
-            @if (hotel().image?.[0]; as img) {
-                <div class="hotel-image">
-                  <img [src]="img" [alt]="hotel().hotelName" />
-                </div>
-              }
-          <p class="hotel-description">{{ hotel().description }}</p>
+          @if (h.image?.[0]; as img) {
+          <div class="hotel-image">
+            <img [src]="img" [alt]="h.hotelName" />
+          </div>
+          }
+          <p class="hotel-description">{{ h.description }}</p>
+          @if (h.amenities.length > 0) {
           <div class="promo-card">
-            <h3>Promociones Disponibles</h3>
+            <h3>Comodidades</h3>
             <ul>
-              @for (promo of hotel().promotions; track promo) {
-                <li>{{ promo }}</li>
+              @for (amenity of h.amenities; track amenity) {
+              <li>{{ amenity }}</li>
               }
             </ul>
           </div>
+          }
         </div>
       </div>
-      
     </section>
 
     <!-- Fechas + Cantidad huéspedes -->
@@ -41,24 +53,14 @@
 
         <!-- Inputs ocultos para los datepickers -->
         <mat-form-field appearance="outline" class="visually-hidden-field">
-          <input
-            matInput
-            [matDatepicker]="arrivalPicker"
-            [min]="minDate"
-            [value]="arrivalDate()"
-            (dateChange)="onArrivalDateChange($event)"
-          />
+          <input matInput [matDatepicker]="arrivalPicker" [min]="minDate" [value]="arrivalDate()"
+            (dateChange)="onArrivalDateChange($event)" />
           <mat-datepicker #arrivalPicker></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="visually-hidden-field">
-          <input
-            matInput
-            [matDatepicker]="departurePicker"
-            [min]="minDate"
-            [value]="departureDate()"
-            (dateChange)="onDepartureDateChange($event)"
-          />
+          <input matInput [matDatepicker]="departurePicker" [min]="minDate" [value]="departureDate()"
+            (dateChange)="onDepartureDateChange($event)" />
           <mat-datepicker #departurePicker></mat-datepicker>
         </mat-form-field>
 
@@ -75,9 +77,9 @@
         </div>
 
         @if (dateError()) {
-          <p class="date-error">
-            No puede poner fechas menores a la fecha actual ni una llegada mayor a la salida.
-          </p>
+        <p class="date-error">
+          No puede poner fechas menores a la fecha actual ni una llegada mayor a la salida.
+        </p>
         }
       </div>
       <div class="guests-block">
@@ -115,8 +117,8 @@
     <section class="section-rooms" [class.section-rooms--scroll]="hasManyRooms()">
       <h3 class="block-title">Habitaciones disponibles</h3>
       <div class="rooms-grid">
-        @for (room of hotel().rooms; track room._id) {
-          <app-room [room]="room" [variant]="'hotel-booking'" />
+        @for (room of h.rooms; track room._id) {
+        <app-room [room]="room" [variant]="'hotel-booking'" />
         }
       </div>
     </section>
@@ -127,4 +129,5 @@
       <span>Book</span>
     </button>
   </main>
+  }
 </div>

@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RoomSuggestion } from '../../../core/interfaces/models/RoomSuggestion';
 import { RoomComponent } from '../room/room.component';
@@ -8,9 +8,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SearchService } from '../../../core/services/search.service';
+import { SearchResult } from '../../../core/interfaces/models/SearchResult';
+import { SearchFilters } from '../search-form/search-form.component';
 
-interface HotelBookingMock {
+interface HotelBookingData {
   hotelId: string;
   hotelName: string;
   location: string;
@@ -21,7 +24,6 @@ interface HotelBookingMock {
   rooms: RoomSuggestion[];
   totalPrice: number;
   available: boolean;
-  promotions: string[];
 }
 
 @Component({
@@ -36,18 +38,22 @@ interface HotelBookingMock {
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    RouterLink,
   ],
   templateUrl: './hotel-booking.component.html',
   styleUrl: './hotel-booking.component.css',
 })
-export class HotelBookingComponent {
+export class HotelBookingComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private searchService = inject(SearchService);
+
   readonly today = new Date();
   private readonly tomorrow = (() => {
     const t = new Date();
     t.setDate(t.getDate() + 1);
     return t;
   })();
+
   arrivalDate = signal<Date>(this.today);
   departureDate = signal<Date>(this.tomorrow);
 
@@ -65,52 +71,86 @@ export class HotelBookingComponent {
     return arrival < baseToday || departure < baseToday || arrival > departure;
   });
 
-  hotel = signal<HotelBookingMock>({
-    hotelId: '69992d3af480e2b0614d313c',
-    hotelName: 'Tropical Garden Inn',
-    location: 'Honolulu',
-    description:
-      'Tropical Garden Inn es un encantador hotel rodeado de exuberantes jardines y vegetación tropical. Su ambiente relajado invita a disfrutar del clima cálido y la tranquilidad del entorno. Las habitaciones están decoradas con colores frescos y materiales naturales que evocan el paraíso. Cuenta con acceso cercano a la playa y actividades acuáticas para todos los huéspedes. El hotel dispone de una piscina al aire libre rodeada de palmeras y áreas de descanso. Su restaurante ofrece cocina fresca con sabores caribeños y cócteles tropicales.',
-    amenities: ['Beach Access', 'Spa', 'Pool'],
-    image: ['https://images.pexels.com/photos/7154962/pexels-photo-7154962.jpeg'],
-    optionLabel: 'suggested option (1 people)',
-    promotions: [
-      'Carnaval',
-      'Familias de 8 integrantes',
-      'Niños menores de 5 años no pagan estadía',
-      'Desayuno incluido',
-    ],
-    rooms: [
-      {
-        _id: '69992d3af480e2b0614d3168',
-        type: 'SIMPLE_ONE',
-        price: 97,
-        capacity: 1,
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-      },
-      {
-        _id: '69992d3af480e2b0614d3169',
-        type: 'SIMPLE_ONE',
-        price: 97,
-        capacity: 1,
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-      },
-      {
-        _id: '69992d3af480e2b0614d3169',
-        type: 'SIMPLE_ONE',
-        price: 97,
-        capacity: 1,
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-      },
-    ],
-    totalPrice: 97,
-    available: true,
-  });
+  hotel = signal<HotelBookingData | null>(null);
+  loading = signal<boolean>(true);
+  error = signal<string | null>(null);
 
-  hasManyRooms = computed(() => this.hotel().rooms.length > 2);
+  hasManyRooms = computed(() => (this.hotel()?.rooms.length ?? 0) > 2);
+
+  ngOnInit(): void {
+    const hotelId = this.route.snapshot.paramMap.get('hotelId') ?? '';
+    const navState = this.router.getCurrentNavigation()?.extras.state as { filters?: SearchFilters } | undefined;
+    // Router state is only available during navigation; fall back to history.state
+    const stateFilters: SearchFilters | null =
+      navState?.filters ?? (history.state as { filters?: SearchFilters })?.filters ?? null;
+
+    // Sync the date pickers to whatever the user had in the search form
+    if (stateFilters?.checkIn) {
+      // ISO string 'YYYY-MM-DD' — parse as local date to avoid timezone offset shifts
+      const [y, m, d] = stateFilters.checkIn.split('-').map(Number);
+      this.arrivalDate.set(new Date(y, m - 1, d));
+    }
+    if (stateFilters?.checkOut) {
+      const [y, m, d] = stateFilters.checkOut.split('-').map(Number);
+      this.departureDate.set(new Date(y, m - 1, d));
+    }
+
+    this.loadHotelData(hotelId, stateFilters);
+  }
+
+  private loadHotelData(hotelId: string, filters: SearchFilters | null): void {
+    this.loading.set(true);
+    this.error.set(null);
+
+    const startDate = filters?.checkIn ?? this.toIsoDate(this.today);
+    const endDate = filters?.checkOut ?? this.toIsoDate(this.tomorrow);
+
+    this.searchService.loadSearchResults({
+      hotelId,
+      startDate,
+      endDate,
+      peopleCount: filters?.people && filters.people > 0 ? filters.people : undefined,
+      city: filters?.location ?? undefined,
+      minPrice: filters?.minPrice,
+      maxPrice: filters?.maxPrice,
+    }).subscribe({
+      next: (results: SearchResult[]) => {
+        if (results.length === 0) {
+          this.error.set('No se encontraron habitaciones disponibles para este hotel.');
+          this.hotel.set(null);
+        } else {
+          const r = results[0];
+          this.hotel.set({
+            hotelId: r.hotelId,
+            hotelName: r.hotelName,
+            location: r.location,
+            description: r.description ?? '',
+            amenities: r.amenities ?? [],
+            image: r.image ?? [],
+            optionLabel: r.optionLabel,
+            rooms: r.rooms.map(room => ({
+              _id: room.id,
+              type: room.type,
+              price: room.price,
+              capacity: room.capacity,
+            })),
+            totalPrice: r.totalPrice,
+            available: r.available,
+          });
+        }
+        this.loading.set(false);
+      },
+      error: (err: Error) => {
+        console.error('Error loading hotel booking:', err);
+        this.error.set(err.message || 'Error al cargar la información del hotel.');
+        this.loading.set(false);
+      },
+    });
+  }
+
+  private toIsoDate(d: Date): string {
+    return d.toISOString().split('T')[0];
+  }
 
   private formatDate(d: Date): string {
     const months = [

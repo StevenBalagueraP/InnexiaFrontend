@@ -131,12 +131,13 @@
 .book-btn {
   width: 100px;
   height: 70px;
-  background: var(--app-secondary);
-  color: var(--app-white);
+  background: #CDA349 !important;
+  color: #ffffff !important;
   border: none;
   border-radius: 10px;
   font-size: 16px;
   font-weight: var(--hotel-label-weight);
+  ;
   cursor: pointer;
   transition: 0.2s ease;
   display: flex;
@@ -144,6 +145,11 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
+}
+
+.book-btn mat-icon,
+.book-btn .mat-icon {
+  color: #ffffff !important;
 }
 
 .book-icon {

@@ -16,10 +16,7 @@ export const routes: Routes = [
                 path: 'auth',
                 loadChildren: () => import('./core/auth/auth.routes').then(m => m.AUTH_ROUTES)
             },
-            {
-                path: 'hotel-booking',
-                loadComponent: () => import('./shared/components/hotel-booking/hotel-booking.component').then(m => m.HotelBookingComponent)
-            }
+
         ]
     }
 ];
