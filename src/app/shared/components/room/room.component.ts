@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Room } from '../../../core/interfaces/models/room';
 import { RoomSuggestion } from '../../../core/interfaces/models/RoomSuggestion';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,5 +22,11 @@ export class RoomComponent {
    * - 'hotel-booking': expanded card used inside hotel booking flow
    */
   variant = input<'search' | 'hotel-booking'>('search');
+
+  /** Whether this room is currently selected by the user */
+  selected = input<boolean>(false);
+
+  /** Emitted when the user clicks the Book button inside this card */
+  bookClicked = output<void>();
 
 }

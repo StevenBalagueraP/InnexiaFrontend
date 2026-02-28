@@ -118,7 +118,8 @@
       <h3 class="block-title">Habitaciones disponibles</h3>
       <div class="rooms-grid">
         @for (room of h.rooms; track room._id) {
-        <app-room [room]="room" [variant]="'hotel-booking'" />
+        <app-room [room]="room" [variant]="'hotel-booking'" [selected]="isRoomSelected(room._id ?? '')"
+          (bookClicked)="toggleRoom(room._id ?? '')" />
         }
       </div>
     </section>

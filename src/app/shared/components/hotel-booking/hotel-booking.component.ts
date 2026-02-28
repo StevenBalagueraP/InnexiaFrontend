@@ -74,7 +74,22 @@ export class HotelBookingComponent implements OnInit {
   loading = signal<boolean>(true);
   error = signal<string | null>(null);
 
+  /** IDs of rooms the user has selected by clicking Book */
+  userSelectedRooms = signal<string[]>([]);
+
   hasManyRooms = computed(() => (this.hotel()?.rooms.length ?? 0) > 2);
+
+  toggleRoom(id: string): void {
+    this.userSelectedRooms.update(current =>
+      current.includes(id)
+        ? current.filter(r => r !== id)
+        : [...current, id]
+    );
+  }
+
+  isRoomSelected(id: string): boolean {
+    return this.userSelectedRooms().includes(id);
+  }
 
   ngOnInit(): void {
     const hotelId = this.route.snapshot.paramMap.get('hotelId') ?? '';

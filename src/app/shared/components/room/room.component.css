@@ -30,6 +30,10 @@
   padding: 16px 20px;
 }
 
+.card--selected {
+  border: 3px solid #CDA349;
+}
+
 .room-name {
   margin: 0;
 
@@ -83,7 +87,7 @@
   margin-top: 6px;
 
   font-family: 'Encode Sans Semi Condensed', sans-serif;
-  font-weight: var(--app-weigth-300); 
+  font-weight: var(--app-weigth-300);
   font-size: 12px;
   line-height: 100%;
 
@@ -105,4 +109,9 @@
 .book-icon {
   font-size: 16px;
   margin-right: 4px;
+}
+
+.book-btn--selected {
+  border-color: #CDA349 !important;
+  color: #CDA349 !important;
 }
