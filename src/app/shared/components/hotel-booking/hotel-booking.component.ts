@@ -1,4 +1,4 @@
-import { Component, signal, computed, inject, OnInit } from '@angular/core';
+import { Component, signal, computed, inject, OnInit, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RoomSuggestion } from '../../../core/interfaces/models/RoomSuggestion';
 import { RoomComponent } from '../room/room.component';
@@ -62,6 +62,10 @@ export class HotelBookingComponent implements OnInit {
   adults = signal(1);
   children = signal(0);
 
+  private currentHotelId = '';
+  private currentFilters: SearchFilters | null = null;
+  private initialized = false;
+
   dateError = computed(() => {
     const normalize = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
     const baseToday = normalize(this.today);
@@ -73,6 +77,12 @@ export class HotelBookingComponent implements OnInit {
   hotel = signal<HotelBookingData | null>(null);
   loading = signal<boolean>(true);
   error = signal<string | null>(null);
+
+  /** Shown inline inside the rooms section when a people-filter yields no results */
+  noRoomsWarning = signal<string | null>(null);
+
+  /** Disable the + buttons while there are no rooms for the current filter */
+  canAddGuests = computed(() => !this.loading() && this.noRoomsWarning() === null);
 
   /** IDs of rooms the user has selected by clicking Book */
   userSelectedRooms = signal<string[]>([]);
@@ -91,11 +101,24 @@ export class HotelBookingComponent implements OnInit {
     return this.userSelectedRooms().includes(id);
   }
 
+  constructor() {
+    // Re-search whenever adults or children change (after initial load)
+    effect(() => {
+      const totalPeople = this.adults() + this.children();
+      // Suppress the first run; ngOnInit handles the initial load
+      if (!this.initialized) return;
+      this.loadHotelData(this.currentHotelId, this.currentFilters, totalPeople);
+    });
+  }
+
   ngOnInit(): void {
     const hotelId = this.route.snapshot.paramMap.get('hotelId') ?? '';
     // Angular populates history.state with the router navigation state before the component initializes
     const stateFilters: SearchFilters | null =
       (history.state as { filters?: SearchFilters | null })?.filters ?? null;
+
+    this.currentHotelId = hotelId;
+    this.currentFilters = stateFilters;
 
     // Sync the date pickers to whatever the user had in the search form
     if (stateFilters?.checkIn) {
@@ -108,30 +131,43 @@ export class HotelBookingComponent implements OnInit {
       this.departureDate.set(new Date(y, m - 1, d));
     }
 
+    // If the search had a peopleCount, pre-set adults to that value
+    if (stateFilters?.people && stateFilters.people > 0) {
+      this.adults.set(stateFilters.people);
+    }
+
     this.loadHotelData(hotelId, stateFilters);
+    this.initialized = true;
   }
 
-  private loadHotelData(hotelId: string, filters: SearchFilters | null): void {
+  private loadHotelData(hotelId: string, filters: SearchFilters | null, overridePeopleCount?: number): void {
     this.loading.set(true);
     this.error.set(null);
 
     const startDate = filters?.checkIn ?? this.toIsoDate(this.today);
     const endDate = filters?.checkOut ?? this.toIsoDate(this.tomorrow);
 
+    // overridePeopleCount comes from the adults+children stepper;
+    // fall back to filters.people on the initial load
+    const peopleCount = overridePeopleCount !== undefined
+      ? (overridePeopleCount > 0 ? overridePeopleCount : undefined)
+      : (filters?.people && filters.people > 0 ? filters.people : undefined);
+
     this.searchService.loadSearchResults({
       hotelId,
       startDate,
       endDate,
-      peopleCount: filters?.people && filters.people > 0 ? filters.people : undefined,
+      peopleCount,
       city: filters?.location ?? undefined,
       minPrice: filters?.minPrice,
       maxPrice: filters?.maxPrice,
     }).subscribe({
       next: (results: SearchResult[]) => {
-        if (results.length === 0) {
-          this.error.set('No se encontraron habitaciones disponibles para este hotel.');
-          this.hotel.set(null);
+        if (results.length === 0 || results[0].rooms.length === 0) {
+          // Keep hotel info visible but show an inline warning
+          this.noRoomsWarning.set('No se encontraron habitaciones con ese rango');
         } else {
+          this.noRoomsWarning.set(null);
           const r = results[0];
           this.hotel.set({
             hotelId: r.hotelId,
@@ -174,10 +210,13 @@ export class HotelBookingComponent implements OnInit {
   }
 
   setAdults(v: number): void {
+    // Only allow incrementing when rooms exist for current filter
+    if (v > 0 && !this.canAddGuests()) return;
     this.adults.update((n) => Math.max(0, n + v));
   }
 
   setChildren(v: number): void {
+    if (v > 0 && !this.canAddGuests()) return;
     this.children.update((n) => Math.max(0, n + v));
   }
 

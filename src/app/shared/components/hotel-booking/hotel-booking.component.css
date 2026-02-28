@@ -151,7 +151,8 @@
 /* Description: 672x125px, weight 300, 20px */
 .hotel-desc-block {
   display: flex;
-  gap: 0; /* manejamos espacios con márgenes específicos */
+  gap: 0;
+  /* manejamos espacios con márgenes específicos */
   align-items: flex-start;
   /* dejamos que el contenido (imagen + descripción + promos) use todo el ancho disponible */
   max-width: none;
@@ -338,8 +339,10 @@
   flex-direction: column;
   gap: 16px;
   padding: 16px 20px;
-  background-color: #D9D9D93B; /* 23% opacity */
-  box-shadow: 0 4px 4px 0 #00000040; /* 25% opacity shadow */
+  background-color: #D9D9D93B;
+  /* 23% opacity */
+  box-shadow: 0 4px 4px 0 #00000040;
+  /* 25% opacity shadow */
   border-radius: 10px;
 }
 
@@ -361,6 +364,29 @@
 .section-rooms--scroll {
   max-height: 561px;
   overflow-y: auto;
+}
+
+/* Inline warning when no rooms match the current people filter */
+.no-rooms-warning {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0;
+  padding: 14px 20px;
+  background: #fff8e1;
+  border: 1.5px solid #ffc107;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #b45309;
+}
+
+.no-rooms-warning mat-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+  color: #f59e0b;
+  flex-shrink: 0;
 }
 
 /* FAB Book */

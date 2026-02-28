@@ -92,7 +92,8 @@
                 <mat-icon>expand_more</mat-icon>
               </button>
               <span class="guest-value">{{ adults() }}</span>
-              <button type="button" mat-icon-button (click)="setAdults(1)" aria-label="Más adultos">
+              <button type="button" mat-icon-button (click)="setAdults(1)" [disabled]="!canAddGuests()"
+                aria-label="Más adultos">
                 <mat-icon>expand_less</mat-icon>
               </button>
             </div>
@@ -104,7 +105,8 @@
                 <mat-icon>expand_more</mat-icon>
               </button>
               <span class="guest-value">{{ children() }}</span>
-              <button type="button" mat-icon-button (click)="setChildren(1)" aria-label="Más niños">
+              <button type="button" mat-icon-button (click)="setChildren(1)" [disabled]="!canAddGuests()"
+                aria-label="Más niños">
                 <mat-icon>expand_less</mat-icon>
               </button>
             </div>
@@ -116,12 +118,19 @@
     <!-- Habitaciones disponibles -->
     <section class="section-rooms" [class.section-rooms--scroll]="hasManyRooms()">
       <h3 class="block-title">Habitaciones disponibles</h3>
+      @if (noRoomsWarning()) {
+      <p class="no-rooms-warning">
+        <mat-icon>search_off</mat-icon>
+        {{ noRoomsWarning() }}
+      </p>
+      } @else {
       <div class="rooms-grid">
         @for (room of h.rooms; track room._id) {
         <app-room [room]="room" [variant]="'hotel-booking'" [selected]="isRoomSelected(room._id ?? '')"
           (bookClicked)="toggleRoom(room._id ?? '')" />
         }
       </div>
+      }
     </section>
 
     <!-- FAB Book -->
