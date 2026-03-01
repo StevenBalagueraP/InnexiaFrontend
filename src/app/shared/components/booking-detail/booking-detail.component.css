@@ -1,17 +1,9 @@
-:host {
-  --accent: #cda349;
-  --dark-blue: #1e3d58;
-  --grey-btn: #515151;
-  --bg-page: #f8fafc;
-  font-family: 'Rubik', system-ui, sans-serif;
-}
-
 .booking-detail-page {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-page);
+  background: var(--app-white);
   padding: 24px;
   box-sizing: border-box;
 }
@@ -19,7 +11,7 @@
 .booking-detail-card {
   width: 965px;
   min-height: 637px;
-  background: #ffffff;
+  background: var(--app-white);
   border-radius: 20px;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
   padding: 36px 44px 32px;
@@ -32,7 +24,7 @@
   font-family: 'Rubik', system-ui, sans-serif;
   font-weight: 500;
   font-size: 32px;
-  color: var(--dark-blue);
+  color: var(--app-primary);
   text-align: center;
   margin: 0 0 28px;
 }
@@ -48,7 +40,7 @@
   max-width: 100%;
   min-width: 485px;
   height: 72px;
-  border: 1.5px solid var(--accent);
+  border: 1.5px solid var(--app-secondary);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -56,7 +48,7 @@
   gap: 32px;
   padding: 0 32px;
   box-sizing: border-box;
-  background: #ffffff;
+  background: var(--app-white);
   margin: 0 auto;
 }
 
@@ -71,7 +63,7 @@
   font-size: 18px;
   width: 18px;
   height: 18px;
-  color: var(--accent);
+  color: var(--app-secondary);
   flex-shrink: 0;
 }
 
@@ -79,7 +71,7 @@
   font-family: 'Rubik', system-ui, sans-serif;
   font-size: 14px;
   font-weight: 400;
-  color: var(--grey-btn);
+  color: var(--app-date-color);
   white-space: nowrap;
 }
 
@@ -87,7 +79,7 @@
   font-family: 'Rubik', system-ui, sans-serif;
   font-size: 14px;
   font-weight: 500;
-  color: var(--accent);
+  color: var(--app-secondary);
   white-space: nowrap;
 }
 
@@ -109,7 +101,7 @@
   width: 351px;
   height: 140px;
   border-radius: 10px;
-  background: #ffffff;
+  background: var(--app-white);
   box-shadow: 0px 4px 4px 0px #00000040;
   padding: 16px 20px;
   box-sizing: border-box;
@@ -122,7 +114,7 @@
   font-family: 'Encode Sans Semi Condensed', system-ui, sans-serif;
   font-weight: 500;
   font-size: 20px;
-  color: var(--dark-blue);
+  color: var(--app-primary);
   margin: 0 0 8px;
 }
 
@@ -133,7 +125,7 @@
 }
 
 li::marker {
-  color: #cda349;
+  color: var(--app-secondary);
 }
 
 .promo-card li {
@@ -149,7 +141,7 @@ li::marker {
   width: 228px;
   height: 140px;
   border-radius: 10px;
-  background: #ffffff;
+  background: var(--app-white);
   box-shadow: 0px 4px 4px 0px #00000040;
   padding: 16px 20px;
   box-sizing: border-box;
@@ -163,7 +155,7 @@ li::marker {
   font-family: 'Rubik', system-ui, sans-serif;
   font-weight: 500;
   font-size: 20px;
-  color: var(--accent);
+  color: var(--app-secondary);
   margin: 0 0 10px;
 }
 
@@ -174,7 +166,7 @@ li::marker {
   font-style: normal;
   font-size: 18px;
   font-weight: 275;
-  color: #000000;
+  color: var(--app-black);
   margin-bottom: 4px;
 }
 
@@ -187,15 +179,15 @@ li::marker {
 
 .amount {
   font-weight: 275;
-  color: #000000;
+  color: var(--app-black);
 }
 
 .amount.discount {
-  color: #c0392b;
+  color: var(--app-error);
 }
 
 .final-amount {
-  color: #000000;
+  color: var(--app-black);
   font-weight: 275;
 }
 
@@ -207,7 +199,7 @@ li::marker {
   font-family: 'Rubik', system-ui, sans-serif;
   font-weight: 500;
   font-size: 20px;
-  color: var(--accent);
+  color: var(--app-secondary);
   margin: 0 0 8px;
 }
 
@@ -219,14 +211,14 @@ li::marker {
 .rooms-section li {
   font-family: 'Rubik', system-ui, sans-serif;
   font-size: 14px;
-  color: #000000;
+  color: var(--app-black);
   line-height: 1.5;
 }
 
 .rooms-summary {
   font-family: 'Rubik', system-ui, sans-serif;
   font-size: 13px;
-  color: var(--grey-btn);
+  color: var(--app-date-color);
   margin: 0;
 }
 
@@ -234,7 +226,7 @@ li::marker {
   font-family: 'Rubik', system-ui, sans-serif;
   font-weight: 500;
   font-size: 20px;
-  color: var(--accent);
+  color: var(--app-secondary);
   margin: 14px 0 6px;
 }
 
@@ -253,7 +245,7 @@ li::marker {
   font-family: 'Rubik', system-ui, sans-serif;
   font-weight: 400;
   font-size: 14px;
-  color: #000000;
+  color: var(--app-black);
   line-height: 1.5;
 }
 
@@ -282,20 +274,20 @@ li::marker {
 }
 
 .btn-cancel {
-  background: #e0e0e0 !important;
-  color: #000000 !important;
+  background: var(--app-grey-line) !important;
+  color: var(--app-black) !important;
 }
 
 .btn-confirm {
-  background: var(--accent) !important;
-  color: #ffffff !important;
+  background: var(--app-secondary) !important;
+  color: var(--app-white) !important;
 }
 
 .btn-confirm mat-icon {
   font-size: 18px;
   width: 18px;
   height: 18px;
-  color: #ffffff;
+  color: var(--app-white);
 }
 
 @media (max-width: 1024px) {
