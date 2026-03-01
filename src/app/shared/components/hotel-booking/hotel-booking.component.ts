@@ -167,8 +167,8 @@ export class HotelBookingComponent implements OnInit {
     }).subscribe({
       next: (results: SearchResult[]) => {
         if (results.length === 0 || results[0].rooms.length === 0) {
-          // Keep hotel info visible but show an inline warning
-          this.noRoomsWarning.set('No se encontraron habitaciones con ese rango');
+          // No rooms available → go back to search
+          this.router.navigate(['/']);
         } else {
           this.noRoomsWarning.set(null);
           const r = results[0];
@@ -254,6 +254,7 @@ export class HotelBookingComponent implements OnInit {
         arrivalDate: this.arrivalDate().toISOString(),
         departureDate: this.departureDate().toISOString(),
         roomIds: this.userSelectedRooms(),
+        hotelId: this.currentHotelId,
       },
     });
   }

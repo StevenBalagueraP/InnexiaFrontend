@@ -2,7 +2,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { Router } from '@angular/router';
 import { BookingSummaryResponse } from '../../../core/services/booking-summary.service';
 
 @Component({
@@ -22,7 +21,8 @@ export class BookingDetailComponent {
   /** Emitted when the user clicks "Confirmar Reserva" */
   @Output() confirmClicked = new EventEmitter<void>();
 
-  constructor(private readonly router: Router) { }
+  /** Emitted when the user clicks "Cancelar" */
+  @Output() cancelClicked = new EventEmitter<void>();
 
   get checkInLabel(): string {
     return this.formatDate(this.booking.checkInDate);
@@ -41,7 +41,7 @@ export class BookingDetailComponent {
   }
 
   onCancel(): void {
-    this.router.navigate(['/']);
+    this.cancelClicked.emit();
   }
 
   onConfirm(): void {

@@ -17,6 +17,7 @@ export interface BookingDetailNavState {
     arrivalDate: string;   // ISO string
     departureDate: string; // ISO string
     roomIds: string[];
+    hotelId: string;
 }
 
 @Component({
@@ -40,6 +41,7 @@ export interface BookingDetailNavState {
         [confirmLoading]="confirmLoading()"
         [confirmError]="confirmError()"
         (confirmClicked)="onConfirm()"
+        (cancelClicked)="onCancel()"
       />
     }
   `,
@@ -125,8 +127,36 @@ export class BookingDetailPageComponent implements OnInit {
             },
             error: (err: Error) => {
                 console.error('Error creating booking:', err);
-                this.confirmError.set(err.message || 'No se pudo confirmar la reserva. Intenta de nuevo.');
                 this.confirmLoading.set(false);
+
+                // 409 → back to hotel-booking so the user can pick different rooms/dates
+                if (err.message?.includes('Ya existe una reserva')) {
+                    this.goBackToHotelBooking();
+                    return;
+                }
+
+                this.confirmError.set(err.message || 'No se pudo confirmar la reserva. Intenta de nuevo.');
+            },
+        });
+    }
+
+    onCancel(): void {
+        this.goBackToHotelBooking();
+    }
+
+    private goBackToHotelBooking(): void {
+        const state = this.navState;
+        if (!state?.hotelId) {
+            this.router.navigate(['/']);
+            return;
+        }
+
+        this.router.navigate(['/hotel-booking', state.hotelId], {
+            state: {
+                filters: {
+                    checkIn: state.arrivalDate.split('T')[0],
+                    checkOut: state.departureDate.split('T')[0],
+                },
             },
         });
     }
