@@ -1,4 +1,5 @@
 import { Component, signal, computed, inject, OnInit, effect } from '@angular/core';
+import { AuthService } from '../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { RoomSuggestion } from '../../../core/interfaces/models/RoomSuggestion';
 import { RoomComponent } from '../room/room.component';
@@ -46,6 +47,7 @@ export class HotelBookingComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private searchService = inject(SearchService);
+  private authService = inject(AuthService);
 
   readonly today = new Date();
   private readonly tomorrow = (() => {
@@ -240,6 +242,19 @@ export class HotelBookingComponent implements OnInit {
   }
 
   goToBookingDetail(): void {
-    this.router.navigate(['/booking-detail']);
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/auth/login']);
+      return;
+    }
+
+    this.router.navigate(['/booking-detail'], {
+      state: {
+        adults: this.adults(),
+        children: this.children(),
+        arrivalDate: this.arrivalDate().toISOString(),
+        departureDate: this.departureDate().toISOString(),
+        roomIds: this.userSelectedRooms(),
+      },
+    });
   }
 }

@@ -11,6 +11,6 @@ export const SEARCH_ROUTES: Routes = [
     },
     {
         path: 'booking-detail',
-        loadComponent: () => import('../../shared/components/booking-detail/booking-detail.component').then(m => m.BookingDetailComponent)
+        loadComponent: () => import('../../features/booking-detail/booking-detail.page.component').then(m => m.BookingDetailPageComponent)
     }
 ];
