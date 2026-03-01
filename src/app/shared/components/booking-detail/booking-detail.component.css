@@ -1,0 +1,329 @@
+/* ── Variables ─────────────────────────────────────────────── */
+:host {
+  --accent: #cda349;
+  --dark-blue: #1e3d58;
+  --grey-btn: #515151;
+  --bg-page: #f8fafc;
+  font-family: 'Rubik', system-ui, sans-serif;
+}
+
+/* ── Page wrapper ──────────────────────────────────────────── */
+.booking-detail-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-page);
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* ── Card 965 × 637 ────────────────────────────────────────── */
+.booking-detail-card {
+  width: 965px;
+  min-height: 637px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
+  padding: 36px 44px 32px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Title: Rubik 500 32px ─────────────────────────────────── */
+.title {
+  font-family: 'Rubik', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  color: var(--dark-blue);
+  text-align: center;
+  margin: 0 0 28px;
+}
+
+/* ── Dates section ─────────────────────────────────────────── */
+.dates-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+/* Rectángulo de fechas: ancho dinámico centrado */
+.dates-rect {
+  width: fit-content;
+  max-width: 100%;
+  min-width: 485px;
+  height: 72px;
+  border: 1.5px solid var(--accent);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 0 32px;
+  box-sizing: border-box;
+  background: #ffffff;
+  margin: 0 auto;
+}
+
+/* Date row: icon + label + value en la misma línea */
+.date-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.date-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.date-label {
+  font-family: 'Rubik', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--grey-btn);
+  white-space: nowrap;
+}
+
+.date-value {
+  font-family: 'Rubik', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.divider {
+  width: 1px;
+  height: 42px;
+  background: rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+/* ── Summary row: promo + cost ─────────────────────────────── */
+.summary-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 28px;
+}
+
+/* Promo card: 351 × 140, 93px from left ─────────────────── */
+.promo-card {
+  width: 351px;
+  min-height: 140px;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  padding: 16px 20px;
+  box-sizing: border-box;
+  margin-left: 93px;
+  flex-shrink: 0;
+}
+
+.promo-card h3 {
+  font-family: 'Encode Sans Semi Condensed', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--dark-blue);
+  margin: 0 0 8px;
+}
+
+.promo-card ul {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.promo-card li {
+  font-family: 'Encode Sans Semi Condensed', system-ui, sans-serif;
+  font-weight: 275;
+  font-style: normal;
+  font-size: 18px;
+  color: #000000;
+  line-height: 1.35;
+}
+
+/* Cost card: 228 × 140, 190px from promo ──────────────────── */
+.cost-card {
+  width: 228px;
+  min-height: 140px;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  padding: 16px 20px;
+  box-sizing: border-box;
+  margin-left: 190px;
+  flex-shrink: 0;
+}
+
+.cost-card h3 {
+  font-family: 'Rubik', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--accent);
+  margin: 0 0 10px;
+}
+
+.cost-line {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Rubik', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  margin-bottom: 4px;
+}
+
+.cost-line.final {
+  margin-top: 6px;
+  font-weight: 500;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 6px;
+}
+
+.amount {
+  font-weight: 500;
+  color: #000000;
+}
+
+.amount.discount {
+  color: #c0392b;
+}
+
+.final-amount {
+  color: #000000;
+  font-weight: 500;
+}
+
+/* ── Rooms section ─────────────────────────────────────────── */
+.rooms-section {
+  margin-bottom: 20px;
+}
+
+.rooms-section h2 {
+  font-family: 'Rubik', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--accent);
+  margin: 0 0 8px;
+}
+
+.rooms-section ul {
+  margin: 0 0 8px;
+  padding-left: 22px;
+}
+
+.rooms-section li {
+  font-family: 'Rubik', system-ui, sans-serif;
+  font-size: 14px;
+  color: #000000;
+  line-height: 1.5;
+}
+
+.rooms-summary {
+  font-family: 'Rubik', system-ui, sans-serif;
+  font-size: 13px;
+  color: var(--grey-btn);
+  margin: 0;
+}
+
+/* ── Policy section ────────────────────────────────────────── */
+.policy-section h2 {
+  font-family: 'Rubik', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--accent);
+  margin: 14px 0 6px;
+}
+
+.policy-section ul {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.policy-section li {
+  font-family: 'Rubik', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #000000;
+  line-height: 1.5;
+}
+
+/* ── Actions – bottom-right of card ───────────────────────── */
+.actions {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 20px;
+}
+
+/* Shared button base */
+.btn-cancel,
+.btn-confirm {
+  font-family: 'Rubik', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: none;
+  border-radius: 20px;
+  padding: 0 24px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Cancelar: fondo gris claro, texto negro */
+.btn-cancel {
+  background: #e0e0e0 !important;
+  color: #000000 !important;
+}
+
+/* Confirmar Reserva: texto blanco, fondo #CDA349 */
+.btn-confirm {
+  background: var(--accent) !important;
+  color: #ffffff !important;
+}
+
+.btn-confirm mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: #ffffff;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .booking-detail-card {
+    width: 100%;
+  }
+
+  .summary-row {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .promo-card {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .cost-card {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .dates-rect {
+    width: 100%;
+    max-width: 485px;
+  }
+}

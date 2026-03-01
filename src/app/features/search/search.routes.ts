@@ -8,5 +8,9 @@ export const SEARCH_ROUTES: Routes = [
     {
         path: 'hotel-booking/:hotelId',
         loadComponent: () => import('../../shared/components/hotel-booking/hotel-booking.component').then(m => m.HotelBookingComponent)
+    },
+    {
+        path: 'booking-detail',
+        loadComponent: () => import('../../shared/components/booking-detail/booking-detail.component').then(m => m.BookingDetailComponent)
     }
 ];

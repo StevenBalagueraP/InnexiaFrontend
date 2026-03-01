@@ -134,7 +134,14 @@
     </section>
 
     <!-- FAB Book -->
-    <button class="fab-book" mat-fab extended type="button" aria-label="Reservar">
+    <button
+      class="fab-book"
+      mat-fab
+      extended
+      type="button"
+      aria-label="Reservar"
+      (click)="goToBookingDetail()"
+    >
       <mat-icon>event</mat-icon>
       <span>Book</span>
     </button>

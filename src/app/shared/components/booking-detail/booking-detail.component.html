@@ -1,0 +1,88 @@
+<div class="booking-detail-page">
+  <div class="booking-detail-card">
+    <h1 class="title">Detalle de la Reserva</h1>
+
+    <section class="dates-section">
+      <div class="dates-rect">
+        <div class="date-item">
+          <mat-icon class="date-icon">flight_land</mat-icon>
+          <span class="date-label">Fecha de Llegada:</span>
+          <span class="date-value">{{ checkInLabel }}</span>
+        </div>
+        <div class="divider"></div>
+        <div class="date-item">
+          <mat-icon class="date-icon">flight_takeoff</mat-icon>
+          <span class="date-label">Fecha de Salida:</span>
+          <span class="date-value">{{ checkOutLabel }}</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="summary-row">
+      <div class="promo-card">
+        <h3>Promociones Disponibles</h3>
+        <ul>
+          <li>Carnaval</li>
+          <li>Familias de 8 integrantes</li>
+          <li>Niños menores de 5 años no pagan estadía</li>
+          <li>Desayuno incluido</li>
+        </ul>
+      </div>
+
+      <div class="cost-card">
+        <h3>Costo de la reserva</h3>
+        <div class="cost-line">
+          <span>Costo</span>
+          <span class="amount">
+            {{ booking.baseCost | currency : 'USD' : 'symbol' : '1.0-0' }}
+          </span>
+        </div>
+        <div class="cost-line">
+          <span>Descuento</span>
+          <span class="amount discount">
+            -{{ booking.estimatedDiscount | currency : 'USD' : 'symbol' : '1.0-0' }}
+          </span>
+        </div>
+        <div class="cost-line final">
+          <span>Costo Final</span>
+          <span class="amount final-amount">
+            {{ booking.finalCost | currency : 'USD' : 'symbol' : '1.0-0' }}
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section class="rooms-section">
+      <h2>Habitaciones seleccionadas</h2>
+      <ul>
+        @for (room of booking.roomsSelected; track room.id; let i = $index) {
+        <li>
+          Habitación {{ i + 1 }} – {{ room.type }}
+        </li>
+        }
+      </ul>
+    </section>
+
+    <section class="policy-section">
+      <h2>Políticas de Reserva</h2>
+      <ul>
+        <li>Las reservas se pueden cancelar hasta tres días antes de la fecha de reserva.</li>
+        <li>
+          Si intenta cancelar una reserva existente y la fecha de cancelación ha
+          expirado, la transacción será rechazada y se le obligará a cubrir
+          todos los pagos.
+        </li>
+      </ul>
+    </section>
+
+    <div class="actions">
+      <button mat-raised-button type="button" class="btn-cancel" (click)="onCancel()">
+        Cancelar
+      </button>
+      <button mat-raised-button type="button" class="btn-confirm" (click)="onConfirm()">
+        <mat-icon>event_available</mat-icon>
+        <span>Confirmar Reserva</span>
+      </button>
+    </div>
+  </div>
+</div>

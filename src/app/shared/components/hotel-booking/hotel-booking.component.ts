@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SearchService } from '../../../core/services/search.service';
 import { SearchResult } from '../../../core/interfaces/models/SearchResult';
 import { SearchFilters } from '../search-form/search-form.component';
@@ -44,6 +44,7 @@ interface HotelBookingData {
 })
 export class HotelBookingComponent implements OnInit {
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private searchService = inject(SearchService);
 
   readonly today = new Date();
@@ -236,5 +237,9 @@ export class HotelBookingComponent implements OnInit {
     const d = new Date(this.today);
     d.setHours(0, 0, 0, 0);
     return d;
+  }
+
+  goToBookingDetail(): void {
+    this.router.navigate(['/booking-detail']);
   }
 }
