@@ -8,6 +8,7 @@ import {
     BookingSummaryRequest,
     BookingSummaryResponse,
 } from '../../core/services/booking-summary.service';
+import { AddBookingService } from '../../core/services/add-booking.service';
 import { BookingDetailComponent } from '../../shared/components/booking-detail/booking-detail.component';
 
 export interface BookingDetailNavState {
@@ -34,7 +35,12 @@ export interface BookingDetailNavState {
         <p>{{ error() }}</p>
       </div>
     } @else if (summary(); as s) {
-      <app-booking-detail [booking]="s" />
+      <app-booking-detail
+        [booking]="s"
+        [confirmLoading]="confirmLoading()"
+        [confirmError]="confirmError()"
+        (confirmClicked)="onConfirm()"
+      />
     }
   `,
     styles: [`
@@ -53,20 +59,28 @@ export interface BookingDetailNavState {
 })
 export class BookingDetailPageComponent implements OnInit {
     private bookingSummaryService = inject(BookingSummaryService);
+    private addBookingService = inject(AddBookingService);
     private router = inject(Router);
 
     loading = signal<boolean>(true);
     error = signal<string | null>(null);
     summary = signal<BookingSummaryResponse | null>(null);
 
+    confirmLoading = signal<boolean>(false);
+    confirmError = signal<string | null>(null);
+
+    // Kept from nav state to build the add-booking request
+    private navState: BookingDetailNavState | null = null;
+
     ngOnInit(): void {
         const state = history.state as BookingDetailNavState | null;
 
         if (!state || !state.roomIds || state.roomIds.length === 0) {
-            // No booking data – redirect back
             this.router.navigate(['/']);
             return;
         }
+
+        this.navState = state;
 
         const request: BookingSummaryRequest = {
             startDate: state.arrivalDate,
@@ -86,6 +100,33 @@ export class BookingDetailPageComponent implements OnInit {
                 console.error('Error fetching booking summary:', err);
                 this.error.set('No se pudo obtener el resumen de la reserva. Intenta de nuevo.');
                 this.loading.set(false);
+            },
+        });
+    }
+
+    onConfirm(): void {
+        const s = this.summary();
+        const state = this.navState;
+        if (!s || !state) return;
+
+        this.confirmLoading.set(true);
+        this.confirmError.set(null);
+
+        this.addBookingService.createBooking({
+            checkInDate: s.checkInDate,
+            checkOutDate: s.checkOutDate,
+            roomIds: state.roomIds,
+            finalCost: s.finalCost,
+            peopleCount: state.adults + state.children,
+        }).subscribe({
+            next: () => {
+                this.confirmLoading.set(false);
+                this.router.navigate(['/user']);
+            },
+            error: (err: Error) => {
+                console.error('Error creating booking:', err);
+                this.confirmError.set(err.message || 'No se pudo confirmar la reserva. Intenta de nuevo.');
+                this.confirmLoading.set(false);
             },
         });
     }

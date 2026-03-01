@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,6 +16,11 @@ export class BookingDetailComponent {
   readonly accentColor = '#CDA349';
 
   @Input({ required: true }) booking!: BookingSummaryResponse;
+  @Input() confirmLoading = false;
+  @Input() confirmError: string | null = null;
+
+  /** Emitted when the user clicks "Confirmar Reserva" */
+  @Output() confirmClicked = new EventEmitter<void>();
 
   constructor(private readonly router: Router) { }
 
@@ -40,7 +45,7 @@ export class BookingDetailComponent {
   }
 
   onConfirm(): void {
-    console.log('Reserva confirmada:', this.booking);
+    this.confirmClicked.emit();
   }
 
   private formatDate(isoDate: string): string {

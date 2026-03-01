@@ -23,8 +23,9 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
                     backendError?.message ||
                     (error.status === 400 ? 'Parámetros de búsqueda inválidos.' :
                         error.status === 404 ? 'No se encontraron resultados.' :
-                            error.status === 500 ? 'Error interno del servidor. Intente más tarde.' :
-                                `Error ${error.status}: algo salió mal.`);
+                            error.status === 409 ? 'Ya existe una reserva para esas fechas o habitaciones.' :
+                                error.status === 500 ? 'Error interno del servidor. Intente más tarde.' :
+                                    `Error ${error.status}: algo salió mal.`);
 
                 return throwError(() => new Error(message));
             }
