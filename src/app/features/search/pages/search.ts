@@ -22,6 +22,7 @@ export class Search {
   hotels = signal<Hotel[]>([]);
   searchResults = signal<SearchResult[]>([]);
   isSearchActive = signal<boolean>(false);
+  lastFilters = signal<SearchFilters | null>(null);
   loading = signal<boolean>(true);
   error = signal<string | null>(null);
 
@@ -60,6 +61,7 @@ export class Search {
   onFiltersChanged(filters: SearchFilters): void {
     if (filters.hasChanges) {
       this.isSearchActive.set(true);
+      this.lastFilters.set(filters);
       this.error.set(null);
       this.searchService.loadSearchResults({
         startDate: filters.checkIn,
@@ -81,6 +83,7 @@ export class Search {
       });
     } else {
       this.isSearchActive.set(false);
+      this.lastFilters.set(null);
       this.searchResults.set([]);
       this.error.set(null);
     }
