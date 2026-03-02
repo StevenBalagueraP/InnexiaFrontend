@@ -10,9 +10,9 @@
     }
 
     @if (isSearchActive()) {
-    <app-hotel-list [searchResults]="searchResults()" />
+    <app-hotel-list [searchResults]="searchResults()" [activeFilters]="lastFilters()" />
     } @else {
-    <app-hotel-list [hotels]="hotels()" />
+    <app-hotel-list [hotels]="hotels()" [activeFilters]="lastFilters()" />
     }
   </div>
 </div>
