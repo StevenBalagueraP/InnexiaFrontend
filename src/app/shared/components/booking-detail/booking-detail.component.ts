@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,29 +13,21 @@ import { BookingSummaryResponse } from '../../../core/services/booking-summary.s
 })
 export class BookingDetailComponent {
 
-  @Input({ required: true }) booking!: BookingSummaryResponse;
-  @Input() confirmLoading = false;
-  @Input() confirmError: string | null = null;
+  booking = input.required<BookingSummaryResponse>();
+  confirmLoading = input<boolean>(false);
+  confirmError = input<string | null>(null);
 
-  @Output() confirmClicked = new EventEmitter<void>();
+  confirmClicked = output<void>();
+  cancelClicked = output<void>();
 
-  @Output() cancelClicked = new EventEmitter<void>();
+  checkInLabel = computed(() => this.formatDate(this.booking().checkInDate));
+  checkOutLabel = computed(() => this.formatDate(this.booking().checkOutDate));
 
-  get checkInLabel(): string {
-    return this.formatDate(this.booking.checkInDate);
-  }
+  totalGuests = computed(() =>
+    this.booking().roomsSelected.reduce((acc, room) => acc + room.capacity, 0)
+  );
 
-  get checkOutLabel(): string {
-    return this.formatDate(this.booking.checkOutDate);
-  }
-
-  get totalGuests(): number {
-    return this.booking.roomsSelected.reduce((acc, room) => acc + room.capacity, 0);
-  }
-
-  get totalRooms(): number {
-    return this.booking.roomsSelected.length;
-  }
+  totalRooms = computed(() => this.booking().roomsSelected.length);
 
   onCancel(): void {
     this.cancelClicked.emit();
