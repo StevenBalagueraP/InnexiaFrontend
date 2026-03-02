@@ -175,8 +175,8 @@ export class HotelBookingComponent implements OnInit {
             // Triggered by adults/children change → show inline warning, don't redirect
             this.noRoomsWarning.set('No hay habitaciones disponibles para esa cantidad de personas.');
           } else {
-            // Triggered by initial load, cancel or confirm → redirect to search
-            this.router.navigate(['/search']);
+            // Triggered by initial load, cancel or confirm → redirect to home
+            this.router.navigate(['/']);
           }
         } else {
           this.noRoomsWarning.set(null);
