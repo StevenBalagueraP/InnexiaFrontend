@@ -68,6 +68,8 @@ export class HotelBookingComponent implements OnInit {
   private currentHotelId = '';
   private currentFilters: SearchFilters | null = null;
   private initialized = false;
+  /** True when the search was triggered by changing adults/children (not initial load) */
+  private searchingByPeople = false;
 
   dateError = computed(() => {
     const normalize = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
@@ -110,6 +112,7 @@ export class HotelBookingComponent implements OnInit {
       const totalPeople = this.adults() + this.children();
       // Suppress the first run; ngOnInit handles the initial load
       if (!this.initialized) return;
+      this.searchingByPeople = true;
       this.loadHotelData(this.currentHotelId, this.currentFilters, totalPeople);
     });
   }
@@ -166,9 +169,15 @@ export class HotelBookingComponent implements OnInit {
       maxPrice: filters?.maxPrice,
     }).subscribe({
       next: (results: SearchResult[]) => {
-        if (results.length === 0 || results[0].rooms.length === 0) {
-          // No rooms available → go back to search
-          this.router.navigate(['/']);
+        const noRooms = results.length === 0 || results[0].rooms.length === 0;
+        if (noRooms) {
+          if (this.searchingByPeople) {
+            // Triggered by adults/children change → show inline warning, don't redirect
+            this.noRoomsWarning.set('No hay habitaciones disponibles para esa cantidad de personas.');
+          } else {
+            // Triggered by initial load, cancel or confirm → redirect to search
+            this.router.navigate(['/search']);
+          }
         } else {
           this.noRoomsWarning.set(null);
           const r = results[0];
@@ -190,6 +199,7 @@ export class HotelBookingComponent implements OnInit {
             available: r.available,
           });
         }
+        this.searchingByPeople = false;
         this.loading.set(false);
       },
       error: (err: Error) => {
