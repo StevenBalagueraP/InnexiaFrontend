@@ -27,7 +27,7 @@ I dont have explained the logic abot how the hotel booking page works, but I can
 
 
 ## Link to the video explaining all the reactive component 
-### https://drive.google.com/file/d/1mJMSAswDsp-jrgnk011AxctLpeWVA0N4/view?usp=sharing
+### https://drive.google.com/file/d/1WDLPGx0Clb6lTiGpjyuT8KlyLIfgkrx2/view?usp=sharing
 
 ## Activity 3: 
 
