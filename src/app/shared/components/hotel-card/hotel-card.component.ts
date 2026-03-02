@@ -21,7 +21,6 @@ export class HotelCard {
 
   data = input.required<SearchResult | Hotel>();
 
-  /** Optional active filters from the search page — passed to hotel-booking via router state */
   activeFilters = input<SearchFilters | null>(null);
 
   isSearchResult = computed(() => this.checkIsSearchResult(this.data()));
@@ -31,13 +30,11 @@ export class HotelCard {
     return this.checkIsSearchResult(value) ? value.hotelId : (value._id ?? '');
   });
 
-  /** Hotel name — works for both types */
   hotelName = computed<string>(() => {
     const value = this.data();
     return this.checkIsSearchResult(value) ? value.hotelName : value.name;
   });
 
-  /** First image or null */
   hotelImage = computed<string | null>(() => {
     const value = this.data();
     if (this.checkIsSearchResult(value)) {
@@ -46,13 +43,11 @@ export class HotelCard {
     return value.images?.[0] ?? null;
   });
 
-  /** Location */
   hotelLocation = computed<string>(() => {
     const value = this.data();
     return this.checkIsSearchResult(value) ? value.location : value.location;
   });
 
-  /** Description */
   hotelDescription = computed<string | null>(() => {
     const value = this.data();
     return this.checkIsSearchResult(value)
@@ -60,19 +55,16 @@ export class HotelCard {
       : (value.description ?? null);
   });
 
-  /** Total price (only for SearchResult) */
   totalPrice = computed<number | null>(() => {
     const value = this.data();
     return this.checkIsSearchResult(value) ? value.totalPrice : null;
   });
 
-  /** Option label (only for SearchResult) */
   optionLabel = computed<string | null>(() => {
     const value = this.data();
     return this.checkIsSearchResult(value) ? value.optionLabel : null;
   });
 
-  /** Suggested rooms mapped to RoomSuggestion shape for app-room */
   suggestedRooms = computed<RoomSuggestion[]>(() => {
     const value = this.data();
     if (!this.checkIsSearchResult(value)) return [];

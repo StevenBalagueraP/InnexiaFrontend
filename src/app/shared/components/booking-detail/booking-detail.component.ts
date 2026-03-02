@@ -18,10 +18,8 @@ export class BookingDetailComponent {
   @Input() confirmLoading = false;
   @Input() confirmError: string | null = null;
 
-  /** Emitted when the user clicks "Confirmar Reserva" */
   @Output() confirmClicked = new EventEmitter<void>();
 
-  /** Emitted when the user clicks "Cancelar" */
   @Output() cancelClicked = new EventEmitter<void>();
 
   get checkInLabel(): string {
