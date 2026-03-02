@@ -7,13 +7,13 @@
         <div class="date-item">
           <mat-icon class="date-icon">flight_land</mat-icon>
           <span class="date-label">Fecha de Llegada:</span>
-          <span class="date-value">{{ checkInLabel }}</span>
+          <span class="date-value">{{ checkInLabel() }}</span>
         </div>
         <div class="divider"></div>
         <div class="date-item">
           <mat-icon class="date-icon">flight_takeoff</mat-icon>
           <span class="date-label">Fecha de Salida:</span>
-          <span class="date-value">{{ checkOutLabel }}</span>
+          <span class="date-value">{{ checkOutLabel() }}</span>
         </div>
       </div>
     </section>
@@ -34,19 +34,19 @@
         <div class="cost-line">
           <span>Costo</span>
           <span class="amount">
-            {{ booking.baseCost | currency : 'USD' : 'symbol' : '1.0-0' }}
+            {{ booking().baseCost | currency : 'USD' : 'symbol' : '1.0-0' }}
           </span>
         </div>
         <div class="cost-line">
           <span>Descuento</span>
           <span class="amount discount">
-            -{{ booking.estimatedDiscount | currency : 'USD' : 'symbol' : '1.0-0' }}
+            -{{ booking().estimatedDiscount | currency : 'USD' : 'symbol' : '1.0-0' }}
           </span>
         </div>
         <div class="cost-line final">
           <span>Costo Final</span>
           <span class="amount final-amount">
-            {{ booking.finalCost | currency : 'USD' : 'symbol' : '1.0-0' }}
+            {{ booking().finalCost | currency : 'USD' : 'symbol' : '1.0-0' }}
           </span>
         </div>
       </div>
@@ -55,7 +55,7 @@
     <section class="rooms-section">
       <h2>Habitaciones seleccionadas</h2>
       <ul>
-        @for (room of booking.roomsSelected; track room.id; let i = $index) {
+        @for (room of booking().roomsSelected; track room.id; let i = $index) {
         <li>
           Habitación {{ i + 1 }} – {{ room.type }}
         </li>
@@ -76,11 +76,11 @@
     </section>
 
     <div class="actions">
-      <button mat-raised-button type="button" class="btn-cancel" (click)="onCancel()" [disabled]="confirmLoading">
+      <button mat-raised-button type="button" class="btn-cancel" (click)="onCancel()" [disabled]="confirmLoading()">
         Cancelar
       </button>
-      <button mat-raised-button type="button" class="btn-confirm" (click)="onConfirm()" [disabled]="confirmLoading">
-        @if (confirmLoading) {
+      <button mat-raised-button type="button" class="btn-confirm" (click)="onConfirm()" [disabled]="confirmLoading()">
+        @if (confirmLoading()) {
         <mat-icon class="spin-icon">hourglass_empty</mat-icon>
         <span>Procesando…</span>
         } @else {
@@ -89,10 +89,10 @@
         }
       </button>
     </div>
-    @if (confirmError) {
+    @if (confirmError()) {
     <p class="confirm-error">
       <mat-icon>error_outline</mat-icon>
-      {{ confirmError }}
+      {{ confirmError() }}
     </p>
     }
   </div>
