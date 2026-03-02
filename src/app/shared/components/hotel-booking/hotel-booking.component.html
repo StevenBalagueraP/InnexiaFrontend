@@ -1,5 +1,4 @@
 <div class="booking-page">
-  <!-- Loading state -->
   @if (loading()) {
   <div class="loading-state">
     <mat-icon>hourglass_empty</mat-icon>
@@ -11,9 +10,7 @@
     <p>{{ error() }}</p>
   </div>
   } @else if (hotel(); as h) {
-  <!-- Main content -->
   <main class="main">
-    <!-- Hotel details -->
     <section class="section-hotel">
       <div class="hotel-info">
         <div class="hotel-head">
@@ -46,12 +43,10 @@
       </div>
     </section>
 
-    <!-- Fechas + Cantidad huéspedes -->
     <section class="section-dates-guests">
       <div class="dates-block">
         <h3 class="block-title">Fechas</h3>
 
-        <!-- Inputs ocultos para los datepickers -->
         <mat-form-field appearance="outline" class="visually-hidden-field">
           <input matInput [matDatepicker]="arrivalPicker" [min]="minDate" [value]="arrivalDate()"
             (dateChange)="onArrivalDateChange($event)" />
@@ -115,7 +110,6 @@
       </div>
     </section>
 
-    <!-- Habitaciones disponibles -->
     <section class="section-rooms" [class.section-rooms--scroll]="hasManyRooms()">
       <h3 class="block-title">Habitaciones disponibles</h3>
       @if (noRoomsWarning()) {
@@ -133,7 +127,6 @@
       }
     </section>
 
-    <!-- FAB Book -->
     <button
       class="fab-book"
       mat-fab
