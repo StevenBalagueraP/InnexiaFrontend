@@ -1,0 +1,14 @@
+@if (loading()) {
+<div class="page-loader">
+    <mat-spinner diameter="56" />
+    <p>Calculando el detalle de tu reserva…</p>
+</div>
+} @else if (error()) {
+<div class="page-error">
+    <mat-icon>error_outline</mat-icon>
+    <p>{{ error() }}</p>
+</div>
+} @else if (summary(); as s) {
+<app-booking-detail [booking]="s" [confirmLoading]="confirmLoading()" [confirmError]="confirmError()"
+    (confirmClicked)="onConfirm()" (cancelClicked)="onCancel()" />
+}

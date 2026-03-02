@@ -31,7 +31,7 @@
 }
 
 .card--selected {
-  border: 3px solid #CDA349;
+  border: 3px solid var(--app-secondary);
 }
 
 .room-name {
@@ -112,6 +112,6 @@
 }
 
 .book-btn--selected {
-  border-color: #CDA349 !important;
-  color: #CDA349 !important;
+  border-color: var(--app-secondary) !important;
+  color: var(--app-secondary) !important;
 }

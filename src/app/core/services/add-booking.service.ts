@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface AddBookingRequest {
-    checkInDate: string;   // ISO string e.g. "2026-02-07T00:00:00.000Z"
-    checkOutDate: string;  // ISO string
+    checkInDate: string;
+    checkOutDate: string;
     roomIds: string[];
     finalCost: number;
     peopleCount: number;
