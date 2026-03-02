@@ -133,7 +133,7 @@ li::marker {
   font-weight: 275;
   font-style: normal;
   font-size: 18px;
-  color: #000000;
+  color: var(--app-black);
   line-height: 1.35;
 }
 
@@ -261,7 +261,7 @@ li::marker {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: var(--app-error, #e53935);
+  color: var(--app-error);
   font-family: 'Rubik', system-ui, sans-serif;
   font-size: 13px;
   margin: 8px 0 0;

@@ -47,8 +47,6 @@ export class AuthService {
     private setUserData(token: string): void {
         try {
             const payload = JSON.parse(atob(token.split('.')[1]));
-            // Adjust property name based on your JWT payload structure (e.g. 'name', 'username', 'sub')
-            // Assuming 'name' or fallback to 'email' or 'sub'
             const name = payload.name || payload.username || payload.email || payload.sub;
             this.currentUserName.set(name);
         } catch (e) {

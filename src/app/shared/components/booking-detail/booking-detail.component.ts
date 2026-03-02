@@ -12,7 +12,6 @@ import { BookingSummaryResponse } from '../../../core/services/booking-summary.s
   styleUrl: './booking-detail.component.css',
 })
 export class BookingDetailComponent {
-  readonly accentColor = '#CDA349';
 
   @Input({ required: true }) booking!: BookingSummaryResponse;
   @Input() confirmLoading = false;
