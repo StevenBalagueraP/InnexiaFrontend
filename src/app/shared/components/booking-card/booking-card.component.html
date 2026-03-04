@@ -1,1 +1,62 @@
-<p>booking-card works!</p>
+<link
+    href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@400;500;600&family=Rubik:wght@400;500&display=swap"
+    rel="stylesheet">
+
+<div class="cards-container">
+    @for (booking of bookings(); track booking.id) {
+    <div class="booking-card">
+
+        <!-- Imagen del hotel -->
+        <div class="hotel-img-wrapper">
+            <img class="hotel-img" [src]="booking.hotelImage || 'https://placehold.co/102x102?text=Hotel'"
+                [alt]="booking.hotelName" loading="lazy" />
+        </div>
+
+        <!-- Wrapper agrupado: main + separator + rooms -->
+        <div class="card-content">
+
+            <!-- Info principal -->
+            <div class="card-main">
+                <h3 class="hotel-name">{{ booking.hotelName }}</h3>
+                <p class="hotel-location">
+                    <mat-icon class="location-icon">location_on</mat-icon>
+                    {{ booking.hotelLocation }}
+                </p>
+                <p class="info-row">
+                    <span class="info-label">Estado:</span>
+                    <span class="info-value">{{ getStatusLabel(booking.status) }}</span>
+                </p>
+                <p class="info-row">
+                    <span class="info-label">Fecha de inicio:</span>
+                    <span class="info-value">{{ formatDate(booking.checkIn) }}</span>
+                </p>
+                <p class="info-row">
+                    <span class="info-label">Fecha de fin:</span>
+                    <span class="info-value">{{ formatDate(booking.checkOut) }}</span>
+                </p>
+            </div>
+
+            <!-- Separador vertical -->
+            <div class="card-separator"></div>
+
+            <!-- Habitaciones -->
+            <div class="card-rooms">
+                <h4 class="rooms-title">Habitaciones seleccionadas</h4>
+                <ul class="rooms-list">
+                    @for (room of booking.rooms; track room.id) {
+                    <li class="room-item">{{ formatRoomType(room.type) }}</li>
+                    }
+                </ul>
+            </div>
+
+        </div><!-- /card-content -->
+
+        <!-- Botón cancelar: empujado al extremo derecho, centrado vertical -->
+        <button class="cancel-btn" mat-button>
+            <mat-icon class="cancel-icon">cancel</mat-icon>
+            Cancelar
+        </button>
+
+    </div>
+    }
+</div>

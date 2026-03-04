@@ -16,7 +16,6 @@
     letter-spacing: -0.5px;
 }
 
-/* ─── Loading ─────────────────────────────────── */
 .loading-state {
     display: flex;
     flex-direction: column;
@@ -41,7 +40,6 @@
     }
 }
 
-/* ─── Empty ─────────────────────────────────────── */
 .empty-state {
     text-align: center;
     padding: 80px 0;
@@ -54,14 +52,12 @@
     margin-bottom: 12px;
 }
 
-/* ─── Bookings List ─────────────────────────────── */
 .bookings-list {
     display: flex;
     flex-direction: column;
     gap: 24px;
 }
 
-/* ─── Booking Card ─────────────────────────────── */
 .booking-card {
     background: #ffffff;
     border-radius: 16px;
@@ -75,7 +71,6 @@
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.13);
 }
 
-/* ─── Image ─────────────────────────────────────── */
 .booking-image-wrapper {
     position: relative;
     width: 100%;
@@ -121,7 +116,6 @@
     color: #3730a3;
 }
 
-/* ─── Body ─────────────────────────────────────── */
 .booking-body {
     padding: 20px 24px;
     display: flex;
@@ -146,13 +140,11 @@
     margin-right: 4px;
 }
 
-/* ─── Divider ──────────────────────────────────── */
 .booking-divider {
     height: 1px;
     background: #f3f4f6;
 }
 
-/* ─── Dates ─────────────────────────────────────── */
 .booking-dates {
     display: flex;
     align-items: center;
@@ -186,7 +178,7 @@
     flex-shrink: 0;
 }
 
-/* ─── Rooms ─────────────────────────────────────── */
+
 .section-label {
     font-size: 0.75rem;
     font-weight: 600;
@@ -224,7 +216,7 @@
     font-weight: 500;
 }
 
-/* ─── Total ─────────────────────────────────────── */
+
 .booking-total {
     display: flex;
     justify-content: space-between;

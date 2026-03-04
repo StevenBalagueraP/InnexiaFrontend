@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@400;500;600&family=Rubik:wght@400;500&display=swap');
+
+:host {
+    display: block;
+}
+
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px;
+}
+
+/* ── Card ─────────────────────────────────────────── */
+.booking-card {
+    display: flex;
+    align-items: center;
+    /* centrado vertical de todos los hijos */
+    gap: 16px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.2s ease;
+}
+
+.booking-card:hover {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Hotel Image ─────────────────────────────────── */
+.hotel-img-wrapper {
+    flex-shrink: 0;
+    width: 102px;
+    height: 102px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f3f4f6;
+}
+
+.hotel-img {
+    width: 102px;
+    height: 102px;
+    object-fit: cover;
+}
+
+/* ── Content group: main + separator + rooms ─────── */
+.card-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    /* no crece; el botón Cancelar se empuja con margin-left:auto */
+}
+
+/* ── Main Info ───────────────────────────────────── */
+.card-main {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-shrink: 0;
+    width: 220px;
+}
+
+.hotel-name {
+    font-family: 'Encode Sans Semi Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #1E3D58;
+    margin: 0 0 2px;
+    line-height: 1.2;
+}
+
+.hotel-location {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-family: 'Encode Sans Semi Condensed', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: #787878;
+    margin: 0 0 6px;
+}
+
+.location-icon {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+    color: #787878;
+    line-height: 14px;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+}
+
+.info-label {
+    font-family: 'Encode Sans Semi Condensed', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #000000;
+}
+
+.info-value {
+    font-family: 'Encode Sans Semi Condensed', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #000000;
+}
+
+/* ── Separator ───────────────────────────────────── */
+.card-separator {
+    width: 1px;
+    /* align-self:stretch funciona porque .card-content es flex */
+    align-self: stretch;
+    background: #e5e7eb;
+    flex-shrink: 0;
+    min-height: 60px;
+}
+
+/* ── Rooms Section ───────────────────────────────── */
+.card-rooms {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.rooms-title {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: #CDA349;
+    margin: 0;
+}
+
+.rooms-list {
+    list-style: disc;
+    padding-left: 18px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.room-item {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #000000;
+    text-transform: capitalize;
+}
+
+/* ── Cancel Button: derecha extrema, centrado vertical ── */
+.cancel-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+    /* empuja al borde derecho */
+    align-self: center;
+    /* centra verticalmente dentro de la card */
+    flex-shrink: 0;
+    color: #CDA349 !important;
+    font-family: 'Encode Sans Semi Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid #CDA349;
+    border-radius: 6px;
+    padding: 6px 12px;
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    white-space: nowrap;
+}
+
+.cancel-btn:hover {
+    background: rgba(205, 163, 73, 0.08);
+}
+
+.cancel-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    color: #CDA349;
+}
