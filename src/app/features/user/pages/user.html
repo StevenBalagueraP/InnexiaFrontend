@@ -1,4 +1,31 @@
-<div class="container mt-4">
-    <h2>User Page</h2>
-    <p>This is a simple user page as requested.</p>
+<div class="user-bookings-container">
+    <h2>Mis Reservas</h2>
+
+    @if (isLoading()) {
+    <div class="loading-state">
+        <p>Cargando reservas...</p>
+    </div>
+    } @else if (bookings().length === 0) {
+    <div class="empty-state">
+        <p>No tienes reservas aún.</p>
+    </div>
+    } @else {
+    <div class="bookings-list">
+        @for (booking of bookings(); track booking._id) {
+        <div class="booking-card">
+            <div class="booking-hotel">
+                <h3>{{ booking.hotel.name }}</h3>
+                <p>{{ booking.hotel.location }}</p>
+            </div>
+            <div class="booking-info">
+                <span class="status" [class]="booking.status.toLowerCase()">{{ booking.status }}</span>
+                <p>Check-in: {{ booking.checkIn | date:'mediumDate' }}</p>
+                <p>Check-out: {{ booking.checkOut | date:'mediumDate' }}</p>
+                <p>Huéspedes: {{ booking.guests.adults }} adultos, {{ booking.guests.children }} niños</p>
+                <p class="total">Total: ${{ booking.totalPrice }}</p>
+            </div>
+        </div>
+        }
+    </div>
+    }
 </div>

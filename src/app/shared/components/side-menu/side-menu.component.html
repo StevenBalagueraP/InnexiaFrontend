@@ -12,7 +12,7 @@
         <span class="label">Ingresar</span>
     </div>
     } @else {
-    <div class="user-icon">
+    <div class="user-icon" [routerLink]="['/user']" style="cursor: pointer;">
         <mat-icon>person</mat-icon>
         <span class="label">{{ userName() || 'Usuario' }}</span>
     </div>
