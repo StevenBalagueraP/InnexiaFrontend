@@ -1,29 +1,71 @@
 <div class="user-bookings-container">
-    <h2>Mis Reservas</h2>
+    <h2 class="page-title">Mis Reservas</h2>
 
     @if (isLoading()) {
     <div class="loading-state">
+        <div class="spinner"></div>
         <p>Cargando reservas...</p>
     </div>
     } @else if (bookings().length === 0) {
     <div class="empty-state">
+        <span class="empty-icon">🏨</span>
         <p>No tienes reservas aún.</p>
     </div>
     } @else {
     <div class="bookings-list">
-        @for (booking of bookings(); track booking._id) {
+        @for (booking of bookings(); track booking.id) {
         <div class="booking-card">
-            <div class="booking-hotel">
-                <h3>{{ booking.hotel.name }}</h3>
-                <p>{{ booking.hotel.location }}</p>
+
+            <!-- Imagen del Hotel -->
+            <div class="booking-image-wrapper">
+                <img class="booking-hotel-img"
+                    [src]="booking.hotelImage || 'https://placehold.co/600x300?text=Sin+imagen'"
+                    [alt]="booking.hotelName" loading="lazy" />
+                <span class="status-badge" [class]="'badge-' + booking.status.toLowerCase()">
+                    {{ booking.status }}
+                </span>
             </div>
-            <div class="booking-info">
-                <span class="status" [class]="booking.status.toLowerCase()">{{ booking.status }}</span>
-                <p>Check-in: {{ booking.checkIn | date:'mediumDate' }}</p>
-                <p>Check-out: {{ booking.checkOut | date:'mediumDate' }}</p>
-                <p>Huéspedes: {{ booking.guests.adults }} adultos, {{ booking.guests.children }} niños</p>
-                <p class="total">Total: ${{ booking.totalPrice }}</p>
+
+            <!-- Info del Hotel -->
+            <div class="booking-body">
+                <div class="booking-hotel-info">
+                    <h3 class="hotel-name">{{ booking.hotelName }}</h3>
+                    <p class="hotel-location">
+                        <span class="icon">📍</span> {{ booking.hotelLocation }}
+                    </p>
+                </div>
+
+                <div class="booking-divider"></div>
+
+                <!-- Fechas -->
+                <div class="booking-dates">
+                    <div class="date-item">
+                        <span class="date-label">Check-in</span>
+                        <span class="date-value">{{ booking.checkIn | date:'mediumDate' }}</span>
+                    </div>
+                    <div class="date-arrow">→</div>
+                    <div class="date-item">
+                        <span class="date-label">Check-out</span>
+                        <span class="date-value">{{ booking.checkOut | date:'mediumDate' }}</span>
+                    </div>
+                </div>
+
+                <div class="booking-divider"></div>
+
+                <!-- Habitaciones seleccionadas -->
+                <div class="booking-rooms">
+                    <p class="section-label">Habitaciones seleccionadas</p>
+                    <div class="rooms-list">
+                        @for (room of booking.rooms; track room.id) {
+                        <div class="room-chip">
+                            <span class="room-type">{{ room.type }}</span>
+                            <span class="room-price">${{ room.price }}/noche</span>
+                        </div>
+                        }
+                    </div>
+                </div>
             </div>
+
         </div>
         }
     </div>
