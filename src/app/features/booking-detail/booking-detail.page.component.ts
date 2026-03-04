@@ -18,6 +18,7 @@ export interface BookingDetailNavState {
     departureDate: string;
     roomIds: string[];
     hotelId: string;
+    hotelImage?: string;
 }
 
 @Component({
@@ -87,6 +88,7 @@ export class BookingDetailPageComponent implements OnInit {
             roomIds: state.roomIds,
             finalCost: s.finalCost,
             peopleCount: state.adults + state.children,
+            hotelImage: state.hotelImage,
         }).subscribe({
             next: () => {
                 this.confirmLoading.set(false);

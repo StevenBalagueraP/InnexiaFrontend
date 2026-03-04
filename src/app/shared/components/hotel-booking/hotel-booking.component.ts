@@ -250,6 +250,7 @@ export class HotelBookingComponent implements OnInit {
         departureDate: this.departureDate().toISOString(),
         roomIds: this.userSelectedRooms(),
         hotelId: this.currentHotelId,
+        hotelImage: this.hotel()?.image?.[0] ?? '',
       },
     });
   }
