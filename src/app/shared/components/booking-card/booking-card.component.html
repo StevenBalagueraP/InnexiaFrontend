@@ -1,0 +1,63 @@
+<link
+    href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@400;500;600&family=Rubik:wght@400;500&display=swap"
+    rel="stylesheet">
+
+<div class="booking-card">
+
+    <div class="hotel-img-wrapper">
+        <img class="hotel-img" [src]="booking().hotelImage || 'https://placehold.co/102x102?text=Hotel'"
+            [alt]="booking().hotelName" loading="lazy" />
+    </div>
+
+    <div class="card-content">
+
+        <div class="card-main">
+            <h3 class="hotel-name">{{ booking().hotelName }}</h3>
+            <p class="hotel-location">
+                <mat-icon class="location-icon">location_on</mat-icon>
+                {{ booking().hotelLocation }}
+            </p>
+            <p class="info-row">
+                <span class="info-label">Estado:</span>
+                <span class="info-value">{{ cancelled() ? 'Cancelado' : getStatusLabel(booking().status) }}</span>
+            </p>
+            <p class="info-row">
+                <span class="info-label">Fecha de inicio:</span>
+                <span class="info-value">{{ formatDate(booking().checkIn) }}</span>
+            </p>
+            <p class="info-row">
+                <span class="info-label">Fecha de fin:</span>
+                <span class="info-value">{{ formatDate(booking().checkOut) }}</span>
+            </p>
+        </div>
+
+        <div class="card-separator"></div>
+
+        <div class="card-rooms">
+            <h4 class="rooms-title">Habitaciones seleccionadas</h4>
+            <ul class="rooms-list">
+                @for (room of booking().rooms; track room.id) {
+                <li class="room-item">{{ formatRoomType(room.type) }}</li>
+                }
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="cancel-section">
+        <button class="cancel-btn" mat-button [disabled]="isDisabled()" (click)="onCancel()">
+            @if (isCancelling()) {
+            <mat-icon class="cancel-icon spin">sync</mat-icon>
+            Cancelando...
+            } @else {
+            <mat-icon class="cancel-icon">cancel</mat-icon>
+            Cancelar
+            }
+        </button>
+
+        @if (cancelError()) {
+        <p class="cancel-error">{{ cancelError() }}</p>
+        }
+    </div>
+
+</div>

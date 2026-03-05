@@ -8,6 +8,7 @@ export interface AddBookingRequest {
     roomIds: string[];
     finalCost: number;
     peopleCount: number;
+    hotelImage?: string;
 }
 
 export interface AddBookingResponse {

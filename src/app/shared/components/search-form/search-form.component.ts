@@ -109,15 +109,21 @@ export class SearchForm {
     this.location.set(this.initialState.location);
   }
 
+  private localDateStr(d: Date): string {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
+  }
+
   private getToday(): string {
-    const today = new Date();
-    return today.toISOString().split('T')[0];
+    return this.localDateStr(new Date());
   }
 
   private getTomorrow(): string {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    return tomorrow.toISOString().split('T')[0];
+    const t = new Date();
+    t.setDate(t.getDate() + 1);
+    return this.localDateStr(t);
   }
 
   hasChanges = computed(() => {
