@@ -1,11 +1,12 @@
 import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookingService, Booking } from '../../../core/services/booking.service';
+import { BookingCardListComponent } from '../../../shared/components/booking-card-list/booking-card-list.component';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, BookingCardListComponent],
   templateUrl: './user.html',
   styleUrl: './user.css',
 })

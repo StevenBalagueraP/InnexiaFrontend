@@ -32,7 +32,10 @@ export class BookingService {
     }
 
     getUserBookings(): Observable<Booking[]> {
-        return this.http.get<Booking[]>(this.apiUrl);
+        return this.http.get<Booking[]>(`${this.apiUrl}`);
+    }
+
+    cancelBooking(bookingId: string): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}/${bookingId}/cancel`, {});
     }
 }
-

@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, input, signal, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { BookingService } from '../../../core/services/booking.service';
 
 export interface BookingCardRoom {
     id: string;
@@ -29,21 +30,52 @@ export interface BookingCardData {
     styleUrl: './booking-card.component.css',
 })
 export class BookingCardComponent {
-    bookings = signal<BookingCardData[]>([
-        {
-            id: '69a7bdde92c1e8548f970cf2',
-            hotelName: 'Desert Oasis Resort',
-            hotelLocation: 'Phoenix',
-            hotelImage: 'https://images.pexels.com/photos/31587931/pexels-photo-31587931.jpeg',
-            status: 'CONFIRMED',
-            checkIn: '2026-03-04T05:06:29.157Z',
-            checkOut: '2026-03-05T05:06:29.157Z',
-            rooms: [
-                { id: '69992d3af480e2b0614d3150', type: 'SUITE_FAMILY', price: 250, capacity: 4 },
-                { id: '69992d3af480e2b0614d314c', type: 'SIMPLE_TWO', price: 279, capacity: 2 },
-            ],
-        },
-    ]);
+    // Angular v17+ signal input
+    booking = input.required<BookingCardData>();
+
+    private bookingService = inject(BookingService);
+
+    isCancelling = signal<boolean>(false);
+    cancelError = signal<string | null>(null);
+    cancelled = signal<boolean>(false);
+
+    /** El botón está deshabilitado si: status es CANCELLED, ya se canceló en esta sesión,
+     *  la fecha de checkOut ya pasó, o se está procesando la cancelación. */
+    isDisabled = computed(() => {
+        const b = this.booking();
+        if (!b) return true;
+        if (this.isCancelling()) return true;
+        if (this.cancelled()) return true;
+        if (b.status === 'CANCELLED') return true;
+        const checkOutDate = new Date(b.checkOut);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        checkOutDate.setHours(0, 0, 0, 0);
+        if (checkOutDate < today) return true;
+        return false;
+    });
+
+    onCancel(): void {
+        const bookingId = this.booking().id;
+        this.isCancelling.set(true);
+        this.cancelError.set(null);
+        console.log(bookingId)
+
+        this.bookingService.cancelBooking(bookingId).subscribe({
+            next: () => {
+                this.cancelled.set(true);
+                this.isCancelling.set(false);
+            },
+            error: (err) => {
+                this.isCancelling.set(false);
+                if (err?.status === 400) {
+                    this.cancelError.set('Debe cancelar con 3 días de anticipación. Se cobrará el monto total.');
+                } else {
+                    this.cancelError.set('Ocurrió un error al cancelar la reserva.');
+                }
+            }
+        });
+    }
 
     formatDate(dateStr: string): string {
         return new Date(dateStr).toLocaleDateString('es-ES', {
