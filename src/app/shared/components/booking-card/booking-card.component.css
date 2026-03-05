@@ -4,7 +4,6 @@
     display: block;
 }
 
-/* ── Cancel Section ──────────────────────────────── */
 .cancel-section {
     display: flex;
     flex-direction: column;
@@ -38,11 +37,9 @@
     animation: spin 0.8s linear infinite;
 }
 
-/* ── Card ─────────────────────────────────────────── */
 .booking-card {
     display: flex;
     align-items: center;
-    /* centrado vertical de todos los hijos */
     gap: 16px;
     background: #ffffff;
     border: 1px solid #e5e7eb;
@@ -56,7 +53,6 @@
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
 }
 
-/* ── Hotel Image ─────────────────────────────────── */
 .hotel-img-wrapper {
     flex-shrink: 0;
     width: 102px;
@@ -72,15 +68,12 @@
     object-fit: cover;
 }
 
-/* ── Content group: main + separator + rooms ─────── */
 .card-content {
     display: flex;
     align-items: flex-start;
-    /* 👈 en vez de center */
     gap: 16px;
 }
 
-/* ── Main Info ───────────────────────────────────── */
 .card-main {
     display: flex;
     flex-direction: column;
@@ -137,17 +130,14 @@
     color: #000000;
 }
 
-/* ── Separator ───────────────────────────────────── */
 .card-separator {
     width: 1px;
-    /* align-self:stretch funciona porque .card-content es flex */
     align-self: stretch;
     background: #e5e7eb;
     flex-shrink: 0;
     min-height: 60px;
 }
 
-/* ── Rooms Section ───────────────────────────────── */
 .card-rooms {
     display: flex;
     flex-direction: column;

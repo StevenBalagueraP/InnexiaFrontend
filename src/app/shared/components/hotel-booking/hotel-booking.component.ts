@@ -197,7 +197,10 @@ export class HotelBookingComponent implements OnInit {
   }
 
   private toIsoDate(d: Date): string {
-    return d.toISOString().split('T')[0];
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
   }
 
   private formatDate(d: Date): string {
@@ -246,8 +249,8 @@ export class HotelBookingComponent implements OnInit {
       state: {
         adults: this.adults(),
         children: this.children(),
-        arrivalDate: this.arrivalDate().toISOString(),
-        departureDate: this.departureDate().toISOString(),
+        arrivalDate: this.toIsoDate(this.arrivalDate()),
+        departureDate: this.toIsoDate(this.departureDate()),
         roomIds: this.userSelectedRooms(),
         hotelId: this.currentHotelId,
         hotelImage: this.hotel()?.image?.[0] ?? '',

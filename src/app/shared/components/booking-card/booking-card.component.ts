@@ -30,7 +30,6 @@ export interface BookingCardData {
     styleUrl: './booking-card.component.css',
 })
 export class BookingCardComponent {
-    // Angular v17+ signal input
     booking = input.required<BookingCardData>();
 
     private bookingService = inject(BookingService);
@@ -39,8 +38,6 @@ export class BookingCardComponent {
     cancelError = signal<string | null>(null);
     cancelled = signal<boolean>(false);
 
-    /** El botón está deshabilitado si: status es CANCELLED, ya se canceló en esta sesión,
-     *  la fecha de checkOut ya pasó, o se está procesando la cancelación. */
     isDisabled = computed(() => {
         const b = this.booking();
         if (!b) return true;
@@ -71,7 +68,7 @@ export class BookingCardComponent {
                 if (err?.status === 400) {
                     this.cancelError.set('Debe cancelar con 3 días de anticipación. Se cobrará el monto total.');
                 } else {
-                    this.cancelError.set('Ocurrió un error al cancelar la reserva.');
+                    this.cancelError.set('Debe cancelar con 3 días de anticipación. Se cobrará el monto total.');
                 }
             }
         });

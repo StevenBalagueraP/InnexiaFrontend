@@ -4,16 +4,13 @@
 
 <div class="booking-card">
 
-    <!-- Imagen del hotel -->
     <div class="hotel-img-wrapper">
         <img class="hotel-img" [src]="booking().hotelImage || 'https://placehold.co/102x102?text=Hotel'"
             [alt]="booking().hotelName" loading="lazy" />
     </div>
 
-    <!-- Wrapper agrupado: main + separator + rooms -->
     <div class="card-content">
 
-        <!-- Info principal -->
         <div class="card-main">
             <h3 class="hotel-name">{{ booking().hotelName }}</h3>
             <p class="hotel-location">
@@ -34,10 +31,8 @@
             </p>
         </div>
 
-        <!-- Separador vertical -->
         <div class="card-separator"></div>
 
-        <!-- Habitaciones -->
         <div class="card-rooms">
             <h4 class="rooms-title">Habitaciones seleccionadas</h4>
             <ul class="rooms-list">
@@ -47,9 +42,8 @@
             </ul>
         </div>
 
-    </div><!-- /card-content -->
+    </div>
 
-    <!-- Botón cancelar + mensaje de error -->
     <div class="cancel-section">
         <button class="cancel-btn" mat-button [disabled]="isDisabled()" (click)="onCancel()">
             @if (isCancelling()) {
