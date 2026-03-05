@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookingCardComponent, BookingCardData } from '../booking-card/booking-card.component';
 
@@ -10,5 +10,5 @@ import { BookingCardComponent, BookingCardData } from '../booking-card/booking-c
     styleUrl: './booking-card-list.component.css',
 })
 export class BookingCardListComponent {
-    @Input() bookings: BookingCardData[] = [];
+    bookings = input.required<BookingCardData[]>();
 }
