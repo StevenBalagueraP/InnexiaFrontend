@@ -18,6 +18,7 @@ export interface BookingDetailNavState {
     departureDate: string;
     roomIds: string[];
     hotelId: string;
+    hotelImage?: string;
 }
 
 @Component({
@@ -41,6 +42,10 @@ export class BookingDetailPageComponent implements OnInit {
 
     private navState: BookingDetailNavState | null = null;
 
+    private toLocalNoon(dateStr: string): string {
+        return `${dateStr}T12:00:00`;
+    }
+
     ngOnInit(): void {
         const state = history.state as BookingDetailNavState | null;
 
@@ -52,8 +57,8 @@ export class BookingDetailPageComponent implements OnInit {
         this.navState = state;
 
         const request: BookingSummaryRequest = {
-            startDate: state.arrivalDate,
-            endDate: state.departureDate,
+            startDate: this.toLocalNoon(state.arrivalDate),
+            endDate: this.toLocalNoon(state.departureDate),
             adultCount: state.adults,
             childCount: state.children,
             peopleCount: state.adults + state.children,
@@ -87,6 +92,7 @@ export class BookingDetailPageComponent implements OnInit {
             roomIds: state.roomIds,
             finalCost: s.finalCost,
             peopleCount: state.adults + state.children,
+            hotelImage: state.hotelImage,
         }).subscribe({
             next: () => {
                 this.confirmLoading.set(false);
@@ -120,8 +126,8 @@ export class BookingDetailPageComponent implements OnInit {
         this.router.navigate(['/hotel-booking', state.hotelId], {
             state: {
                 filters: {
-                    checkIn: state.arrivalDate.split('T')[0],
-                    checkOut: state.departureDate.split('T')[0],
+                    checkIn: state.arrivalDate,
+                    checkOut: state.departureDate,
                 },
             },
         });
