@@ -48,9 +48,8 @@
 /* ── Content group: main + separator + rooms ─────── */
 .card-content {
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* 👈 en vez de center */
     gap: 16px;
-    /* no crece; el botón Cancelar se empuja con margin-left:auto */
 }
 
 /* ── Main Info ───────────────────────────────────── */
@@ -59,7 +58,6 @@
     flex-direction: column;
     gap: 4px;
     flex-shrink: 0;
-    width: 220px;
 }
 
 .hotel-name {
