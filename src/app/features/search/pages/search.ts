@@ -28,7 +28,6 @@ export class Search {
 
   constructor() {
     this.loadHotels();
-    this.loadBookings();
   }
 
   loadHotels(): void {
@@ -43,17 +42,6 @@ export class Search {
       error: (err) => {
         console.error('Error al cargar el hotel', err);
         this.error.set('Error al cargar el hotel');
-      }
-    });
-  }
-
-  loadBookings(): void {
-    this.bookingService.getBookings().subscribe({
-      next: (data) => {
-        console.log('Bookings loaded:', data);
-      },
-      error: (err) => {
-        console.error('Error loading bookings:', err);
       }
     });
   }
