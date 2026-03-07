@@ -18,7 +18,6 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
                 const backendError: BackendError = error.error;
                 console.error('Backend Error:', backendError);
 
-                // Build a readable message from the backend payload
                 const message =
                     backendError?.message ||
                     (error.status === 400 ? 'Parámetros de búsqueda inválidos.' :
