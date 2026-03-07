@@ -14,9 +14,10 @@
 
   <div class="date-item">
     <div class="date-info">
-      <span class="icon">🛬</span>
+      <span class="material-icons">flight_land</span>
       <span>Llegada</span>
     </div>
+
     <input 
       type="date" 
       [value]="checkIn()" 
@@ -26,15 +27,18 @@
 
   <div class="date-item">
     <div class="date-info">
-      <span class="icon">🛫</span>
-      <span>Salida  </span>
+      <span class="material-icons">flight_takeoff</span>
+      <span>Salida</span>
     </div>
+
     <input 
       type="date" 
       [value]="checkOut()" 
       (change)="checkOut.set($any($event.target).value)"
     />
   </div>
+
+</div>
 
 </div>
 @if (dateError()) {
