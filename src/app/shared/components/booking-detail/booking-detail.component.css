@@ -1,9 +1,3 @@
-/* ===== RESPONSIVE BREAKPOINTS =====
-   Mobile:  < 600px
-   Tablet:  600px – 1024px
-   Desktop: 1025px – 1700px+
-===================================== */
-
 .booking-detail-page {
   min-height: 100vh;
   display: flex;
@@ -36,7 +30,6 @@
   margin: 0 0 28px;
 }
 
-/* ---------- DATES ---------- */
 .dates-section {
   display: flex;
   justify-content: center;
@@ -98,7 +91,6 @@
   flex-shrink: 0;
 }
 
-/* ---------- SUMMARY ROW ---------- */
 .summary-row {
   display: flex;
   flex-direction: row;
@@ -200,7 +192,6 @@ li::marker {
   font-weight: 275;
 }
 
-/* ---------- ROOMS & POLICY ---------- */
 .rooms-section {
   margin-bottom: 20px;
 }
@@ -258,7 +249,6 @@ li::marker {
   line-height: 1.5;
 }
 
-/* ---------- ACTIONS ---------- */
 .actions {
   margin-top: auto;
   display: flex;
@@ -327,10 +317,6 @@ li::marker {
   color: var(--app-white);
 }
 
-
-/* ============================================================
-   TABLET  600px – 1024px
-   ============================================================ */
 @media (min-width: 600px) and (max-width: 1024px) {
   .booking-detail-page {
     padding: 20px 16px;
@@ -348,7 +334,6 @@ li::marker {
     margin-bottom: 20px;
   }
 
-  /* Dates: stack vertically when narrow, still horizontal when space allows */
   .dates-rect {
     min-width: unset;
     width: 100%;
@@ -362,7 +347,6 @@ li::marker {
     display: none;
   }
 
-  /* Summary: columna centrada, cards al 100% */
   .summary-row {
     flex-direction: column;
     align-items: center;
@@ -390,10 +374,6 @@ li::marker {
   }
 }
 
-
-/* ============================================================
-   MOBILE  < 600px
-   ============================================================ */
 @media (max-width: 599px) {
   .booking-detail-page {
     padding: 12px 10px;
@@ -413,7 +393,6 @@ li::marker {
     margin-bottom: 16px;
   }
 
-  /* Dates: apiladas verticalmente */
   .dates-section {
     margin-bottom: 20px;
   }
@@ -437,7 +416,6 @@ li::marker {
     font-size: 13px;
   }
 
-  /* Summary: columna, cards full-width */
   .summary-row {
     flex-direction: column;
     align-items: stretch;
@@ -478,7 +456,6 @@ li::marker {
     font-size: 15px;
   }
 
-  /* Rooms & Policy */
   .rooms-section h2,
   .policy-section h2 {
     font-size: 17px;
@@ -493,7 +470,6 @@ li::marker {
     width: 100%;
   }
 
-  /* Actions: botones en fila, ocupan todo el ancho */
   .actions {
     flex-direction: column-reverse;
     align-items: stretch;
@@ -516,9 +492,6 @@ li::marker {
 }
 
 
-/* ============================================================
-   WIDE DESKTOP  ≥ 1700px
-   ============================================================ */
 @media (min-width: 1700px) {
   .booking-detail-page {
     padding: 48px;
