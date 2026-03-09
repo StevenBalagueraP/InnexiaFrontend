@@ -78,9 +78,9 @@
         }
       </div>
       <div class="guests-block">
-        <h3 class="block-title">Cantidad de huéspedes</h3>
-        <div class="guests-fields">
-          <div class="guest-field">
+          <h3 class="block-title">Cantidad de huéspedes</h3>
+          <div class="guests-rect">
+
             <span class="guest-label">Adultos</span>
             <div class="guest-stepper">
               <button type="button" mat-icon-button (click)="setAdults(-1)" aria-label="Menos adultos">
@@ -92,8 +92,9 @@
                 <mat-icon>expand_less</mat-icon>
               </button>
             </div>
-          </div>
-          <div class="guest-field">
+
+            <div class="guests-divider"></div>
+
             <span class="guest-label">Niños</span>
             <div class="guest-stepper">
               <button type="button" mat-icon-button (click)="setChildren(-1)" aria-label="Menos niños">
@@ -105,8 +106,8 @@
                 <mat-icon>expand_less</mat-icon>
               </button>
             </div>
+
           </div>
-        </div>
       </div>
     </section>
 
