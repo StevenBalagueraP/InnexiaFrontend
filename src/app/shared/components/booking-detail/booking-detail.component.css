@@ -1,3 +1,9 @@
+/* ===== RESPONSIVE BREAKPOINTS =====
+   Mobile:  < 600px
+   Tablet:  600px – 1024px
+   Desktop: 1025px – 1700px+
+===================================== */
+
 .booking-detail-page {
   min-height: 100vh;
   display: flex;
@@ -10,6 +16,7 @@
 
 .booking-detail-card {
   width: 965px;
+  max-width: 100%;
   min-height: 637px;
   background: var(--app-white);
   border-radius: 20px;
@@ -29,6 +36,7 @@
   margin: 0 0 28px;
 }
 
+/* ---------- DATES ---------- */
 .dates-section {
   display: flex;
   justify-content: center;
@@ -90,6 +98,7 @@
   flex-shrink: 0;
 }
 
+/* ---------- SUMMARY ROW ---------- */
 .summary-row {
   display: flex;
   flex-direction: row;
@@ -191,6 +200,7 @@ li::marker {
   font-weight: 275;
 }
 
+/* ---------- ROOMS & POLICY ---------- */
 .rooms-section {
   margin-bottom: 20px;
 }
@@ -240,7 +250,6 @@ li::marker {
   max-width: 100%;
 }
 
-
 .policy-section li {
   font-family: 'Rubik', system-ui, sans-serif;
   font-weight: 400;
@@ -249,6 +258,7 @@ li::marker {
   line-height: 1.5;
 }
 
+/* ---------- ACTIONS ---------- */
 .actions {
   margin-top: auto;
   display: flex;
@@ -275,13 +285,8 @@ li::marker {
 }
 
 @keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
 .spin-icon {
@@ -322,29 +327,288 @@ li::marker {
   color: var(--app-white);
 }
 
-@media (max-width: 1024px) {
-  .booking-detail-card {
-    width: 100%;
+
+/* ============================================================
+   TABLET  600px – 1024px
+   ============================================================ */
+@media (min-width: 600px) and (max-width: 1024px) {
+  .booking-detail-page {
+    padding: 20px 16px;
+    align-items: flex-start;
   }
 
+  .booking-detail-card {
+    width: 100%;
+    padding: 28px 28px 24px;
+    min-height: unset;
+  }
+
+  .title {
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+
+  /* Dates: stack vertically when narrow, still horizontal when space allows */
+  .dates-rect {
+    min-width: unset;
+    width: 100%;
+    height: auto;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    padding: 14px 20px;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  /* Summary: columna centrada, cards al 100% */
   .summary-row {
     flex-direction: column;
-    gap: 20px;
     align-items: center;
+    gap: 20px;
+    margin-bottom: 24px;
   }
 
   .promo-card {
     margin-left: 0;
     width: 100%;
+    height: auto;
+    overflow: visible;
   }
 
   .cost-card {
     margin-left: 0;
+    margin-right: 0;
     width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .policy-list {
+    width: 100%;
+  }
+}
+
+
+/* ============================================================
+   MOBILE  < 600px
+   ============================================================ */
+@media (max-width: 599px) {
+  .booking-detail-page {
+    padding: 12px 10px;
+    align-items: flex-start;
+  }
+
+  .booking-detail-card {
+    width: 100%;
+    padding: 20px 16px 18px;
+    border-radius: 14px;
+    min-height: unset;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .title {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  /* Dates: apiladas verticalmente */
+  .dates-section {
+    margin-bottom: 20px;
   }
 
   .dates-rect {
+    min-width: unset;
     width: 100%;
-    max-width: 485px;
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 16px;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .date-label,
+  .date-value {
+    font-size: 13px;
+  }
+
+  /* Summary: columna, cards full-width */
+  .summary-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .promo-card {
+    margin-left: 0;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    padding: 14px 16px;
+  }
+
+  .promo-card h3 {
+    font-size: 16px;
+  }
+
+  .promo-card li {
+    font-size: 14px;
+  }
+
+  .cost-card {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    padding: 14px 16px;
+  }
+
+  .cost-card h3 {
+    font-size: 16px;
+  }
+
+  .cost-line {
+    font-size: 15px;
+  }
+
+  /* Rooms & Policy */
+  .rooms-section h2,
+  .policy-section h2 {
+    font-size: 17px;
+  }
+
+  .rooms-section li,
+  .policy-section li {
+    font-size: 13px;
+  }
+
+  .policy-list {
+    width: 100%;
+  }
+
+  /* Actions: botones en fila, ocupan todo el ancho */
+  .actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 10px;
+    padding-top: 16px;
+  }
+
+  .btn-cancel,
+  .btn-confirm {
+    width: 100%;
+    justify-content: center;
+    height: 44px;
+    font-size: 15px;
+  }
+
+  .confirm-error {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+
+/* ============================================================
+   WIDE DESKTOP  ≥ 1700px
+   ============================================================ */
+@media (min-width: 1700px) {
+  .booking-detail-page {
+    padding: 48px;
+  }
+
+  .booking-detail-card {
+    width: 1200px;
+    padding: 52px 64px 44px;
+  }
+
+  .title {
+    font-size: 38px;
+    margin-bottom: 36px;
+  }
+
+  .dates-rect {
+    min-width: 580px;
+    height: 84px;
+    gap: 48px;
+    padding: 0 48px;
+  }
+
+  .date-label,
+  .date-value {
+    font-size: 16px;
+  }
+
+  .date-icon {
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+  }
+
+  .divider {
+    height: 52px;
+  }
+
+  .summary-row {
+    margin-bottom: 36px;
+  }
+
+  .promo-card {
+    width: 420px;
+    height: 160px;
+    margin-left: 130px;
+    padding: 20px 28px;
+  }
+
+  .promo-card h3 {
+    font-size: 23px;
+  }
+
+  .promo-card li {
+    font-size: 20px;
+  }
+
+  .cost-card {
+    width: 270px;
+    height: 160px;
+    margin-left: 220px;
+    margin-right: 130px;
+    padding: 20px 28px;
+  }
+
+  .cost-card h3 {
+    font-size: 23px;
+  }
+
+  .cost-line {
+    font-size: 20px;
+  }
+
+  .rooms-section h2,
+  .policy-section h2 {
+    font-size: 23px;
+  }
+
+  .rooms-section li,
+  .policy-section li {
+    font-size: 16px;
+  }
+
+  .policy-list {
+    width: 780px;
+  }
+
+  .btn-cancel,
+  .btn-confirm {
+    height: 46px;
+    font-size: 16px;
+    padding: 0 32px;
   }
 }
