@@ -263,3 +263,62 @@ h2 {
   accent-color: var(--app-primary);
   cursor: pointer;
 }
+
+
+
+/* === Responsive: collapsed to search icon on small screens === */
+.search-wrapper {
+  position: relative;
+  height: 100%;   /
+}
+
+.search-toggle-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  color: var(--app-black);
+  cursor: pointer;
+  background: none;      /* 👈 quita el fondo */
+  border: none;          /* 👈 quita el borde */
+  padding: 0;            /* 👈 quita el padding por defecto del button */
+}
+
+
+.search-toggle-btn mat-icon {
+  font-size: 24px;
+  height: 24px;
+  width: 24px;
+}
+
+.search-panel-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: transparent;
+}
+
+@media (max-width: 1000px) {
+  .search-toggle-btn {
+    display: flex;
+    margin-top: 40px;   /* 👈 baja el icono */
+    margin-left: 6px;
+  }
+
+  .search-container {
+    display: none;
+    position: fixed;
+    top: 90px;           /* 👈 ajusta según cuánto bajaste el botón */
+    left: 16px;
+    z-index: 100;
+    width: 382.25px;
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+  }
+
+  .search-container.open {
+    display: flex;
+  }
+}
+

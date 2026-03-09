@@ -1,6 +1,6 @@
 .hotel-card {
   width: 100%;
-  max-width: 1104px;
+  max-width: 100%;
   margin: 0 auto; /* centrar la card en pantallas grandes */
   padding: 30px;
   border: 1px solid var(--app-hotel-card-background);

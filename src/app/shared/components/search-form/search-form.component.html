@@ -1,4 +1,14 @@
-<div class="search-container">
+<div class="search-wrapper">
+<!-- Botón lupa visible solo en pantallas ≤ 1000px -->
+  <button class="search-toggle-btn" (click)="togglePanel()">
+    <mat-icon>{{ panelOpen() ? 'close' : 'search' }}</mat-icon>
+  </button>
+
+  <!-- Overlay para cerrar al hacer click fuera -->
+  @if (panelOpen()) {
+    <div class="search-panel-overlay" (click)="panelOpen.set(false)"></div>
+  }
+<div class="search-container" [class.open]="panelOpen()">
 
   <h2>Buscador</h2>
 @if (hasChanges()) {
@@ -130,3 +140,5 @@
 </div>
 
 </div>
+</div>
+
