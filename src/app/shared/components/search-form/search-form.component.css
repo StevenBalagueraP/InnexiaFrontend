@@ -264,12 +264,9 @@ h2 {
   cursor: pointer;
 }
 
-
-
-/* === Responsive: collapsed to search icon on small screens === */
 .search-wrapper {
   position: relative;
-  height: 100%;   /
+  height: 100%;   
 }
 
 .search-toggle-btn {
@@ -280,9 +277,9 @@ h2 {
   height: 48px;
   color: var(--app-black);
   cursor: pointer;
-  background: none;      /* 👈 quita el fondo */
-  border: none;          /* 👈 quita el borde */
-  padding: 0;            /* 👈 quita el padding por defecto del button */
+  background: none;    
+  border: none;      
+  padding: 0;        
 }
 
 
@@ -302,14 +299,14 @@ h2 {
 @media (max-width: 1000px) {
   .search-toggle-btn {
     display: flex;
-    margin-top: 40px;   /* 👈 baja el icono */
+    margin-top: 40px; 
     margin-left: 6px;
   }
 
   .search-container {
     display: none;
     position: fixed;
-    top: 90px;           /* 👈 ajusta según cuánto bajaste el botón */
+    top: 90px;     
     left: 16px;
     z-index: 100;
     width: 382.25px;

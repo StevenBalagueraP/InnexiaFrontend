@@ -1,7 +1,7 @@
 .hotel-card {
   width: 100%;
   max-width: 100%;
-  margin: 0 auto; /* centrar la card en pantallas grandes */
+  margin: 0 auto;
   padding: 30px;
   border: 1px solid var(--app-hotel-card-background);
   border-radius: 12px;
@@ -34,7 +34,7 @@
 .hotel-right {
   display: flex;
   align-items: center;
-  align-self: stretch; /* centra el botón verticalmente en desktop */
+  align-self: center;
   flex-shrink: 0;
 }
 
@@ -144,7 +144,8 @@
   font-size: 16px;
   font-weight: var(--hotel-label-weight);
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: opacity 0.2s ease, box-shadow 0.2s ease;
+  will-change: opacity;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -159,7 +160,7 @@
 
 .book-btn:hover {
   opacity: 0.85;
-  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .rooms-container {
@@ -168,9 +169,6 @@
   flex-wrap: wrap;
 }
 
-/* ================================================================
-   PANTALLA GRANDE (≤ 1500px) — promo card baja a nueva fila
-   ================================================================ */
 @media (max-width: 1500px) {
   .hotel-top {
     flex-wrap: wrap;
@@ -183,9 +181,7 @@
   }
 }
 
-/* ================================================================
-   TABLET  (≤ 900px)
-   ================================================================ */
+
 @media (max-width: 900px) {
   .hotel-card {
     padding: 20px;
@@ -201,9 +197,6 @@
   }
 }
 
-/* ================================================================
-   MÓVIL  (≤ 600px)
-   ================================================================ */
 @media (max-width: 600px) {
   .hotel-card {
     padding: 16px;
