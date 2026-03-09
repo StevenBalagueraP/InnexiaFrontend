@@ -33,7 +33,7 @@ export class SearchForm {
     checkOut: this.getTomorrow(),
     people: 0,
     minPrice: 0,
-    maxPrice: 1000,
+    maxPrice: 10000,
     location: ''
   };
 

@@ -81,14 +81,14 @@
 
       <div 
         class="slider-range"
-        [style.left.%]="(minPrice() / 1000) * 100"
-        [style.width.%]="((maxPrice() - minPrice()) / 1000) * 100">
+        [style.left.%]="(minPrice() / 10000) * 100"
+        [style.width.%]="((maxPrice() - minPrice()) / 10000) * 100">
       </div>
 
       <input 
         type="range"
         min="0"
-        max="1000"
+        max="10000"
         [value]="minPrice()"
         (input)="updateMin(+($any($event.target).value))"
         class="range-thumb"
@@ -97,7 +97,7 @@
       <input 
         type="range"
         min="0"
-        max="1000"
+        max="10000"
         [value]="maxPrice()"
         (input)="updateMax(+($any($event.target).value))"
         class="range-thumb"
