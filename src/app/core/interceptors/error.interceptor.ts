@@ -1,17 +1,14 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
-import { inject } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
 import { BackendError } from '../interfaces/backend-error.interface';
-import { LocalStorageService } from '../services/local-storage.service';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
-    const localStorageService = inject(LocalStorageService);
-
     return next(req).pipe(
         catchError((error: HttpErrorResponse) => {
+            // 401 is handled by authInterceptor (token refresh + redirect).
+            // Here we only translate other HTTP errors into user-friendly messages.
             if (error.status === 401) {
-                localStorageService.removeToken();
-                return throwError(() => new Error('Credenciales inválidas. Por favor inicie sesión nuevamente.'));
+                return throwError(() => error); // let it propagate as-is
             }
 
             if (error.status >= 400 && error.status < 600) {

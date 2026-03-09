@@ -12,6 +12,11 @@ import { inject } from '@angular/core';
 })
 export class SideMenuComponent {
   private authService = inject(AuthService);
+  sidebarOpen = false;
+
+  toggleSidebar() {
+    this.sidebarOpen = !this.sidebarOpen;
+  }
   public isLoggedIn = this.authService.isLoggedIn;
   public userName = this.authService.currentUserName;
 

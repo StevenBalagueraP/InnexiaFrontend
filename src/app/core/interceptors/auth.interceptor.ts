@@ -1,19 +1,80 @@
-import { HttpInterceptorFn } from '@angular/common/http';
+import {
+    HttpErrorResponse,
+    HttpEvent,
+    HttpHandlerFn,
+    HttpInterceptorFn,
+    HttpRequest
+} from '@angular/common/http';
 import { inject } from '@angular/core';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError, filter, switchMap, take } from 'rxjs/operators';
 import { LocalStorageService } from '../services/local-storage.service';
+import { AuthService } from '../services/auth.service';
+
+// ── Shared state for refresh queuing (module-level, not per-instance) ──────────
+let isRefreshing = false;
+const refreshTokenSubject = new BehaviorSubject<string | null>(null);
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
     const localStorageService = inject(LocalStorageService);
+    const authService = inject(AuthService);
+
     const token = localStorageService.getToken();
 
-    if (token) {
-        const clonedReq = req.clone({
-            setHeaders: {
-                Authorization: `Bearer ${token}`
+    return next(addAuthHeader(req, token)).pipe(
+        catchError((error: HttpErrorResponse) => {
+            // Only attempt refresh for 401 errors and NOT for the refresh/login endpoints
+            // (to avoid infinite loops)
+            if (
+                error.status === 401 &&
+                !req.url.includes('/auth/refresh') &&
+                !req.url.includes('/auth/login')
+            ) {
+                return handle401(req, next, localStorageService, authService);
             }
-        });
-        return next(clonedReq);
+            return throwError(() => error);
+        })
+    );
+};
+
+function addAuthHeader(req: HttpRequest<unknown>, token: string | null): HttpRequest<unknown> {
+    if (!token) return req;
+    return req.clone({
+        setHeaders: { Authorization: `Bearer ${token}` }
+    });
+}
+
+function handle401(
+    req: HttpRequest<unknown>,
+    next: HttpHandlerFn,
+    localStorageService: LocalStorageService,
+    authService: AuthService
+): Observable<HttpEvent<unknown>> {
+    if (isRefreshing) {
+        // Another request is already refreshing — queue this one until the new token arrives
+        return refreshTokenSubject.pipe(
+            filter((token): token is string => token !== null),
+            take(1),
+            switchMap((token) => next(addAuthHeader(req, token)))
+        );
     }
 
-    return next(req);
-};
+    isRefreshing = true;
+    refreshTokenSubject.next(null); // block queued requests until we have a new token
+
+    return authService.refreshToken().pipe(
+        switchMap((response) => {
+            isRefreshing = false;
+            refreshTokenSubject.next(response.access_token);
+            // Retry the original failed request with the new token
+            return next(addAuthHeader(req, response.access_token));
+        }),
+        catchError((refreshError) => {
+            // Refresh itself failed (e.g. token too corrupted / server unreachable)
+            isRefreshing = false;
+            refreshTokenSubject.next(null);
+            authService.handleSessionExpired();
+            return throwError(() => refreshError);
+        })
+    );
+}

@@ -1,4 +1,7 @@
-<div class="sidebar">
+<button class="menu-button" (click)="toggleSidebar()">
+  <mat-icon>menu</mat-icon>
+</button>
+<div class="sidebar" [class.open]="sidebarOpen">
     <div class="hotel-icon" [routerLink]="['/']">
         <mat-icon>apartment</mat-icon>
         <span class="label">Traveler</span>

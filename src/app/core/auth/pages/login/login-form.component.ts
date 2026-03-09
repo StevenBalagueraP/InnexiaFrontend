@@ -25,11 +25,10 @@ import { toSignal } from '@angular/core/rxjs-interop';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginFormComponent {
-    // Signals for inputs and outputs as requested
-    initialData = input<string>(''); // Receiving initial data via signal
-    loading = input<boolean>(false); // Receiving loading state
-    errorMessage = input<string>(''); // Receiving error message
-    loginSuccess = output<{ email: string, password: string }>(); // Emitting event via signal
+    initialData = input<string>(''); 
+    loading = input<boolean>(false); 
+    errorMessage = input<string>(''); 
+    loginSuccess = output<{ email: string, password: string }>();
 
     private fb = inject(FormBuilder);
 
@@ -38,17 +37,12 @@ export class LoginFormComponent {
         password: ['', [Validators.required, Validators.minLength(6)]]
     });
 
-    // Signals for password and email values as explicitly requested
-    // We sync these with the form controls to ensure we meet the "use signals for password and email" requirement
-    // while keeping the "Reactive Validators" requirement.
     email = toSignal(this.loginForm.controls['email'].valueChanges, { initialValue: '' });
     password = toSignal(this.loginForm.controls['password'].valueChanges, { initialValue: '' });
 
-    // Signal for password visibility
     hidePassword = signal(true);
 
     constructor() {
-        // Effect to handle initial data if provided
         effect(() => {
             const initial = this.initialData();
             if (initial) {
@@ -56,18 +50,14 @@ export class LoginFormComponent {
             }
         });
 
-        // Effect to apply error to password field when errorMessage changes
         effect(() => {
             const error = this.errorMessage();
             if (error) {
                 this.loginForm.get('password')?.setErrors({ invalidCredentials: true });
-                this.loginForm.markAllAsTouched(); // Ensure error message shows up
+                this.loginForm.markAllAsTouched(); 
             }
         });
 
-        // Logging signals to demonstrate usage (optional, or for debugging)
-        // effect(() => console.log('Email Signal:', this.email()));
-        // effect(() => console.log('Password Signal:', this.password()));
     }
 
     togglePasswordVisibility(event: MouseEvent) {

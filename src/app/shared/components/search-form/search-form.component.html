@@ -14,9 +14,10 @@
 
   <div class="date-item">
     <div class="date-info">
-      <span class="icon">🛬</span>
+      <span class="material-icons">flight_land</span>
       <span>Llegada</span>
     </div>
+
     <input 
       type="date" 
       [value]="checkIn()" 
@@ -26,9 +27,10 @@
 
   <div class="date-item">
     <div class="date-info">
-      <span class="icon">🛫</span>
-      <span>Salida  </span>
+      <span class="material-icons">flight_takeoff</span>
+      <span>Salida</span>
     </div>
+
     <input 
       type="date" 
       [value]="checkOut()" 
@@ -37,6 +39,7 @@
   </div>
 
 </div>
+
 @if (dateError()) {
   <div class="date-error">
     La fecha de salida no puede ser menor que la de llegada
@@ -78,14 +81,14 @@
 
       <div 
         class="slider-range"
-        [style.left.%]="(minPrice() / 1000) * 100"
-        [style.width.%]="((maxPrice() - minPrice()) / 1000) * 100">
+        [style.left.%]="(minPrice() / 10000) * 100"
+        [style.width.%]="((maxPrice() - minPrice()) / 10000) * 100">
       </div>
 
       <input 
         type="range"
         min="0"
-        max="1000"
+        max="10000"
         [value]="minPrice()"
         (input)="updateMin(+($any($event.target).value))"
         class="range-thumb"
@@ -94,7 +97,7 @@
       <input 
         type="range"
         min="0"
-        max="1000"
+        max="10000"
         [value]="maxPrice()"
         (input)="updateMax(+($any($event.target).value))"
         class="range-thumb"
