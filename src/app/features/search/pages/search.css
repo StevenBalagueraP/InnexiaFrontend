@@ -60,3 +60,25 @@ app-search-form {
         transform: translateY(0);
     }
 }
+
+@media (max-width: 1000px) {
+    .layout {
+        flex-direction: column;
+        height: auto;
+        overflow: visible;
+        gap: 0;
+    }
+
+    app-search-form {
+        position: static;
+        height: auto;
+        align-self: auto;
+        flex-shrink: 1;
+        width: 100%;
+    }
+
+    .content-area {
+        height: auto;
+        overflow-y: visible;
+    }
+}
