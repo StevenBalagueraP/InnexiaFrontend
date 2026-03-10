@@ -9,6 +9,8 @@
   background: var(--app-white);
   font-family: 'Encode Sans Semi Condensed', sans-serif;
   box-sizing: border-box;
+  contain: layout style;
+  will-change: transform;
 }
 
 .hotel-main-wrapper {
@@ -145,7 +147,6 @@
   font-weight: var(--hotel-label-weight);
   cursor: pointer;
   transition: opacity 0.2s ease, box-shadow 0.2s ease;
-  will-change: opacity;
   display: flex;
   flex-direction: column;
   align-items: center;

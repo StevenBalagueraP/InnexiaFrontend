@@ -6,7 +6,7 @@
       <div class="hotel-top">
         <div class="hotel-image">
           @if (hotelImage()) {
-          <img [src]="hotelImage()!" [alt]="hotelName()" />
+          <img [src]="hotelImage()!" [alt]="hotelName()" loading="lazy" decoding="async" />
           } @else {
           <div class="image-placeholder">🏔</div>
           }
