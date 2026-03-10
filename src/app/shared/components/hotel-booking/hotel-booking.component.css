@@ -564,3 +564,29 @@
     font-size: 14px;
   }
 }
+
+.booking-conflict-error {
+  position: fixed;
+  bottom: 90px;
+  right: 40px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 12px 18px;
+  background: #fff0f0;
+  border: 1.5px solid var(--app-error);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: var(--user-label-weight);
+  color: var(--app-error);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.booking-conflict-error mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: var(--app-error);
+  flex-shrink: 0;
+}

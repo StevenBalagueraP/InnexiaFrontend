@@ -133,6 +133,13 @@
       <mat-icon>event</mat-icon>
       <span>Book</span>
     </button>
+
+    @if (bookingConflictError()) {
+    <p class="booking-conflict-error">
+      <mat-icon>warning</mat-icon>
+      Ya existe una reserva con estas habitaciones, inténtelo de nuevo.
+    </p>
+    }
   </main>
   }
 </div>

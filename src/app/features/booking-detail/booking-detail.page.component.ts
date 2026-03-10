@@ -72,8 +72,18 @@ export class BookingDetailPageComponent implements OnInit {
             },
             error: (err: Error) => {
                 console.error('Error fetching booking summary:', err);
-                this.error.set('No se pudo obtener el resumen de la reserva. Intenta de nuevo.');
                 this.loading.set(false);
+
+                const is409 = (err as any)?.status === 409
+                    || err?.message?.includes('One or more rooms are already booked');
+
+                // ✅ Si el getSummary también lanza 409, redirige con el flag
+                if (is409) {
+                    this.goBackToHotelBooking(true);
+                    return;
+                }
+
+                this.error.set('No se pudo obtener el resumen de la reserva. Intenta de nuevo.');
             },
         });
     }
@@ -102,8 +112,11 @@ export class BookingDetailPageComponent implements OnInit {
                 console.error('Error creating booking:', err);
                 this.confirmLoading.set(false);
 
-                if (err.message?.includes('Ya existe una reserva')) {
-                    this.goBackToHotelBooking();
+                const is409 = (err as any)?.status === 409
+                    || err?.message?.includes('One or more rooms are already booked');
+
+                if (is409) {
+                    this.goBackToHotelBooking(true);
                     return;
                 }
 
@@ -116,7 +129,7 @@ export class BookingDetailPageComponent implements OnInit {
         this.goBackToHotelBooking();
     }
 
-    private goBackToHotelBooking(): void {
+    private goBackToHotelBooking(conflict = false): void {
         const state = this.navState;
         if (!state?.hotelId) {
             this.router.navigate(['/']);
@@ -125,10 +138,11 @@ export class BookingDetailPageComponent implements OnInit {
 
         this.router.navigate(['/hotel-booking', state.hotelId], {
             state: {
-                filters: {
-                    checkIn: state.arrivalDate,
-                    checkOut: state.departureDate,
-                },
+            conflict,          
+            filters: {
+                checkIn: state.arrivalDate,
+                checkOut: state.departureDate,
+            },
             },
         });
     }
