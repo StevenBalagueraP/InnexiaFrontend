@@ -90,6 +90,8 @@ export class HotelBookingComponent implements OnInit {
 
   hasManyRooms = computed(() => (this.hotel()?.rooms.length ?? 0) > 2);
 
+  bookingConflictError = signal<boolean>(false);
+
   toggleRoom(id: string): void {
     this.userSelectedRooms.update(current =>
       current.includes(id)
@@ -113,8 +115,16 @@ export class HotelBookingComponent implements OnInit {
 
   ngOnInit(): void {
     const hotelId = this.route.snapshot.paramMap.get('hotelId') ?? '';
+    const navState = history.state as { filters?: SearchFilters | null; conflict?: boolean };
     const stateFilters: SearchFilters | null =
       (history.state as { filters?: SearchFilters | null })?.filters ?? null;
+
+    if (navState?.conflict) {
+      this.bookingConflictError.set(true);
+      this.adults.set(1);
+      this.children.set(0);
+      this.userSelectedRooms.set([]);
+    }
 
     this.currentHotelId = hotelId;
     this.currentFilters = stateFilters;
@@ -244,6 +254,7 @@ export class HotelBookingComponent implements OnInit {
       this.router.navigate(['/auth/login']);
       return;
     }
+
 
     this.router.navigate(['/booking-detail'], {
       state: {

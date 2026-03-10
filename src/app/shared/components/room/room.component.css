@@ -94,10 +94,13 @@
   color: var(--app-black);
 }
 
+.book-icon {
+  font-size: 16px;
+  margin-right: 4px;
+}
+
 .book-btn {
   align-self: center;
-  border-color: var(--app-secondary);
-  color: var(--app-secondary);
   border-radius: 20px;
   padding: 4px 16px;
   font-family: 'Encode Sans Semi Condensed', sans-serif;
@@ -106,12 +109,14 @@
   text-transform: none;
 }
 
-.book-icon {
-  font-size: 16px;
-  margin-right: 4px;
-}
-
-.book-btn--selected {
+::ng-deep .book-btn.mat-mdc-button-base {
+  background-color: white !important;
   border-color: var(--app-secondary) !important;
   color: var(--app-secondary) !important;
+}
+
+::ng-deep .book-btn--selected.mat-mdc-button-base {
+  background-color: var(--app-secondary) !important;
+  border-color: var(--app-secondary) !important;
+  color: white !important;
 }
