@@ -21,6 +21,9 @@ app-search-form {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+    will-change: scroll-position;
 }
 
 .content-area app-hotel-list {

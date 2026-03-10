@@ -9,6 +9,8 @@
   background: var(--app-white);
   font-family: 'Encode Sans Semi Condensed', sans-serif;
   box-sizing: border-box;
+  contain: layout style;
+  will-change: transform;
 }
 
 .hotel-main-wrapper {
@@ -145,12 +147,27 @@
   font-weight: var(--hotel-label-weight);
   cursor: pointer;
   transition: opacity 0.2s ease, box-shadow 0.2s ease;
-  will-change: opacity;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 6px;
+  --mdc-protected-button-container-color: var(--app-secondary) !important;
+  --mdc-protected-button-label-text-color: var(--app-white) !important;
+  --mat-protected-button-state-layer-color: var(--app-white) !important;
+}
+
+::ng-deep .book-btn.mat-mdc-raised-button,
+::ng-deep .book-btn.mat-mdc-raised-button:not(:disabled) {
+  --mdc-protected-button-container-color: var(--app-secondary);
+  --mdc-protected-button-label-text-color: var(--app-white);
+  background-color: var(--app-secondary) !important;
+  color: var(--app-white) !important;
+}
+
+::ng-deep .book-btn.mat-mdc-raised-button .mat-icon,
+::ng-deep .book-btn.mat-mdc-raised-button .mdc-button__label {
+  color: var(--app-white) !important;
 }
 
 .book-btn mat-icon,
