@@ -151,4 +151,9 @@ export class SearchForm {
       this.filtersChanged.emit(currentFilters);
     });
   }
+  panelOpen = signal(false);
+
+  togglePanel() {
+    this.panelOpen.update(v => !v);
+  }
 }
