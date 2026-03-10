@@ -77,7 +77,7 @@ export class BookingDetailPageComponent implements OnInit {
                 const is409 = (err as any)?.status === 409
                     || err?.message?.includes('One or more rooms are already booked');
 
-                // ✅ Si el getSummary también lanza 409, redirige con el flag
+
                 if (is409) {
                     this.goBackToHotelBooking(true);
                     return;
