@@ -63,22 +63,25 @@ app-search-form {
 
 @media (max-width: 1000px) {
     .layout {
-        flex-direction: column;
-        height: auto;
-        overflow: visible;
+        flex-direction: row;      /* mantén en fila */
+        align-items: flex-start;
+        height: 100vh;
+        overflow: hidden;
         gap: 0;
     }
 
     app-search-form {
         position: static;
-        height: auto;
-        align-self: auto;
-        flex-shrink: 1;
-        width: 100%;
+        height: 100%;
+        align-self: stretch;
+        flex-shrink: 0;
+        width: auto;             /* solo ocupa lo que necesita (el botón) */
     }
 
     .content-area {
-        height: auto;
-        overflow-y: visible;
+        flex: 1;
+        height: 100%;
+        overflow-y: auto;
+        margin-left: 12px;       /* distancia respecto al botón */
     }
 }
