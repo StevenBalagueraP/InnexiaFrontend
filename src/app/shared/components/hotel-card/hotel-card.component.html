@@ -8,13 +8,17 @@
           @if (hotelImage()) {
           <img [src]="hotelImage()!" [alt]="hotelName()" loading="lazy" decoding="async" />
           } @else {
-          <div class="image-placeholder">🏔</div>
+            <mat-icon>landscape</mat-icon>
           }
         </div>
 
         <div class="hotel-main-info">
           <h2 class="hotel-name">{{ hotelName() }}</h2>
-          <p class="hotel-location">📍 {{ hotelLocation() }}</p>
+          <p class="hotel-location">
+            <mat-icon>location_on</mat-icon>
+            {{ hotelLocation() }}
+          </p>
+
 
           @if (hotelDescription()) {
           <p class="hotel-description">
