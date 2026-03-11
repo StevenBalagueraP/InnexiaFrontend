@@ -48,6 +48,10 @@ html {
   --app-weigth-300: 300;
   --app-weigth-700: 700;
   --app-weigth-promotions: 275;
+  --app-box-shadow: #00000040;
+  --app-sans-serif: 'Encode Sans Semi Condensed', sans-serif;
+  --app-rubik: 'Rubik', system-ui, sans-serif;
+
 
   // Overriding Angular Material system variables to match the exact primary/tertiary if the generated palette isn't close enough
   // Note: Angular M3 generates a tonal palette. For strict adherence, we might need to generate a custom palette object.

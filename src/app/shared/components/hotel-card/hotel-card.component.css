@@ -75,7 +75,7 @@
   width: 100%;
   height: auto;
   margin: 0;
-  font-family: 'Encode Sans Semi Condensed', sans-serif;
+  font-family: var(--app-sans-serif);
   font-weight: var(--hotel-label-weight);
   font-size: 20px;
   line-height: 1.2;

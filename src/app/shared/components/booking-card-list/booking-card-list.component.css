@@ -3,7 +3,7 @@
     font-size: 36px;
     font-weight: var(--hotel-label-weight);
     color: var(--app-primary);
-    font-family: 'Encode Sans Semi Condensed', sans-serif;
+    font-family: var(--app-sans-serif);
     gap: 38px;
 }
 
