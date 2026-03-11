@@ -1,0 +1,15 @@
+.list-title{
+    padding-left: 97px;
+    font-size: 36px;
+    font-weight: var(--hotel-label-weight);
+    color: var(--app-primary);
+    font-family: var(--app-sans-serif);
+    gap: 38px;
+}
+
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 38px;    
+    padding-left: 97px; 
+}
