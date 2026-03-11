@@ -6,7 +6,9 @@ import { authInterceptor } from './core/interceptors/auth.interceptor';
 
 import { routes } from './app.routes';
 
-export const API_URL = 'http://localhost:3000';
+import { environment } from '../environments/environment';
+
+export const API_URL: string = environment.apiUrl;
 
 export const appConfig: ApplicationConfig = {
   providers: [

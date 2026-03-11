@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SearchResult } from '../interfaces/models/SearchResult';
+import { API_URL } from '../../app.config';
 
 export interface SearchParams {
     startDate: string;
@@ -17,7 +18,7 @@ export interface SearchParams {
     providedIn: 'root',
 })
 export class SearchService {
-    private apiUrl = 'http://localhost:3000/search';
+    private apiUrl = `${API_URL}/search`;
 
     constructor(private http: HttpClient) { }
 

@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { API_URL } from '../../app.config';
 
 export interface BookingRoom {
     id: string;
@@ -25,7 +26,7 @@ export interface Booking {
 })
 export class BookingService {
     private http = inject(HttpClient);
-    private apiUrl = 'http://localhost:3000/bookings';
+    private apiUrl = `${API_URL}/bookings`;
 
 
     getUserBookings(): Observable<Booking[]> {
