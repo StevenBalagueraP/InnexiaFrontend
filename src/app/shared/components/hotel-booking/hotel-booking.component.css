@@ -1,7 +1,7 @@
 .booking-page {
   display: flex;
   height: 100vh;
-  font-family: 'Encode Sans Semi Condensed', sans-serif;
+  font-family: var(--app-sans-serif);
   background: var(--app-white);
   overflow: hidden;
 }
@@ -98,7 +98,7 @@
 .hotel-name {
   margin: 0;
   min-height: 45px;
-  font-family: 'Encode Sans Semi Condensed', sans-serif;
+  font-family: var(--app-sans-serif);
   font-weight: var(--hotel-label-weight);
   font-size: 36px;
   line-height: 1.25;
@@ -325,7 +325,7 @@
   gap: 16px;
   padding: 16px 20px;
   background-color: #D9D9D93B;
-  box-shadow: 0 4px 4px 0 #00000040;
+  box-shadow: 0 4px 4px 0 var(--app-box-shadow);
   border-radius: 10px;
 }
 
@@ -354,7 +354,7 @@
   gap: 8px;
   margin: 16px 0;
   padding: 14px 20px;
-  background: #fff8e1;
+  background: var(--app-white);
   border: 1.5px solid var(--app-secondary);
   border-radius: 8px;
   font-size: 16px;
@@ -376,7 +376,7 @@
   right: 40px;
   background: var(--app-secondary) !important;
   color: var(--app-white) !important;
-  font-family: 'Encode Sans Semi Condensed', sans-serif;
+  font-family: var(--app-sans-serif);
   font-weight: var(--hotel-label-weight);
   font-size: 18px;
 }
@@ -574,7 +574,7 @@
   gap: 8px;
   margin: 0;
   padding: 12px 18px;
-  background: #fff0f0;
+  background: var(--app-white);
   border: 1.5px solid var(--app-error);
   border-radius: 8px;
   font-size: 14px;

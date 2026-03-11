@@ -12,7 +12,7 @@
 }
 
 .cancel-error {
-    font-family: 'Encode Sans Semi Condensed', sans-serif;
+    font-family: var(--app-sans-serif);
     font-size: 12px;
     color: var(--app-error);
     max-width: 160px;
@@ -80,7 +80,7 @@
 }
 
 .hotel-name {
-    font-family: 'Encode Sans Semi Condensed', sans-serif;
+    font-family: var(--app-sans-serif);
     font-weight: 600;
     font-size: 20px;
     color: var(--app-primary);
@@ -92,7 +92,7 @@
     display: flex;
     align-items: center;
     gap: 2px;
-    font-family: 'Encode Sans Semi Condensed', sans-serif;
+    font-family: var(--app-sans-serif);
     font-weight: 400;
     font-size: 12px;
     color: var(--app-medium-gray);
@@ -115,14 +115,14 @@
 }
 
 .info-label {
-    font-family: 'Encode Sans Semi Condensed', sans-serif;
+    font-family: var(--app-sans-serif);
     font-weight: 500;
     font-size: 16px;
     color: var(--app-black);
 }
 
 .info-value {
-    font-family: 'Encode Sans Semi Condensed', sans-serif;
+    font-family: var(--app-sans-serif);
     font-weight: 500;
     font-size: 16px;
     color: var(--app-black);
@@ -144,7 +144,7 @@
 }
 
 .rooms-title {
-    font-family: 'Rubik', sans-serif;
+    font-family: var(--app-rubik);
     font-weight: 500;
     font-size: 20px;
     color: var(--app-secondary);
@@ -161,7 +161,7 @@
 }
 
 .room-item {
-    font-family: 'Rubik', sans-serif;
+    font-family: var(--app-rubik);
     font-weight: 400;
     font-size: 16px;
     color: var(--app-black);
@@ -175,7 +175,7 @@
     align-self: flex-end;
     flex-shrink: 0;
     color: var(--app-secondary) !important;
-    font-family: 'Encode Sans Semi Condensed', sans-serif;
+    font-family: var(--app-sans-serif);
     font-size: 14px;
     font-weight: 500;
     border: 1px solid var(--app-secondary);
