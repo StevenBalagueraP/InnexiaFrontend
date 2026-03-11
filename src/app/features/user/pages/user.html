@@ -1,0 +1,16 @@
+<div class="user-bookings-container">
+
+    @if (isLoading()) {
+    <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Cargando reservas...</p>
+    </div>
+    } @else if (bookings().length === 0) {
+    <div class="empty-state">
+        <p>No tienes reservas aún.</p>
+    </div>
+    } @else {
+    <app-booking-card-list [bookings]="bookings()" />
+    }
+
+</div>

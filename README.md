@@ -1,93 +1,199 @@
-# InnexiaFrontend
+# Innexia Frontend
+
+> Hotel booking web application built with **Angular 21** as a Capstone project for the Programming 5 course.
+
+---
+
+## Project Description
+
+**Innexia** is a hotel booking platform that allows users to:
+
+- Search for hotels by check-in/check-out dates, number of guests, and room count.
+- View hotel details and available rooms.
+- Make and cancel reservations.
+- Manage their bookings through a personal dashboard.
+
+The project connects to a **NestJS** backend via a REST API, implementing JWT authentication, token management, and HTTP interceptors.
+
+### Capstone Objectives
+
+- Build a Single Page Application (SPA) with Angular following the **Features / Shared / Core** architecture.
+- Implement a complete authentication system (login, guards, interceptors).
+- Consume a REST API for managing hotels, rooms, and bookings.
+- Apply responsive design (mobile, tablet, desktop) using CSS Variables and Angular Material.
+- Manage reactive state with Angular **Signals**.
+
+---
+
+## Prerequisites
+
+Make sure the following tools are installed before running the project:
+
+| Tool            | Recommended Version | Link                                        |
+|-----------------|---------------------|---------------------------------------------|
+| Node.js         | >= 20.x (LTS)       | https://nodejs.org                          |
+| npm             | >= 11.x             | Bundled with Node.js                        |
+| Angular CLI     | >= 21.x             | `npm install -g @angular/cli`               |
+| Innexia Backend | —                   | See `innexiabackend` repository             |
+
+---
+
+## Installation & Setup
+
+###  Folder Structure Sugested
+
+Progra5/
+├── indexiaFrontend/  
+├── indexiaBackend/  
 
 
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-* [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+### 1. Clone the repository
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/jala-university1/cohort-3/ES.CSPR-351.GA.T1.26.M1/SC/jerson.balaguera/innexiafrontend.git
-git branch -M main
-git push -uf origin main
+cd Progra5  // Or the directory where you want to clone the repositories
+```
+```bash
+git clone FrontEndGitLabURL
+git clone BackendGitLabURL
 ```
 
-## Integrate with your tools
+### 2. Install dependencies
 
-* [Set up project integrations](https://gitlab.com/jala-university1/cohort-3/ES.CSPR-351.GA.T1.26.M1/SC/jerson.balaguera/innexiafrontend/-/settings/integrations)
+```bash
+cd indexiafrontend
+npm install -g @angular/cli
+npm install
+```
 
-## Collaborate with your team
+### 3. Configure environment variables
 
-* [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-* [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-* [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-* [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+- you nedd to go to the environments folder that are located in: `innexiafrontend/src/environments`
+- then create a new two files 
+    - environment.development.ts
+    - environment.example.ts
 
-## Test and Deploy
+and then modify this two files that you created with the info provided in the example files located in: `innexiafrontend/src/environments` in our case our backend works in `'http://localhost:3000'`
 
-Use the built-in continuous integration in GitLab.
 
-* [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-* [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+### 4. Start the development server
 
-***
+```bash
+ng serve
+```
 
-# Editing this README
+Open your browser at: **http://localhost:4200/**
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+> The application will automatically reload whenever you save changes to source files.
 
-## Suggestions for a good README
+### 5. Build for production
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+```bash
+ng build
+```
 
-## Name
-Choose a self-explaining name for your project.
+Build artifacts will be generated in the `dist/` directory.
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+---
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+## Folder Structure
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+```
+innexiafrontend/
+├── public/                         # Static public assets
+├── src/
+│   ├── app/
+│   │   ├── core/                   # Core application logic
+│   │   │   ├── auth/               # Guards and authentication strategies
+│   │   │   ├── interceptors/       # HTTP interceptors (JWT, error handling)
+│   │   │   ├── interfaces/         # Global interfaces (Hotel, Room, Booking...)
+│   │   │   └── services/           # Global services (Auth, Hotels, Bookings)
+│   │   │
+│   │   ├── features/               # Feature modules (page-level)
+│   │   │   ├── search/             # Hotel search page
+│   │   │   ├── booking-detail/     # Booking detail & confirmation page
+│   │   │   └── user/               # User reservations dashboard
+│   │   │
+│   │   ├── shared/                 # Reusable components, pipes, and utilities
+│   │   │   ├── components/
+│   │   │   │   ├── booking-card/           # Individual booking card
+│   │   │   │   ├── booking-card-list/      # List of booking cards
+│   │   │   │   ├── booking-detail/         # Booking detail component
+│   │   │   │   ├── hotel-booking/          # Hotel booking form
+│   │   │   │   ├── hotel-card/             # Hotel card in search results
+│   │   │   │   ├── hotel-list/             # Hotel list component
+│   │   │   │   ├── room/                   # Room component
+│   │   │   │   ├── search-form/            # Search form component
+│   │   │   │   └── side-menu/              # Sidebar / navigation menu
+│   │   │   ├── pipes/              # Custom pipes
+│   │   │   └── utils/              # Utility functions
+│   │   │
+│   │   ├── app.routes.ts           # Main route definitions
+│   │   ├── app.config.ts           # Application configuration
+│   │   └── app.ts                  # Root component
+│   │
+│   ├── index.html                  # Main HTML entry point
+│   ├── main.ts                     # Angular bootstrap entry point
+│   ├── styles.css                  # Global styles
+│   └── material-theme.scss         # Angular Material theme
+│
+├── angular.json                    # Angular workspace configuration
+├── package.json                    # npm dependencies and scripts
+├── tsconfig.json                   # TypeScript configuration
+└── README.md
+```
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+---
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+## Tech Stack
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+| Technology         | Version   | Purpose                                   |
+|--------------------|-----------|-------------------------------------------|
+| Angular            | ^21.0.0   | Main framework (SPA)                      |
+| Angular Material   | ~21.1.3   | UI components and design system           |
+| Angular CDK        | ~21.1.3   | UI primitives and accessibility           |
+| RxJS               | ~7.8.0    | Reactive programming and stream handling  |
+| TypeScript         | ~5.9.2    | Static typing                             |
+| Vitest             | ^4.0.8    | Unit testing                              |
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+---
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+## Main Routes
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+| Route                  | Description                              | Guard         |
+|------------------------|------------------------------------------|---------------|
+| `/`                    | Redirects to search                      | —             |
+| `/search`              | Hotel search page                        | —             |
+| `/hotel/:id`           | Hotel detail and booking                 | AuthGuard     |
+| `/booking-detail`      | Booking confirmation                     | AuthGuard     |
+| `/user`                | User reservations dashboard              | AuthGuard     |
+| `/login`               | Login page                               | —             |
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+---
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+## Running Tests
 
-## License
-For open source projects, say how it is licensed.
+```bash
+ng test
+```
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Unit tests are run with **Vitest**.
+
+---
+
+## Project Conventions
+
+- **Architecture**: Features / Shared / Core
+- **Reactive state**: Angular Signals (`signal`, `computed`, `effect`)
+- **Styles**: CSS Variables for theming, Angular Material for components
+- **Responsive breakpoints**: mobile (< 768px), tablet (768px–1024px), desktop (> 1024px)
+- **Date handling**: UTC-5 timezone
+- **JWT tokens**: Stored in cookies with automatic refresh
+
+---
+
+## Author
+
+**Steven Balaguera**  
+Course: Programming 5 — Capstone Project  
+Year: 2026
+

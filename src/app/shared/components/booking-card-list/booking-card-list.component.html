@@ -1,0 +1,7 @@
+<h2 class="list-title">Reservas</h2>
+
+<div class="cards-container">
+    @for (booking of bookings(); track booking.id) {
+    <app-booking-card [booking]="booking" />
+    }
+</div>

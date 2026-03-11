@@ -1,0 +1,28 @@
+<button class="menu-button" (click)="toggleSidebar()">
+  <mat-icon>menu</mat-icon>
+</button>
+<div class="sidebar" [class.open]="sidebarOpen">
+    <div class="hotel-icon" [routerLink]="['/']">
+        <mat-icon>apartment</mat-icon>
+        <span class="label">Traveler</span>
+    </div>
+
+    <div class="divider"></div>
+
+    @if (!isLoggedIn()) {
+    <div class="user-icon" [routerLink]="['/auth/login']">
+        <mat-icon>person</mat-icon>
+        <span class="label">Ingresar</span>
+    </div>
+    } @else {
+    <div class="user-icon" [routerLink]="['/user']" style="cursor: pointer;">
+        <mat-icon>person</mat-icon>
+        <span class="label">{{ userName() || 'Usuario' }}</span>
+    </div>
+    <div class="divider"></div>
+    <div class="user-icon" (click)="logout()" style="cursor: pointer;">
+        <mat-icon>logout</mat-icon>
+        <span class="label">Salir</span>
+    </div>
+    }
+</div>

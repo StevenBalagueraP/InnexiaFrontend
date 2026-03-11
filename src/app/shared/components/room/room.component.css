@@ -1,0 +1,122 @@
+.card {
+  width: 201px;
+  height: 103px;
+  padding: 12px;
+  box-sizing: border-box;
+
+  border: 1px solid var(--app-hotel-card-background);
+  border-radius: 10px;
+
+  box-shadow: 0px 4px 4px 0px var(--app-box-shadow);
+
+  background-color: var(--app-white);
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.card--booking {
+  width: 607px;
+  height: 137px;
+  padding: 16px 20px;
+}
+
+.card--selected {
+  border: 3px solid var(--app-secondary);
+}
+
+.room-name {
+  margin: 0;
+
+  font-family: var(--app-sans-serif);
+  font-weight: var(--hotel-label-weight);
+  font-size: 20px;
+  line-height: 100%;
+
+  color: var(--app-primary);
+}
+
+.capacity-price-row {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.capacity {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  margin-top: 6px;
+  height: 15px;
+
+  font-family: var(--app-sans-serif);
+  font-weight: var(--app-weigth-400);
+  font-size: 12px;
+  line-height: 100%;
+
+  color: var(--app-medium-gray);
+}
+
+.price {
+  font-family: var(--app-sans-serif);
+  font-weight: var(--hotel-label-weight);
+  font-size: 14px;
+  line-height: 100%;
+  color: var(--app-black);
+  white-space: nowrap;
+}
+
+.icon {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+
+
+.description {
+  margin-top: 6px;
+
+  font-family: var(--app-sans-serif);
+  font-weight: var(--app-weigth-300);
+  font-size: 12px;
+  line-height: 100%;
+
+  color: var(--app-black);
+}
+
+.book-icon {
+  font-size: 16px;
+  margin-right: 4px;
+}
+
+.book-btn {
+  align-self: center;
+  border-radius: 20px;
+  padding: 4px 16px;
+  font-family: var(--app-sans-serif);
+  font-weight: var(--user-label-weight);
+  font-size: 14px;
+  text-transform: none;
+}
+
+::ng-deep .book-btn.mat-mdc-button-base {
+  background-color: var(--app-white) !important;
+  border-color: var(--app-secondary) !important;
+  color: var(--app-secondary) !important;
+}
+
+::ng-deep .book-btn--selected.mat-mdc-button-base {
+  background-color: var(--app-secondary) !important;
+  border-color: var(--app-secondary) !important;
+  color: var(--app-white) !important;
+}
