@@ -40,24 +40,45 @@ Make sure the following tools are installed before running the project:
 
 ## Installation & Setup
 
+###  Folder Structure Sugested
+
+Progra5/
+├── indexiaFrontend/  
+├── indexiaBackend/  
+
+
 ### 1. Clone the repository
 
+```
+cd Progra5  // Or the directory where you want to clone the repositories
+```
 ```bash
-git clone <REPOSITORY_URL>
+git clone FrontEndGitLabURL
+git clone BackendGitLabURL
 ```
 
 ### 2. Install dependencies
 
 ```bash
+cd indexiafrontend
+npm install -g @angular/cli
 npm install
 ```
+
+### 3. Configure environment variables
+
+- you nedd to go to the environments folder that are located in: `innexiafrontend/src/environments`
+- then create a new two files 
+    - environment.development.ts
+    - environment.example.ts
+
+and then modify this two files that you created with the info provided in the example files located in: `innexiafrontend/src/environments` in our case our backend works in `'http://localhost:3000'`
+
 
 ### 4. Start the development server
 
 ```bash
 ng serve
-# or:
-npm start
 ```
 
 Open your browser at: **http://localhost:4200/**
