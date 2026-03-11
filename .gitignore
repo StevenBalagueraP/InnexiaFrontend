@@ -43,3 +43,12 @@ __screenshots__/
 Thumbs.db
 
 .vscode/
+
+# Environment variables — contienen valores locales/secretos, NO commitear
+.env
+.env.local
+.env.*.local
+
+# Angular environments — contienen configuración sensible, NO commitear
+src/environments/environment.ts
+src/environments/environment.development.ts

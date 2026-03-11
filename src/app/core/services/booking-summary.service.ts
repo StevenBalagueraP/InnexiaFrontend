@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { API_URL } from '../../app.config';
 
 export interface BookingSummaryRequest {
     startDate: string;
@@ -42,7 +43,7 @@ export interface BookingSummaryResponse {
 })
 export class BookingSummaryService {
     private http = inject(HttpClient);
-    private apiUrl = 'http://localhost:3000/bookings/summary';
+    private apiUrl = `${API_URL}/bookings/summary`;
 
     getSummary(request: BookingSummaryRequest): Observable<BookingSummaryResponse> {
         return this.http.post<BookingSummaryResponse>(this.apiUrl, request);
