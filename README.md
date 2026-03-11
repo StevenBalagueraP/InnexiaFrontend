@@ -196,3 +196,4 @@ Unit tests are run with **Vitest**.
 **Steven Balaguera**  
 Course: Programming 5 — Capstone Project  
 Year: 2026
+
